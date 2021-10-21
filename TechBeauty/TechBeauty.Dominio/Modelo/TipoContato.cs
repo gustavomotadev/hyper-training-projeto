@@ -2,8 +2,8 @@
 {
     public class TipoContato
     {
-        public int Id { get; set; }
-        public string Valor { get; set; }
+        public int Id { get; private set; }
+        public string Valor { get; private set; }
 
         public static TipoContato Criar(int id, string valor)
         {

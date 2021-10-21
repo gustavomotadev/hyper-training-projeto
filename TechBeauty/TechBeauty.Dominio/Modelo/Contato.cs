@@ -2,9 +2,9 @@
 {
     public class Contato
     {
-        public int Id { get; set; }
-        public TipoContato Tipo { get; set; }
-        public string Valor { get; set; }
+        public int Id { get; private set; }
+        public TipoContato Tipo { get; private set; }
+        public string Valor { get; private set; }
 
         public static Contato Criar(int id, TipoContato tipo, string valor)
         {
