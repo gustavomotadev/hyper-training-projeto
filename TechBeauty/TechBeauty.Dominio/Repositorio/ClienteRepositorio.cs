@@ -11,9 +11,9 @@ namespace TechBeauty.Dominio.Repositorio
     {
         public List<Cliente> TabelaCliente { get; private set; } = new List<Cliente>();
 
-        public ClienteRepositorio()
+        public ClienteRepositorio(ContatoRepositorio repoContato)
         {
-            Preencher();
+            Preencher(repoContato);
         }
 
         public void Incluir(Cliente cliente) => TabelaCliente.Add(cliente);
@@ -26,11 +26,26 @@ namespace TechBeauty.Dominio.Repositorio
             SelecionarPorId(id).Alterar(nome, cpf, dataNascimento, contatos);
         }
 
-        public void Exlucir(int id) => TabelaCliente.Remove(SelecionarPorId(id)); 
-        
-        public void Preencher()
-        {
+        public void Exlucir(int id) => TabelaCliente.Remove(SelecionarPorId(id));
 
+        public void Preencher(ContatoRepositorio repoContato)
+        {
+            (string nome, string cpf, DateTime dataNascimento, int[] idContatos)[]
+                valoresCliente =
+                {
+                    ("Robervaldo Ferreira", "45887936514", new DateTime(1981,11,01), new int[]{1} )
+                };
+
+            for (int i = 0; i < valoresCliente.Length; i++)
+            {
+                var contatos = new List<Contato>();
+                foreach (var idContato in valoresCliente[i].idContatos)
+                {
+                    contatos.Add(repoContato.SelecionarPorId(idContato));
+                }
+                Incluir(Cliente.Criar(i + 1, valoresCliente[i].nome, valoresCliente[i].cpf, 
+                    valoresCliente[i].dataNascimento, contatos ));
+            }
         }
     }
 }
