@@ -23,7 +23,7 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Alterar(int id, string valor)
         {
-            SelecionarPorId(id).Alterar(id, valor);
+            SelecionarPorId(id).Alterar(valor);
         }
         public void Excluir(int id)
         {

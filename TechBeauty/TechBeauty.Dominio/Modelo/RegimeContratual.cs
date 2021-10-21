@@ -13,7 +13,7 @@
             return regimeContratual;
         }
 
-        public void Alterar(int id, string nome)
+        public void Alterar(string nome)
         {
             Nome = nome;
         }
