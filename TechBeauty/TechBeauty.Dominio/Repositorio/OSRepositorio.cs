@@ -8,7 +8,7 @@ using TechBeauty.Dominio.Modelo.Enumeradores;
 
 namespace TechBeauty.Dominio.Repositorio
 {
-    /*public class OSRepositorio
+    public class OSRepositorio
     {
         public List<OrdemServico> TabelaOS { get; private set; } = new List<OrdemServico>();
 
@@ -42,13 +42,6 @@ namespace TechBeauty.Dominio.Repositorio
         public void Preencher()
         {
 
-        }*/
-
-
-
-
-
+        }
     }
-
-
 }
