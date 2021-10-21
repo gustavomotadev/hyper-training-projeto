@@ -21,7 +21,7 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Alterar(int id, string valor)
         {
-            TabelaTipoContato.FirstOrDefault(x => x.Id == id).Alterar(id, valor);
+            SelecionarPorId(id).Alterar(id, valor);
         }
 
         public TipoContato SelecionarPorId(int id)
