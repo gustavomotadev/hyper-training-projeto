@@ -14,7 +14,7 @@
             contato.Valor = valor;
             return contato;
         }
-        public void Alterar(int id, TipoContato tipo, string valor)
+        public void Alterar(TipoContato tipo, string valor)
         {
 
             Tipo = tipo;

@@ -25,7 +25,7 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Alterar(int id, TipoContato tipo, string valor)
         {
-            SelecionarPorId(id).Alterar(id, tipo, valor);
+            SelecionarPorId(id).Alterar(tipo, valor);
         }
 
         public void Excluir(int id)
