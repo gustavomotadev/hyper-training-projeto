@@ -21,6 +21,18 @@ namespace TechBeauty.Dominio.Repositorio
             return TabelaContato;
         }
 
+        public Contato SelecionarPorId(int id) => TabelaContato.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, TipoContato tipo, string valor)
+        {
+            SelecionarPorId(id).Alterar(id, tipo, valor);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaContato.Remove(SelecionarPorId(id));
+        }
+
         public void Preencher()
         {
             (int, string)[] valoresContato = { (3, "abc@mail.com") };
