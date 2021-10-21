@@ -34,11 +34,11 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-            string[] valoresRegimeContratual = { "CLT", "PJ" };
+            (int id, string nome)[] valoresRegimeContratual = { (1, "CLT"), (2, "PJ") };
 
-            for (int i = 0; i < valoresRegimeContratual.Length; i++)
+            foreach (var regimeContratual in valoresRegimeContratual)
             {
-                Incluir(RegimeContratual.Criar(i + 1, valoresRegimeContratual[i]));
+                Incluir(RegimeContratual.Criar(regimeContratual.id, regimeContratual.nome));
             }
         }
     }
