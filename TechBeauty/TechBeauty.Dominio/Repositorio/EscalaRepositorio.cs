@@ -9,10 +9,11 @@ namespace TechBeauty.Dominio.Repositorio
 {
     public class EscalaRepositorio
     {
-        public List<Escala> TabelaEscala { get; set; } = new List<Escala>;
+        public List<Escala> TabelaEscala { get; set; } = new List<Escala>();
 
         public EscalaRepositorio()
         {
+            //incompleto
             Preencher();
         }
 
@@ -27,7 +28,7 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-
+            //incompleto
         }
     }
 }
