@@ -10,5 +10,15 @@ namespace TechBeauty.Dominio.Modelo
         public string CPF { get; private set; }
         public DateTime DataNascimento { get; private set; }
         public List<Contato> Contatos { get; private set; }
+
+        public void Alterar(string nome, string cpf, 
+            DateTime dataNascimento, List<Contato> contatos)
+        {
+            Nome = nome;
+            CPF = cpf;
+            DataNascimento = dataNascimento;
+            Contatos = contatos;
+
+        }
     }
 }
