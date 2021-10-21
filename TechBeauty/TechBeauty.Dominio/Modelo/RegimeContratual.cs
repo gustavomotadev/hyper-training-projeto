@@ -12,5 +12,10 @@
             regimeContratual.Nome = nome;
             return regimeContratual;
         }
+
+        public void Alterar(string nome)
+        {
+            Nome = nome;
+        }
     }
 }

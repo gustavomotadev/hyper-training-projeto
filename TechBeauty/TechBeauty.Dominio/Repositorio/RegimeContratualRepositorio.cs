@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -16,6 +17,19 @@ namespace TechBeauty.Dominio.Repositorio
         {
             TabelaRegimeContratual.Add(regimeContratual);
             return TabelaRegimeContratual;
+        }
+
+        public RegimeContratual SelecionarPorId(int id) => 
+            TabelaRegimeContratual.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, string nome)
+        {
+            SelecionarPorId(id).Alterar(nome);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaRegimeContratual.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()
