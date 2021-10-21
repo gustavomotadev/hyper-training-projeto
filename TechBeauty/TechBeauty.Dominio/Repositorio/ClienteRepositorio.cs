@@ -30,21 +30,21 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher(ContatoRepositorio repoContato)
         {
-            (string nome, string cpf, DateTime dataNascimento, int[] idContatos)[]
+            (int id, string nome, string cpf, DateTime dataNascimento, int[] idContatos)[]
                 valoresCliente =
                 {
-                    ("Robervaldo Ferreira", "45887936514", new DateTime(1981,11,01), new int[]{1} )
+                    (1, "Robervaldo Ferreira", "45887936514", new DateTime(1981,11,01), new int[]{1} )
                 };
 
-            for (int i = 0; i < valoresCliente.Length; i++)
+            foreach (var cliente in valoresCliente)
             {
                 var contatos = new List<Contato>();
-                foreach (var idContato in valoresCliente[i].idContatos)
+                foreach (var idContato in cliente.idContatos)
                 {
                     contatos.Add(repoContato.SelecionarPorId(idContato));
                 }
-                Incluir(Cliente.Criar(i + 1, valoresCliente[i].nome, valoresCliente[i].cpf, 
-                    valoresCliente[i].dataNascimento, contatos ));
+                Incluir(Cliente.Criar(cliente.id, cliente.nome, cliente.cpf,
+                    cliente.dataNascimento, contatos ));
             }
         }
     }
