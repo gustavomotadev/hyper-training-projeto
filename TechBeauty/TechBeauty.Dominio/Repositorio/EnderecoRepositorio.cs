@@ -33,16 +33,18 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-            (string, string, string, string, string)[] valoresEndereco =
+            (int id, string logradouro, string cidade, string uf, string numero, string complemento)[] 
+                valoresEndereco =
                 {
-                ("Rua A", "Cidade A", "BA", "s/n", "Edf. A"),
-                ("Rua B", "Cidade B", "DF", "1", "Edf. B"),
-                ("Rua C", "Cidade C", "SP", "2", "Edf. C")
+                (1, "Rua A", "Cidade A", "BA", "s/n", "Edf. A"),
+                (2, "Rua B", "Cidade B", "DF", "1", "Edf. B"),
+                (3, "Rua C", "Cidade C", "SP", "2", "Edf. C")
                 };
 
-            for (int i = 0; i < valoresEndereco.Length; i++)
+            foreach (var endereco in valoresEndereco)
             {
-                Incluir(Endereco.Criar(i + 1, valoresEndereco[i].Item1, valoresEndereco[i].Item2, valoresEndereco[i].Item3, valoresEndereco[i].Item4, valoresEndereco[i].Item5));
+                Incluir(Endereco.Criar(endereco.id, endereco.logradouro, endereco.cidade, endereco.uf, 
+                    endereco.numero, endereco.complemento));
             }
         }
     }
