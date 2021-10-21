@@ -9,13 +9,10 @@ namespace TechBeauty.Dominio.Repositorio
 {
     public class AgendamentoRepositorio
     {
-        public List<Agendamento> TabelaAgendamento { get; set; } = new List<Agendamento>;
+        public List<Agendamento> TabelaAgendamento { get; set; } = new List<Agendamento>();
 
-        public AgendamentoRepositorio()
-        {
-            //Incompleto
-            Preencher();
-        }
+        public AgendamentoRepositorio(ServicoRepositorio repoServico, ColaboradorRepositorio repoColaborador,
+            OrdemServicoRepositorio repoOrdemServico) => Preencher(repoServico, repoColaborador, repoOrdemServico);
 
         public void Incluir(Agendamento agendamento) => TabelaAgendamento.Add(agendamento);
 
@@ -28,9 +25,25 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Excluir(int id) => TabelaAgendamento.Remove(SelecionarPorId(id));
         
-        public void Preencher()
+        public void Preencher(ServicoRepositorio repoServico, ColaboradorRepositorio repoColaborador,
+            OrdemServicoRepositorio repoOrdemServico)
         {
-            //incompleto
+            (int id, int idServico, int idColaborador, string pessoaAtendida, DateTime dataHora, 
+                int idOrdemServico, DateTime dataHoraCriacao, DateTime dataHoraExecucao)[] 
+                valoresAgendamento =
+                {
+                    (1, 1, 1, "Robervaldo", new DateTime(2021, 10, 21), 1, 
+                    new DateTime(2021, 10, 21, 9, 0, 0), new DateTime(2021, 10, 21, 10, 0, 0))
+                };
+
+            foreach (var agendamento in valoresAgendamento)
+            {
+                var servico = repoServico.SelecionarPorId(agendamento.idServico);
+                var colaborador = repoColaborador.SelecionarPorId(agendamento.idColaborador);
+                var ordemServico = repoOrdemServico.SelecionarPorId(agendamento.idOrdemServico);
+                Incluir(Agendamento.Criar(agendamento.id, servico, colaborador, agendamento.pessoaAtendida,
+                    agendamento.dataHora, ordemServico, agendamento.dataHoraCriacao, agendamento.dataHoraExecucao));
+            }
         }
 
 

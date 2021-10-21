@@ -14,14 +14,14 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime DataHoraExecucao { get; private set; }
 
         public static Agendamento Criar(int id, Servico servico, Colaborador colaborador, string pessoaAtendida,
-          DateTime dataHora, OrdemServico os, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
+          DateTime dataHora, OrdemServico ordemServico, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
             var agendamento = new Agendamento();
             agendamento.Id = id;
             agendamento.Servico = servico;
             agendamento.PessoaAtendida = pessoaAtendida;
             agendamento.DataHora = dataHora;
-            agendamento.OrdemServico = os;
+            agendamento.OrdemServico = ordemServico;
             agendamento.DataHoraCriacao = dataHoraCriacao;
             agendamento.DataHoraExecucao = dataHoraExecucao;
 
@@ -29,12 +29,12 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public void Alterar(Servico servico, Colaborador colaborador, string pessoaAtendida,
-          DateTime dataHora, OrdemServico os, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
+          DateTime dataHora, OrdemServico ordemServico, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
             Servico = servico;
             PessoaAtendida = pessoaAtendida;
             DataHora = dataHora;
-            OrdemServico = os;
+            OrdemServico = ordemServico;
             DataHoraCriacao = dataHoraCriacao;
             DataHoraExecucao = dataHoraExecucao;
         }
