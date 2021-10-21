@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -16,6 +17,21 @@ namespace TechBeauty.Dominio.Repositorio
         {
             TabelaTipoContato.Add(tipoContato);
             return TabelaTipoContato;
+        }
+
+        public void Alterar(int id, string valor)
+        {
+            TabelaTipoContato.FirstOrDefault(x => x.Id == id).Alterar(id, valor);
+        }
+
+        public TipoContato SelecionarPorId(int id)
+        {
+            return TabelaTipoContato.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaTipoContato.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()
