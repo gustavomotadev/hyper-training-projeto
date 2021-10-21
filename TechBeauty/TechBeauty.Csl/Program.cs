@@ -21,6 +21,8 @@ namespace TechBeauty.Csl
             var repoContratoTrabalho = new ContratoTrabalhoRepositorio(repoRegimeContratual, repoCargo);
             var repoCliente = new ClienteRepositorio(repoContato);
             var repoOrdemServico = new OrdemServicoRepositorio(repoCliente);
+            var repoColaborador = new ColaboradorRepositorio(repoContato, repoServico, repoEndereco, repoGenero,
+                repoContratoTrabalho);
 
             foreach (var x in repoGenero.TabelaGenero)
             {
@@ -54,19 +56,21 @@ namespace TechBeauty.Csl
             {
                 Console.WriteLine(x.CnpjCTPS);
             }
-
             foreach (var x in repoCliente.TabelaCliente)
             {
                 Console.WriteLine($"Nome: {x.Nome}  Data Nascimento: {x.DataNascimento}  " +
                     $"CPF: {x.CPF}");
             }
-
             foreach (var x in repoOrdemServico.TabelaOS)
             {
                 Console.WriteLine($"Número da OS: {x.Id} Cliente: {x.Cliente.Nome} " +
                     $"Preço: R$ {x.PrecoTotal} Status: {x.StatusOS} ");
             }
-
+            foreach (var x in repoColaborador.TabelaColaborador)
+            {
+                Console.WriteLine($"Nome: {x.Nome}  Genero: {x.Genero.Valor}  " +
+                    $"Regime: {x.Contrato.RegimeContratual.Nome}");
+            }
         }
     }
 }
