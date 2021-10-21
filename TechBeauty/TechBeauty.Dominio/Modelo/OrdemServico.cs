@@ -8,8 +8,7 @@ namespace TechBeauty.Dominio.Modelo
         public decimal PrecoTotal { get; private set; }
         public int DuracaoTotal { get; private set; }
         public Cliente Cliente { get; private set; }
-        
-        //Não sei se cabe o private já que o enum é fixo.
+
         public StatusOS StatusOS { get; private set; }
 
         public static OrdemServico Criar(int id, decimal precoTotal, 
