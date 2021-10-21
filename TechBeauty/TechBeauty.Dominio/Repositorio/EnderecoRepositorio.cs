@@ -36,9 +36,9 @@ namespace TechBeauty.Dominio.Repositorio
             (int id, string logradouro, string cidade, string uf, string numero, string complemento)[] 
                 valoresEndereco =
                 {
-                (1, "Rua A", "Cidade A", "BA", "s/n", "Edf. A"),
-                (2, "Rua B", "Cidade B", "DF", "1", "Edf. B"),
-                (3, "Rua C", "Cidade C", "SP", "2", "Edf. C")
+                    (1, "Rua A", "Cidade A", "BA", "s/n", "Edf. A"),
+                    (2, "Rua B", "Cidade B", "DF", "1", "Edf. B"),
+                    (3, "Rua C", "Cidade C", "SP", "2", "Edf. C")
                 };
 
             foreach (var endereco in valoresEndereco)

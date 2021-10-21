@@ -34,7 +34,11 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-            (int id, string nome)[] valoresRegimeContratual = { (1, "CLT"), (2, "PJ") };
+            (int id, string nome)[] valoresRegimeContratual = 
+                { 
+                    (1, "CLT"), 
+                    (2, "PJ") 
+                };
 
             foreach (var regimeContratual in valoresRegimeContratual)
             {

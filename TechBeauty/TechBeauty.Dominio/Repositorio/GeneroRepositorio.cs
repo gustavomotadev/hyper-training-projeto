@@ -33,7 +33,15 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-            (int id, string valor)[] valoresGenero = { (1, "Masculino"), (2, "Feminino"), (3, "Mulher Trans"), (4, "Homem Trans"), (5, "Não Binário"), (6, "Agênero") };
+            (int id, string valor)[] valoresGenero = 
+                { 
+                    (1, "Masculino"), 
+                    (2, "Feminino"), 
+                    (3, "Mulher Trans"), 
+                    (4, "Homem Trans"), 
+                    (5, "Não Binário"), 
+                    (6, "Agênero") 
+                };
 
             foreach (var genero in valoresGenero)
             {

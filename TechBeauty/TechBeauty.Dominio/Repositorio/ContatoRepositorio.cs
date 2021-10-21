@@ -33,7 +33,10 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher(TipoContatoRepositorio repoTipoContato)
         {
-            (int id, int idTipoContato, string valor)[] valoresContato = { (1, 3, "abc@mail.com") };
+            (int id, int idTipoContato, string valor)[] valoresContato = 
+                { 
+                    (1, 3, "abc@mail.com") 
+                };
 
             foreach (var contato in valoresContato)
             {

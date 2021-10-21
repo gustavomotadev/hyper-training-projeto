@@ -32,7 +32,18 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-            (int id, string valor)[] valoresTipoContato = { (1, "Celular"), (2, "Telefone Fixo"), (3, "E-mail"), (4, "WhatsApp"), (5, "Telegram"), (6, "Facebook"), (7, "Instagram"), (8, "Twitter"), (9, "TikTok") };
+            (int id, string valor)[] valoresTipoContato = 
+                { 
+                    (1, "Celular"), 
+                    (2, "Telefone Fixo"), 
+                    (3, "E-mail"), 
+                    (4, "WhatsApp"), 
+                    (5, "Telegram"), 
+                    (6, "Facebook"), 
+                    (7, "Instagram"), 
+                    (8, "Twitter"), 
+                    (9, "TikTok") 
+                };
 
             foreach (var contato in valoresTipoContato)
             {

@@ -34,12 +34,12 @@ namespace TechBeauty.Dominio.Repositorio
         {
             (int id, string nome, string descricao)[] valoresCargo = 
                 { 
-                (1, "Cabelereira", "a"), 
-                (2, "Manicure", "b"), 
-                (3, "Pedicure", "c"), 
-                (4, "Depiladora", "d"), 
-                (5, "Colorista", "e"), 
-                (6, "Massagista", "f") 
+                    (1, "Cabelereira", "a"), 
+                    (2, "Manicure", "b"), 
+                    (3, "Pedicure", "c"), 
+                    (4, "Depiladora", "d"), 
+                    (5, "Colorista", "e"), 
+                    (6, "Massagista", "f") 
                 };
 
             foreach (var cargo in valoresCargo)

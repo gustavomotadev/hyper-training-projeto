@@ -35,9 +35,9 @@ namespace TechBeauty.Dominio.Repositorio
         {
             (int id, string nome, decimal preco, string descricao, int duracaoEmMin)[] valoresServico =
                 {
-                (1, "Corte", 15.0M, "aaa", 20),
-                (2, "Pintura", 15.0M, "aaa", 20),
-                (3, "Manicure", 15.0M, "aaa", 20)
+                    (1, "Corte", 15.0M, "aaa", 20),
+                    (2, "Pintura", 15.0M, "aaa", 20),
+                    (3, "Manicure", 15.0M, "aaa", 20)
                 };
 
             foreach (var servico in valoresServico)
