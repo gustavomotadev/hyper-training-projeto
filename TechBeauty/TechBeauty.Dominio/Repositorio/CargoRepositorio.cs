@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -12,10 +13,21 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<Cargo> Incluir(Cargo cargo)
+        public void Incluir(Cargo cargo)
         {
             TabelaCargo.Add(cargo);
-            return TabelaCargo;
+        }
+
+        public Cargo SelecionarPorId(int id) => TabelaCargo.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, string nome, string descricao)
+        {
+            SelecionarPorId(id).Alterar(nome, descricao);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaCargo.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()

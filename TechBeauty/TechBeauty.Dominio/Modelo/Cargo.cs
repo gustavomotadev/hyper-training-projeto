@@ -14,5 +14,11 @@
             cargo.Descricao = descricao;
             return cargo;
         }
+
+        public void Alterar(string nome, string descricao)
+        {
+            Nome = nome;
+            Descricao = descricao;
+        }
     }
 }
