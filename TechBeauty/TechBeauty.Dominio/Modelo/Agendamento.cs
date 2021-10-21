@@ -12,5 +12,31 @@ namespace TechBeauty.Dominio.Modelo
         public OrdemServico OrdemServico { get; private set; }
         public DateTime DataHoraCriacao { get; private set; }
         public DateTime DataHoraExecucao { get; private set; }
+
+        public static Agendamento Criar(int id, Servico servico, Colaborador colaborador, string pessoaAtendida,
+          DateTime dataHora, OrdemServico os, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
+        {
+            var agendamento = new Agendamento();
+            agendamento.Id = id;
+            agendamento.Servico = servico;
+            agendamento.PessoaAtendida = pessoaAtendida;
+            agendamento.DataHora = dataHora;
+            agendamento.OrdemServico = os;
+            agendamento.DataHoraCriacao = dataHoraCriacao;
+            agendamento.DataHoraExecucao = dataHoraExecucao;
+
+            return agendamento;
+        }
+
+        public void Alterar(Servico servico, Colaborador colaborador, string pessoaAtendida,
+          DateTime dataHora, OrdemServico os, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
+        {
+            Servico = servico;
+            PessoaAtendida = pessoaAtendida;
+            DataHora = dataHora;
+            OrdemServico = os;
+            DataHoraCriacao = dataHoraCriacao;
+            DataHoraExecucao = dataHoraExecucao;
+        }
     }
 }
