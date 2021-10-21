@@ -20,6 +20,7 @@ namespace TechBeauty.Csl
             var repoContato = new ContatoRepositorio(repoTipoContato);
             var repoContratoTrabalho = new ContratoTrabalhoRepositorio(repoRegimeContratual, repoCargo);
             var repoCliente = new ClienteRepositorio(repoContato);
+            var repoOrdemServico = new OrdemServicoRepositorio(repoCliente);
 
             foreach (var x in repoGenero.TabelaGenero)
             {
@@ -58,6 +59,12 @@ namespace TechBeauty.Csl
             {
                 Console.WriteLine($"Nome: {x.Nome}  Data Nascimento: {x.DataNascimento}  " +
                     $"CPF: {x.CPF}");
+            }
+
+            foreach (var x in repoOrdemServico.TabelaOS)
+            {
+                Console.WriteLine($"Número da OS: {x.Id} Cliente: {x.Cliente.Nome} " +
+                    $"Preço: R$ {x.PrecoTotal} Status: {x.StatusOS} ");
             }
 
         }

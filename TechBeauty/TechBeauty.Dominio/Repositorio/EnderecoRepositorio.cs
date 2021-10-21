@@ -13,10 +13,9 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<Endereco> Incluir(Endereco endereco)
+        public void Incluir(Endereco endereco)
         {
             TabelaEndereco.Add(endereco);
-            return TabelaEndereco;
         }
 
         public Endereco SelecionarPorId(int id) => TabelaEndereco.FirstOrDefault(x => x.Id == id);

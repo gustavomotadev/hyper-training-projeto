@@ -13,10 +13,10 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher(repoTipoContato);
         }
 
-        public List<Contato> Incluir(Contato contato)
+        public void Incluir(Contato contato)
         {
             TabelaContato.Add(contato);
-            return TabelaContato;
+            
         }
 
         public Contato SelecionarPorId(int id) => TabelaContato.FirstOrDefault(x => x.Id == id);

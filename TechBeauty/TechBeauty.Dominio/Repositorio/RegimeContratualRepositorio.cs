@@ -13,10 +13,9 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<RegimeContratual> Incluir(RegimeContratual regimeContratual)
+        public void Incluir(RegimeContratual regimeContratual)
         {
             TabelaRegimeContratual.Add(regimeContratual);
-            return TabelaRegimeContratual;
         }
 
         public RegimeContratual SelecionarPorId(int id) => 

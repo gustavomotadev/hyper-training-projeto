@@ -13,10 +13,9 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<Genero> Incluir(Genero genero)
+        public void Incluir(Genero genero)
         {
             TabelaGenero.Add(genero);
-            return TabelaGenero;
         }
 
         public Genero SelecionarPorId(int id) => TabelaGenero.FirstOrDefault(x => x.Id == id);
