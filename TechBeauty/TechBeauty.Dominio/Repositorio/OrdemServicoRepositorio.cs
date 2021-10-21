@@ -12,18 +12,10 @@ namespace TechBeauty.Dominio.Repositorio
     {
         public List<OrdemServico> TabelaOS { get; private set; } = new List<OrdemServico>();
 
-        public List<Cliente> TabelaCliente { get; private set; }
+        public OrdemServicoRepositorio(ClienteRepositorio cliente) => Preencher(cliente);
 
-        public OrdemServicoRepositorio(List<Cliente> tabelaCliente)
-        {
-            TabelaCliente = tabelaCliente;
-            Preencher();
-        }
-
-        public void Incluir(OrdemServico os)
-        {
-            TabelaOS.Add(os);
-        }
+        public void Incluir(OrdemServico os) => TabelaOS.Add(os);
+        
 
         public OrdemServico SelecionarPorId(int id) => TabelaOS.FirstOrDefault(x => x.Id == id);
 
@@ -33,14 +25,22 @@ namespace TechBeauty.Dominio.Repositorio
             SelecionarPorId(id).Alterar(precoTotal, duracaoTotal, cliente, statusOs);
         }
 
-        public void Excluir(int id)
-        {
-            TabelaOS.Remove(SelecionarPorId(id));
-        }
+        public void Excluir(int id) => TabelaOS.Remove(SelecionarPorId(id));
 
-        public void Preencher()
+        public void Preencher(ClienteRepositorio repoCliente)
         {
+            (decimal precoTotal, int duracaoTotal, int idCliente, 
+                StatusOS status)[] valoresOrdemServico =
+                {
+                    (30.00M, 40, 1, StatusOS.Concluido)
+                };
 
+            for (int i = 0; i < valoresOrdemServico.Length; i++)
+            {
+                var cliente = repoCliente.SelecionarPorId(valoresOrdemServico[i].idCliente);
+                Incluir(OrdemServico.Criar(i + 1, valoresOrdemServico[i].precoTotal,
+                    valoresOrdemServico[i].duracaoTotal, cliente, valoresOrdemServico[i].status));
+            }
         }
     }
 }
