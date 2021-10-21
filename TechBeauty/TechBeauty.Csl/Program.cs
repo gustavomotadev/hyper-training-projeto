@@ -8,23 +8,16 @@ namespace TechBeauty.Csl
 {
     class Program
     {
-        private static GeneroRepositorio repoGenero;
-        private static CargoRepositorio repoCargo;
-        private static TipoContatoRepositorio repoTipoContato;
-        private static RegimeContratualRepositorio repoRegimeContratual;
-        private static ServicoRepositorio repoServico;
-        private static EnderecoRepositorio repoEndereco;
-        private static ContatoRepositorio repoContato;
 
         static void Main(string[] args)
         {
-            repoGenero = new GeneroRepositorio();
-            repoCargo = new CargoRepositorio();
-            repoTipoContato = new TipoContatoRepositorio();
-            repoRegimeContratual = new RegimeContratualRepositorio();
-            repoServico = new ServicoRepositorio();
-            repoEndereco = new EnderecoRepositorio();
-            repoContato = new ContatoRepositorio(repoTipoContato);
+            var repoGenero = new GeneroRepositorio();
+            var repoCargo = new CargoRepositorio();
+            var repoTipoContato = new TipoContatoRepositorio();
+            var repoRegimeContratual = new RegimeContratualRepositorio();
+            var repoServico = new ServicoRepositorio();
+            var repoEndereco = new EnderecoRepositorio();
+            var repoContato = new ContatoRepositorio(repoTipoContato);
 
             foreach (var x in repoGenero.TabelaGenero)
             {
