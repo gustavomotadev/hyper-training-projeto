@@ -33,12 +33,11 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher(TipoContatoRepositorio repoTipoContato)
         {
-            (int, string)[] valoresContato = { (3, "abc@mail.com") };
+            (int id, int idTipoContato, string valor)[] valoresContato = { (1, 3, "abc@mail.com") };
 
-            for (int i = 0; i < valoresContato.Length; i++)
+            foreach (var contato in valoresContato)
             {
-                //puxar o tipocontato pelo Item1
-                Incluir(Contato.Criar(i + 1, repoTipoContato.SelecionarPorId(valoresContato[i].Item1), valoresContato[i].Item2));
+                Incluir(Contato.Criar(contato.id, repoTipoContato.SelecionarPorId(contato.idTipoContato), contato.valor));
             }
         }
     }
