@@ -18,6 +18,7 @@ namespace TechBeauty.Csl
             var repoServico = new ServicoRepositorio();
             var repoEndereco = new EnderecoRepositorio();
             var repoContato = new ContatoRepositorio(repoTipoContato);
+            var repoContratoTrabalho = new ContratoTrabalhoRepositorio(repoRegimeContratual, repoCargo);
 
             foreach (var x in repoGenero.TabelaGenero)
             {
@@ -46,6 +47,10 @@ namespace TechBeauty.Csl
             foreach (var x in repoContato.TabelaContato)
             {
                 Console.WriteLine(x.Valor);
+            }
+            foreach (var x in repoContratoTrabalho.TabelaContratoTrabalho)
+            {
+                Console.WriteLine(x.CnpjCTPS);
             }
         }
     }
