@@ -32,7 +32,6 @@ namespace TechBeauty.Dominio.Repositorio
 
             for (int i = 0; i < valoresContratoTrabalho.Length; i++)
             {
-                //puxar o tipocontato pelo Item1
                 var regime = repoRegimeContratual.SelecionarPorId(valoresContratoTrabalho[i].idRegimeContratual);
                 var cargos = new List<Cargo>();
                 foreach (var idCargo in valoresContratoTrabalho[i].idCargos)
