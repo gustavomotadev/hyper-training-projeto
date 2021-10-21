@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -16,6 +17,18 @@ namespace TechBeauty.Dominio.Repositorio
         {
             TabelaServico.Add(servico);
             return TabelaServico;
+        }
+
+        public Servico SelecionarPorId(int id) => TabelaServico.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, string nome, decimal preco, string descricao, int duracaoEmMin)
+        {
+            SelecionarPorId(id).Alterar(nome, preco, descricao, duracaoEmMin);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaServico.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()

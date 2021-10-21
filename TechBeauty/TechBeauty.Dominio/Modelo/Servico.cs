@@ -18,5 +18,13 @@
             servico.DuracaoEmMin = duracaoEmMin;
             return servico;
         }
+
+        public void Alterar(string nome, decimal preco, string descricao, int duracaoEmMin)
+        {
+            Nome = nome;
+            Preco = preco;
+            Descricao = descricao;
+            DuracaoEmMin = duracaoEmMin;
+        }
     }
 }
