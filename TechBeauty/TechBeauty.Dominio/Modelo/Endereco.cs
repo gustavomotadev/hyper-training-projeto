@@ -20,5 +20,14 @@
             endereco.Complemento = complemento;
             return endereco;
         }
+
+        public void Alterar(string logradouro, string cidade, string uf, string numero, string complemento)
+        {
+            Logradouro = logradouro;
+            Cidade = cidade;
+            UF = uf;
+            Numero = numero;
+            Complemento = complemento;
+        }
     }
 }

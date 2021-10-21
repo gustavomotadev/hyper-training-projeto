@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -16,6 +17,18 @@ namespace TechBeauty.Dominio.Repositorio
         {
             TabelaEndereco.Add(endereco);
             return TabelaEndereco;
+        }
+
+        public Endereco SelecionarPorId(int id) => TabelaEndereco.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, string logradouro, string cidade, string uf, string numero, string complemento)
+        {
+            SelecionarPorId(id).Alterar(logradouro, cidade, uf, numero, complemento);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaEndereco.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()
