@@ -19,16 +19,12 @@ namespace TechBeauty.Dominio.Repositorio
             return TabelaTipoContato;
         }
 
+        public TipoContato SelecionarPorId(int id) => TabelaTipoContato.FirstOrDefault(x => x.Id == id);
+
         public void Alterar(int id, string valor)
         {
             SelecionarPorId(id).Alterar(id, valor);
         }
-
-        public TipoContato SelecionarPorId(int id)
-        {
-            return TabelaTipoContato.FirstOrDefault(x => x.Id == id);
-        }
-
         public void Excluir(int id)
         {
             TabelaTipoContato.Remove(SelecionarPorId(id));
