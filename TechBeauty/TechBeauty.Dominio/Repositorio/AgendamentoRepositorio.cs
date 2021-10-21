@@ -9,7 +9,7 @@ namespace TechBeauty.Dominio.Repositorio
 {
     public class AgendamentoRepositorio
     {
-        public List<Agendamento> TabelaAgendamento { get; set; } = new List<Agendamento>;
+        public List<Agendamento> TabelaAgendamento { get; set; } = new List<Agendamento>();
 
         public AgendamentoRepositorio()
         {
