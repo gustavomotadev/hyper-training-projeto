@@ -24,7 +24,7 @@ namespace TechBeauty.Csl
             repoRegimeContratual = new RegimeContratualRepositorio();
             repoServico = new ServicoRepositorio();
             repoEndereco = new EnderecoRepositorio();
-            repoContato = new ContatoRepositorio(repoTipoContato.TabelaTipoContato);
+            repoContato = new ContatoRepositorio(repoTipoContato);
 
             foreach (var x in repoGenero.TabelaGenero)
             {
