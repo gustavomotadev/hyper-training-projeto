@@ -5,12 +5,12 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class ContratoTrabalho
     {
-        public int Id { get; set; }
-        public int MyProperty { get; set; }
-        public RegimeContratual RegimeContratual { get; set; }
-        public DateTime DataEntrada { get; set; }
-        public DateTime? DataDesligamento { get; set; }
-        public List<Cargo> Cargos { get; set; }
-        public string CnpjCTPS { get; set; }
+        public int Id { get; private set; }
+        public int MyProperty { get; private set; }
+        public RegimeContratual RegimeContratual { get; private set; }
+        public DateTime DataEntrada { get; private set; }
+        public DateTime? DataDesligamento { get; private set; }
+        public List<Cargo> Cargos { get; private set; }
+        public string CnpjCTPS { get; private set; }
     }
 }

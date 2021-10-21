@@ -5,10 +5,10 @@ namespace TechBeauty.Dominio.Modelo
 {
     public abstract class Pessoa
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string CPF { get; set; }
-        public DateTime DataNascimento { get; set; }
-        public List<Contato> Contatos { get; set; }
+        public int Id { get; private set; }
+        public string Nome { get; private set; }
+        public string CPF { get; private set; }
+        public DateTime DataNascimento { get; private set; }
+        public List<Contato> Contatos { get; private set; }
     }
 }
