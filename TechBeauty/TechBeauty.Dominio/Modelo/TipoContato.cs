@@ -12,5 +12,9 @@
             tipoContato.Valor = valor;
             return tipoContato;
         }
+        public void Alterar(int id, string valor)
+        {
+            Valor = valor;
+        }
     }
 }
