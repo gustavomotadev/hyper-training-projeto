@@ -32,11 +32,11 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-            string[] valoresTipoContato = { "Celular", "Telefone Fixo", "E-mail", "WhatsApp", "Telegram", "Facebook", "Instagram", "Twitter", "TikTok" };
+            (int id, string valor)[] valoresTipoContato = { (1, "Celular"), (2, "Telefone Fixo"), (3, "E-mail"), (4, "WhatsApp"), (5, "Telegram"), (6, "Facebook"), (7, "Instagram"), (8, "Twitter"), (9, "TikTok") };
 
-            for (int i = 0; i < valoresTipoContato.Length; i++)
+            foreach (var contato in valoresTipoContato)
             {
-                Incluir(TipoContato.Criar(i + 1, valoresTipoContato[i]));
+                Incluir(TipoContato.Criar(contato.id, contato.valor));
             }
         }
     }
