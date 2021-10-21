@@ -32,11 +32,19 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher()
         {
-            (string, string)[] valoresCargo = { ("Cabelereira", "a"), ("Manicure", "b"), ("Pedicure", "c"), ("Depiladora", "d"), ("Colorista", "e"), ("Massagista", "f") };
+            (int id, string nome, string descricao)[] valoresCargo = 
+                { 
+                (1, "Cabelereira", "a"), 
+                (2, "Manicure", "b"), 
+                (3, "Pedicure", "c"), 
+                (4, "Depiladora", "d"), 
+                (5, "Colorista", "e"), 
+                (6, "Massagista", "f") 
+                };
 
-            for (int i = 0; i < valoresCargo.Length; i++)
+            foreach (var cargo in valoresCargo)
             {
-                Incluir(Cargo.Criar(i + 1, valoresCargo[i].Item1, valoresCargo[i].Item2));
+                Incluir(Cargo.Criar(cargo.id, cargo.nome, cargo.descricao));
             }
         }
     }
