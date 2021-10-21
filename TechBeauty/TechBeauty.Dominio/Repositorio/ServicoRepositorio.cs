@@ -13,10 +13,10 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<Servico> Incluir(Servico servico)
+        public void Incluir(Servico servico)
         {
             TabelaServico.Add(servico);
-            return TabelaServico;
+            
         }
 
         public Servico SelecionarPorId(int id) => TabelaServico.FirstOrDefault(x => x.Id == id);

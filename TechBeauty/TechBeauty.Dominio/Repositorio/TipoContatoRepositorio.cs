@@ -13,10 +13,9 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<TipoContato> Incluir(TipoContato tipoContato)
+        public void Incluir(TipoContato tipoContato)
         {
             TabelaTipoContato.Add(tipoContato);
-            return TabelaTipoContato;
         }
 
         public TipoContato SelecionarPorId(int id) => TabelaTipoContato.FirstOrDefault(x => x.Id == id);

@@ -20,10 +20,9 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<OrdemServico> Incluir(OrdemServico os)
+        public void Incluir(OrdemServico os)
         {
             TabelaOS.Add(os);
-            return TabelaOS;
         }
 
         public OrdemServico SelecionarPorId(int id) => TabelaOS.FirstOrDefault(x => x.Id == id);
