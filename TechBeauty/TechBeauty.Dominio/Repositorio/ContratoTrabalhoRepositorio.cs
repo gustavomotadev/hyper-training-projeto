@@ -24,22 +24,22 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher(RegimeContratualRepositorio repoRegimeContratual, CargoRepositorio repoCargo)
         {
-            (int idRegimeContratual, DateTime dataEntrada, DateTime? dataDesligamento, 
+            (int id, int idRegimeContratual, DateTime dataEntrada, DateTime? dataDesligamento, 
                 int[] idCargos, string cnpjCTPS)[] valoresContratoTrabalho = 
                 { 
-                    (1, new DateTime(2021, 10, 4), null, new int[] { 1, 2 }, "12345678") 
+                    (1, 1, new DateTime(2021, 10, 4), null, new int[] { 1, 2 }, "12345678") 
                 };
 
-            for (int i = 0; i < valoresContratoTrabalho.Length; i++)
+            foreach (var contratoTrabalho in valoresContratoTrabalho)
             {
-                var regime = repoRegimeContratual.SelecionarPorId(valoresContratoTrabalho[i].idRegimeContratual);
+                var regime = repoRegimeContratual.SelecionarPorId(contratoTrabalho.idRegimeContratual);
                 var cargos = new List<Cargo>();
-                foreach (var idCargo in valoresContratoTrabalho[i].idCargos)
+                foreach (var idCargo in contratoTrabalho.idCargos)
                 {
                     cargos.Add(repoCargo.SelecionarPorId(idCargo));
                 }
-                Incluir(ContratoTrabalho.Criar(i + 1, regime, valoresContratoTrabalho[i].dataEntrada,
-                    valoresContratoTrabalho[i].dataDesligamento, cargos, valoresContratoTrabalho[i].cnpjCTPS));
+                Incluir(ContratoTrabalho.Criar(contratoTrabalho.id, regime, contratoTrabalho.dataEntrada,
+                    contratoTrabalho.dataDesligamento, cargos, contratoTrabalho.cnpjCTPS));
             }
         }
     }
