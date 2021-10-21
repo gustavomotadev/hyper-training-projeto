@@ -23,6 +23,8 @@ namespace TechBeauty.Csl
             var repoOrdemServico = new OrdemServicoRepositorio(repoCliente);
             var repoColaborador = new ColaboradorRepositorio(repoContato, repoServico, repoEndereco, repoGenero,
                 repoContratoTrabalho);
+            var repoEscala = new EscalaRepositorio(repoColaborador);
+
 
             foreach (var x in repoGenero.TabelaGenero)
             {
@@ -71,6 +73,13 @@ namespace TechBeauty.Csl
                 Console.WriteLine($"Nome: {x.Nome}  Genero: {x.Genero.Valor}  " +
                     $"Regime: {x.Contrato.RegimeContratual.Nome}");
             }
+            foreach (var x in repoEscala.TabelaEscala)
+            {
+                Console.WriteLine($"Colaborador {x.Colaborador.Nome}  CPF: {x.Colaborador.CPF} " +
+                    $"Entrada: {x.DataHoraEntrada}" + 
+                    $" Saida: {x.DataHoraSaida} " );
+            }
+
         }
     }
 }
