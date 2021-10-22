@@ -19,6 +19,7 @@ namespace TechBeauty.Dominio.Modelo
             var agendamento = new Agendamento();
             agendamento.Id = id;
             agendamento.Servico = servico;
+            agendamento.Colaborador = colaborador;
             agendamento.PessoaAtendida = pessoaAtendida;
             agendamento.DataHora = dataHora;
             agendamento.OrdemServico = ordemServico;

@@ -24,6 +24,7 @@ namespace TechBeauty.Csl
             var repoColaborador = new ColaboradorRepositorio(repoContato, repoServico, repoEndereco, repoGenero,
                 repoContratoTrabalho);
             var repoEscala = new EscalaRepositorio(repoColaborador);
+            var repoAgendamento = new AgendamentoRepositorio(repoServico, repoColaborador, repoOrdemServico);
 
 
             foreach (var x in repoGenero.TabelaGenero)
@@ -75,9 +76,14 @@ namespace TechBeauty.Csl
             }
             foreach (var x in repoEscala.TabelaEscala)
             {
-                Console.WriteLine($"Colaborador {x.Colaborador.Nome}  CPF: {x.Colaborador.CPF} " +
+                Console.WriteLine($"Colaborador: {x.Colaborador.Nome}  CPF: {x.Colaborador.CPF} " +
                     $"Entrada: {x.DataHoraEntrada}" + 
                     $" Saida: {x.DataHoraSaida} " );
+            }
+            foreach (var x in repoAgendamento.TabelaAgendamento)
+            {
+                Console.WriteLine($"Colaborador: {x.Colaborador.Nome}  Pessoa Atendida: {x.PessoaAtendida} " +
+                    $"Servico: {x.Servico.Nome} Hora: {x.DataHoraExecucao}");
             }
 
         }
