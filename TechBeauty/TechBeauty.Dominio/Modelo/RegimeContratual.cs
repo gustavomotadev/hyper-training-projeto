@@ -2,8 +2,8 @@
 {
     public class RegimeContratual
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        public int Id { get; private set; }
+        public string Nome { get; private set; }
 
         public static RegimeContratual Criar(int id, string nome)
         {
@@ -11,6 +11,11 @@
             regimeContratual.Id = id;
             regimeContratual.Nome = nome;
             return regimeContratual;
+        }
+
+        public void Alterar(string nome)
+        {
+            Nome = nome;
         }
     }
 }

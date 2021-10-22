@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -12,19 +13,35 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<RegimeContratual> Incluir(RegimeContratual regimeContratual)
+        public void Incluir(RegimeContratual regimeContratual)
         {
             TabelaRegimeContratual.Add(regimeContratual);
-            return TabelaRegimeContratual;
+        }
+
+        public RegimeContratual SelecionarPorId(int id) => 
+            TabelaRegimeContratual.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, string nome)
+        {
+            SelecionarPorId(id).Alterar(nome);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaRegimeContratual.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()
         {
-            string[] valoresRegimeContratual = { "CLT", "PJ" };
+            (int id, string nome)[] valoresRegimeContratual = 
+                { 
+                    (1, "CLT"), 
+                    (2, "PJ") 
+                };
 
-            for (int i = 0; i < valoresRegimeContratual.Length; i++)
+            foreach (var regimeContratual in valoresRegimeContratual)
             {
-                Incluir(RegimeContratual.Criar(i + 1, valoresRegimeContratual[i]));
+                Incluir(RegimeContratual.Criar(regimeContratual.id, regimeContratual.nome));
             }
         }
     }
