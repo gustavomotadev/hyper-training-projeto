@@ -24,7 +24,7 @@ namespace TechBeauty.Csl
             var repoColaborador = new ColaboradorRepositorio(repoContato, repoServico, repoEndereco, repoGenero,
                 repoContratoTrabalho);
             var repoEscala = new EscalaRepositorio(repoColaborador);
-            var repoAgendamento = new AgendamentoRepositorio(repoServico, repoColaborador, repoOrdemServico);
+            var repoAgendamento = new AgendamentoRepositorio(repoServico, repoColaborador);
 
 
             foreach (var x in repoGenero.TabelaGenero)
