@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -12,19 +13,40 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<TipoContato> Incluir(TipoContato tipoContato)
+        public void Incluir(TipoContato tipoContato)
         {
             TabelaTipoContato.Add(tipoContato);
-            return TabelaTipoContato;
+        }
+
+        public TipoContato SelecionarPorId(int id) => TabelaTipoContato.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, string valor)
+        {
+            SelecionarPorId(id).Alterar(valor);
+        }
+        public void Excluir(int id)
+        {
+            TabelaTipoContato.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()
         {
-            string[] valoresTipoContato = { "Celular", "Telefone Fixo", "E-mail", "WhatsApp", "Telegram", "Facebook", "Instagram", "Twitter", "TikTok" };
+            (int id, string valor)[] valoresTipoContato = 
+                { 
+                    (1, "Celular"), 
+                    (2, "Telefone Fixo"), 
+                    (3, "E-mail"), 
+                    (4, "WhatsApp"), 
+                    (5, "Telegram"), 
+                    (6, "Facebook"), 
+                    (7, "Instagram"), 
+                    (8, "Twitter"), 
+                    (9, "TikTok") 
+                };
 
-            for (int i = 0; i < valoresTipoContato.Length; i++)
+            foreach (var contato in valoresTipoContato)
             {
-                Incluir(TipoContato.Criar(i + 1, valoresTipoContato[i]));
+                Incluir(TipoContato.Criar(contato.id, contato.valor));
             }
         }
     }

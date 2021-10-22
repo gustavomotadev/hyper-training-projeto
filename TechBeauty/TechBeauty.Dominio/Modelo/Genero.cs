@@ -12,5 +12,10 @@
             genero.Valor = valor;
             return genero;
         }
+
+        public void Alterar(string valor)
+        {
+            Valor = valor;
+        }
     }
 }

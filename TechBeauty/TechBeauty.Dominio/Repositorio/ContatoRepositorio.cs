@@ -7,28 +7,40 @@ namespace TechBeauty.Dominio.Repositorio
     public class ContatoRepositorio
     {
         public List<Contato> TabelaContato { get; private set; } = new List<Contato>();
-        public List<TipoContato> TabelaTipoContato { get; private set; }
 
-        public ContatoRepositorio(List<TipoContato> tabelaTipoContato)
+        public ContatoRepositorio(TipoContatoRepositorio repoTipoContato)
         {
-            TabelaTipoContato = tabelaTipoContato;
-            Preencher();
+            Preencher(repoTipoContato);
         }
 
-        public List<Contato> Incluir(Contato contato)
+        public void Incluir(Contato contato)
         {
             TabelaContato.Add(contato);
-            return TabelaContato;
+            
         }
 
-        public void Preencher()
-        {
-            (int, string)[] valoresContato = { (3, "abc@mail.com") };
+        public Contato SelecionarPorId(int id) => TabelaContato.FirstOrDefault(x => x.Id == id);
 
-            for (int i = 0; i < valoresContato.Length; i++)
+        public void Alterar(int id, TipoContato tipo, string valor)
+        {
+            SelecionarPorId(id).Alterar(tipo, valor);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaContato.Remove(SelecionarPorId(id));
+        }
+
+        public void Preencher(TipoContatoRepositorio repoTipoContato)
+        {
+            (int id, int idTipoContato, string valor)[] valoresContato = 
+                { 
+                    (1, 3, "abc@mail.com") 
+                };
+
+            foreach (var contato in valoresContato)
             {
-                //puxar o tipocontato pelo Item1
-                Incluir(Contato.Criar(i + 1, TabelaTipoContato.FirstOrDefault(x => x.Id == valoresContato[i].Item1), valoresContato[i].Item2));
+                Incluir(Contato.Criar(contato.id, repoTipoContato.SelecionarPorId(contato.idTipoContato), contato.valor));
             }
         }
     }

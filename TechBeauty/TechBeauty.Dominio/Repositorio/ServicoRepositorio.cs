@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Repositorio
@@ -12,24 +13,36 @@ namespace TechBeauty.Dominio.Repositorio
             Preencher();
         }
 
-        public List<Servico> Incluir(Servico servico)
+        public void Incluir(Servico servico)
         {
             TabelaServico.Add(servico);
-            return TabelaServico;
+            
+        }
+
+        public Servico SelecionarPorId(int id) => TabelaServico.FirstOrDefault(x => x.Id == id);
+
+        public void Alterar(int id, string nome, decimal preco, string descricao, int duracaoEmMin)
+        {
+            SelecionarPorId(id).Alterar(nome, preco, descricao, duracaoEmMin);
+        }
+
+        public void Excluir(int id)
+        {
+            TabelaServico.Remove(SelecionarPorId(id));
         }
 
         public void Preencher()
         {
-            (string, decimal, string, int)[] valoresServico =
+            (int id, string nome, decimal preco, string descricao, int duracaoEmMin)[] valoresServico =
                 {
-                ("Corte", 15.0M, "aaa", 20),
-                ("Pintura", 15.0M, "aaa", 20),
-                ("Manicure", 15.0M, "aaa", 20)
+                    (1, "Corte", 15.0M, "aaa", 20),
+                    (2, "Pintura", 15.0M, "aaa", 20),
+                    (3, "Manicure", 15.0M, "aaa", 20)
                 };
 
-            for (int i = 0; i < valoresServico.Length; i++)
+            foreach (var servico in valoresServico)
             {
-                Incluir(Servico.Criar(i + 1, valoresServico[i].Item1, valoresServico[i].Item2, valoresServico[i].Item3, valoresServico[i].Item4));
+                Incluir(Servico.Criar(servico.id, servico.nome, servico.preco, servico.descricao, servico.duracaoEmMin));
             }
         }
     }

@@ -5,10 +5,20 @@ namespace TechBeauty.Dominio.Modelo
 {
     public abstract class Pessoa
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string CPF { get; set; }
-        public DateTime DataNascimento { get; set; }
-        public List<Contato> Contatos { get; set; }
+        public int Id { get; protected set; }
+        public string Nome { get; protected set; }
+        public string CPF { get; protected set; }
+        public DateTime DataNascimento { get; protected set; }
+        public List<Contato> Contatos { get; protected set; }
+
+        public void Alterar(string nome, string cpf, 
+            DateTime dataNascimento, List<Contato> contatos)
+        {
+            Nome = nome;
+            CPF = cpf;
+            DataNascimento = dataNascimento;
+            Contatos = contatos;
+
+        }
     }
 }

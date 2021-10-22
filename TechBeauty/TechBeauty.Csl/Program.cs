@@ -8,23 +8,24 @@ namespace TechBeauty.Csl
 {
     class Program
     {
-        private static GeneroRepositorio repoGenero;
-        private static CargoRepositorio repoCargo;
-        private static TipoContatoRepositorio repoTipoContato;
-        private static RegimeContratualRepositorio repoRegimeContratual;
-        private static ServicoRepositorio repoServico;
-        private static EnderecoRepositorio repoEndereco;
-        private static ContatoRepositorio repoContato;
 
         static void Main(string[] args)
         {
-            repoGenero = new GeneroRepositorio();
-            repoCargo = new CargoRepositorio();
-            repoTipoContato = new TipoContatoRepositorio();
-            repoRegimeContratual = new RegimeContratualRepositorio();
-            repoServico = new ServicoRepositorio();
-            repoEndereco = new EnderecoRepositorio();
-            repoContato = new ContatoRepositorio(repoTipoContato.TabelaTipoContato);
+            var repoGenero = new GeneroRepositorio();
+            var repoCargo = new CargoRepositorio();
+            var repoTipoContato = new TipoContatoRepositorio();
+            var repoRegimeContratual = new RegimeContratualRepositorio();
+            var repoServico = new ServicoRepositorio();
+            var repoEndereco = new EnderecoRepositorio();
+            var repoContato = new ContatoRepositorio(repoTipoContato);
+            var repoContratoTrabalho = new ContratoTrabalhoRepositorio(repoRegimeContratual, repoCargo);
+            var repoCliente = new ClienteRepositorio(repoContato);
+            var repoOrdemServico = new OrdemServicoRepositorio(repoCliente);
+            var repoColaborador = new ColaboradorRepositorio(repoContato, repoServico, repoEndereco, repoGenero,
+                repoContratoTrabalho);
+            var repoEscala = new EscalaRepositorio(repoColaborador);
+            var repoAgendamento = new AgendamentoRepositorio(repoServico, repoColaborador, repoOrdemServico);
+
 
             foreach (var x in repoGenero.TabelaGenero)
             {
@@ -54,6 +55,37 @@ namespace TechBeauty.Csl
             {
                 Console.WriteLine(x.Valor);
             }
+            foreach (var x in repoContratoTrabalho.TabelaContratoTrabalho)
+            {
+                Console.WriteLine(x.CnpjCTPS);
+            }
+            foreach (var x in repoCliente.TabelaCliente)
+            {
+                Console.WriteLine($"Nome: {x.Nome}  Data Nascimento: {x.DataNascimento}  " +
+                    $"CPF: {x.CPF}");
+            }
+            foreach (var x in repoOrdemServico.TabelaOS)
+            {
+                Console.WriteLine($"Número da OS: {x.Id} Cliente: {x.Cliente.Nome} " +
+                    $"Preço: R$ {x.PrecoTotal} Status: {x.StatusOS} ");
+            }
+            foreach (var x in repoColaborador.TabelaColaborador)
+            {
+                Console.WriteLine($"Nome: {x.Nome}  Genero: {x.Genero.Valor}  " +
+                    $"Regime: {x.Contrato.RegimeContratual.Nome}");
+            }
+            foreach (var x in repoEscala.TabelaEscala)
+            {
+                Console.WriteLine($"Colaborador: {x.Colaborador.Nome}  CPF: {x.Colaborador.CPF} " +
+                    $"Entrada: {x.DataHoraEntrada}" + 
+                    $" Saida: {x.DataHoraSaida} " );
+            }
+            foreach (var x in repoAgendamento.TabelaAgendamento)
+            {
+                Console.WriteLine($"Colaborador: {x.Colaborador.Nome}  Pessoa Atendida: {x.PessoaAtendida} " +
+                    $"Servico: {x.Servico.Nome} Hora: {x.DataHoraExecucao}");
+            }
+
         }
     }
 }
