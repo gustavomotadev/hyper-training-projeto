@@ -28,17 +28,17 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher(ColaboradorRepositorio repoColaborador)
         {
-            (DateTime dataHoraEntrada, DateTime dataHoraSaida,
+            (int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
             int idColaborador)[] valoresEscala =
             {
-                (new DateTime(2021, 10, 21, 08, 30,00), new DateTime(2021, 10, 21, 15, 30, 00), 1)
+                (1, new DateTime(2021, 10, 21, 08, 30,00), new DateTime(2021, 10, 21, 15, 30, 00), 1)
             };
 
-            for (int i = 0; i < valoresEscala.Length; i++)
+            foreach (var escala in valoresEscala)
             {
-                var colaborador = repoColaborador.SelecionarPorId(valoresEscala[i].idColaborador);
-                Incluir(Escala.Criar(i+1, valoresEscala[i].dataHoraEntrada,
-                    valoresEscala[i].dataHoraSaida, colaborador));
+                var colaborador = repoColaborador.SelecionarPorId(escala.idColaborador);
+                Incluir(Escala.Criar(escala.id, escala.dataHoraEntrada,
+                    escala.dataHoraSaida, colaborador));
             }
         }
     }
