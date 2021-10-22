@@ -20,12 +20,6 @@ namespace TechBeauty.Dominio.Repositorio
 
         public OrdemServico SelecionarPorId(int id) => TabelaOrdemServico.FirstOrDefault(x => x.Id == id);
 
-        public void Alterar(int id, decimal precoTotal,
-            int duracaoTotal, Cliente cliente, StatusOS statusOs, List<Agendamento> agendamentos)
-        {
-            SelecionarPorId(id).Alterar(precoTotal, duracaoTotal, cliente, statusOs, agendamentos);
-        }
-
         public void Excluir(int id) => TabelaOrdemServico.Remove(SelecionarPorId(id));
 
         public void Preencher(ClienteRepositorio repoCliente, AgendamentoRepositorio repoAgendamento)
@@ -44,8 +38,8 @@ namespace TechBeauty.Dominio.Repositorio
                 {
                     agendamentos.Add(repoAgendamento.SelecionarPorId(idAgendamento));
                 }
-                Incluir(OrdemServico.Criar(ordemServico.id, ordemServico.precoTotal,
-                    ordemServico.duracaoTotal, cliente, ordemServico.status, agendamentos));
+                //TODO
+                //Incluir(OrdemServico.NovaOS());
             }
         }
     }

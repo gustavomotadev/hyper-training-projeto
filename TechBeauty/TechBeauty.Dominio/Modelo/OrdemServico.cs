@@ -5,34 +5,34 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class OrdemServico
     {
-        public int Id { get; private set; }
-        public decimal PrecoTotal { get; private set; }
-        public int DuracaoTotal { get; private set; }
-        public Cliente Cliente { get; private set; }
-        public StatusOS StatusOS { get; private set; }
+        public int Id { get; init; }
+        public decimal PrecoTotal { get; }
+        public int DuracaoTotal { get; }
+        public Cliente Cliente { get; init; }
+        public StatusOS StatusOS { get; private set; } = StatusOS.Pendente;
         public List<Agendamento> Agendamentos { get; private set; }
 
-        public static OrdemServico Criar(int id, decimal precoTotal, 
-            int duracaoTotal, Cliente cliente, StatusOS statusOs, List<Agendamento> agendamentos)
+        private OrdemServico(int id, Cliente cliente)
         {
-            var os = new OrdemServico();
-            os.Id = id;
-            os.PrecoTotal = precoTotal;
-            os.DuracaoTotal = duracaoTotal;
-            os.Cliente = cliente;
-            os.StatusOS = statusOs;
-            os.Agendamentos = agendamentos;
+            Id = id;
+            Cliente = cliente;
+        }
+
+        public static OrdemServico NovaOS(int idDaOS, Cliente clienteDaOS, List<Agendamento> agendamentosIniciaisDaOS)
+        {
+            var os = new OrdemServico(idDaOS, clienteDaOS);
+            os.Agendamentos = agendamentosIniciaisDaOS;
             return os;
         }
 
-        public void Alterar(decimal precoTotal, int duracaoTotal, Cliente cliente, StatusOS statusOs, 
-            List<Agendamento> agendamentos)
+        public void AlterarStatusDaOS(StatusOS statusDaOS)
         {
-            PrecoTotal = precoTotal;
-            DuracaoTotal = duracaoTotal;
-            Cliente = cliente;
-            StatusOS = statusOs;
-            Agendamentos = agendamentos;
+            StatusOS = statusDaOS;
+        }
+
+        public void AdicionarAgendamento(Agendamento agendamento)
+        {
+            Agendamentos.Add(agendamento);
         }
     }
 }
