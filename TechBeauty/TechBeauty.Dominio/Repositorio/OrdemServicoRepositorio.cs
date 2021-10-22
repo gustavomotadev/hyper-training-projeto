@@ -29,17 +29,17 @@ namespace TechBeauty.Dominio.Repositorio
 
         public void Preencher(ClienteRepositorio repoCliente)
         {
-            (decimal precoTotal, int duracaoTotal, int idCliente, 
+            (int id, decimal precoTotal, int duracaoTotal, int idCliente, 
                 StatusOS status)[] valoresOrdemServico =
                 {
-                    (30.00M, 40, 1, StatusOS.Concluido)
+                    (1, 30.00M, 40, 1, StatusOS.Concluido)
                 };
 
-            for (int i = 0; i < valoresOrdemServico.Length; i++)
+            foreach (var ordemServico in valoresOrdemServico)
             {
-                var cliente = repoCliente.SelecionarPorId(valoresOrdemServico[i].idCliente);
-                Incluir(OrdemServico.Criar(i + 1, valoresOrdemServico[i].precoTotal,
-                    valoresOrdemServico[i].duracaoTotal, cliente, valoresOrdemServico[i].status));
+                var cliente = repoCliente.SelecionarPorId(ordemServico.idCliente);
+                Incluir(OrdemServico.Criar(ordemServico.id, ordemServico.precoTotal,
+                    ordemServico.duracaoTotal, cliente, ordemServico.status));
             }
         }
     }
