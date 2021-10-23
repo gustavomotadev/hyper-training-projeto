@@ -30,7 +30,7 @@
             return endereco;
         }
 
-        public void MudarTudo(string logradouro, string numero, string bairro,
+        public void MudarEndereco(string logradouro, string numero, string bairro,
             string cidade, string uf, string cep, string complemento)
         {
             Logradouro = logradouro;
