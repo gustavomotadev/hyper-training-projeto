@@ -10,7 +10,7 @@
             Id = id;
             TipoRegimeContratual = tipoRegimeContratual;
         }
-        public static RegimeContratual Criar(int idRegimeContratual, string tipoRegimeContratual)
+        public static RegimeContratual AdicionarRegimeContratual(int idRegimeContratual, string tipoRegimeContratual)
         {
             var regimeContratual = new RegimeContratual(idRegimeContratual, tipoRegimeContratual);
             return regimeContratual;
