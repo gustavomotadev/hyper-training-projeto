@@ -1,45 +1,37 @@
 ﻿using System;
+using TechBeauty.Dominio.Modelo.Enumeradores;
 
 namespace TechBeauty.Dominio.Modelo
 {
     public class Agendamento
     {
         public int Id { get; init; }
-        public Servico Servico { get; private set; }
-        public Colaborador Colaborador { get; private set; }
-        public string PessoaAtendida { get; private set; }
-        public DateTime DataHora { get; private set; }
-        public DateTime DataHoraCriacao { get; private set; }
-        public DateTime DataHoraExecucao { get; private set; }
+        public Servico Servico { get; init; }
+        public Colaborador Colaborador { get; init; }
+        public string PessoaAtendida { get; init; }
+        public DateTime DataHoraCriacao { get; init; }
+        public DateTime DataHoraExecucao { get; init; }
+        public StatusAgendamento StatusAgendamento { get; set; } = StatusAgendamento.Agendado;
+        public int DuracaoEmMin => Servico.DuracaoEmMin;
+        public DateTime DataHoraFinal => DataHoraExecucao.AddMinutes(DuracaoEmMin);
 
-        public Agendamento(int id)
+        private Agendamento(int id, Servico servico, Colaborador colaborador, string pessoaAtendida,
+          DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
             Id = id;
-        }
-
-        public static Agendamento Criar(int idAgendamento, Servico servico, Colaborador colaborador, string pessoaAtendida,
-          DateTime dataHora, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
-        {
-            var agendamento = new Agendamento(idAgendamento);
-            
-            agendamento.Servico = servico;
-            agendamento.Colaborador = colaborador;
-            agendamento.PessoaAtendida = pessoaAtendida;
-            agendamento.DataHora = dataHora;
-            agendamento.DataHoraCriacao = dataHoraCriacao;
-            agendamento.DataHoraExecucao = dataHoraExecucao;
-
-            return agendamento;
-        }
-
-        public void Alterar(Servico servico, Colaborador colaborador, string pessoaAtendida,
-          DateTime dataHora, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
-        {
             Servico = servico;
+            Colaborador = colaborador;
             PessoaAtendida = pessoaAtendida;
-            DataHora = dataHora;
             DataHoraCriacao = dataHoraCriacao;
             DataHoraExecucao = dataHoraExecucao;
         }
+
+        public static Agendamento NovoAgendamento(int idDoAgendamento, Servico servico, Colaborador colaborador, 
+            string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao) =>
+            new Agendamento(idDoAgendamento, servico, colaborador, pessoaAtendida,
+            dataHoraCriacao, dataHoraExecucao);
+
+        public void AlterarStatusAgendamento(StatusAgendamento statusDoAgendamento) =>
+            StatusAgendamento = statusDoAgendamento;
     }
 }
