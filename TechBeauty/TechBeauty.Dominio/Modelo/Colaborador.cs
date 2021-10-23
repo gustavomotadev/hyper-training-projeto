@@ -16,7 +16,7 @@ namespace TechBeauty.Dominio.Modelo
         {
             Id = id;
         }
-        public static Colaborador Criar(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
+        public static Colaborador NovoColaborador(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
             List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
             Genero genero, string nomeSocial, ContratoTrabalho contrato)
         {
