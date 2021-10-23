@@ -13,7 +13,7 @@ namespace TechBeauty.Dominio.Modelo
         {
             Id = id;
         }
-        public static Escala Criar(int idEscala, DateTime dataHoraEntrada, DateTime dataHoraSaida, 
+        public static Escala NovaEscala(int idEscala, DateTime dataHoraEntrada, DateTime dataHoraSaida, 
             Colaborador colaborador)
         {
             var escala = new Escala(idEscala);
