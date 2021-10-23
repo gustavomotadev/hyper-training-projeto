@@ -16,7 +16,7 @@ namespace TechBeauty.Dominio.Modelo
         {
             Id = id;
         }
-        public static ContratoTrabalho Criar(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
+        public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
             DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
         {
             var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho);
