@@ -29,5 +29,31 @@
             Descricao = descricao;
             DuracaoEmMin = duracaoEmMin;
         }
+
+        public void AlterarNomePreco(string nome, decimal preco)
+        {
+            Nome = nome;
+            Preco = preco;
+        }
+
+        public void AlterarNome(string nome)
+        {
+            Nome = nome;
+        }
+
+        public void AlterarPreco(decimal preco)
+        {
+            Preco = preco;
+        }
+
+        public void AlterarDescreicao(string descricao)
+        {
+            Descricao = descricao;
+        }
+
+        public void AlterarDuracao(int duracaoEmMin)
+        {
+            DuracaoEmMin = duracaoEmMin;
+        }
     }
 }
