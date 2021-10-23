@@ -12,7 +12,7 @@
         {
             Id = id;
         }
-        public static Servico Criar(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
+        public static Servico NovoServico(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
         {
             var servico = new Servico(idServico);
             servico.Nome = nome;
