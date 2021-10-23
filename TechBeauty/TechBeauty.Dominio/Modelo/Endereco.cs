@@ -8,7 +8,7 @@
         public string Cidade { get; private set; }
         public string UF { get; private set; }
         public string Numero { get; private set; } = "s/n";
-        public string Complemento { get; private set; } = string.Empty;
+        public string Complemento { get; private set; }
         public string CEP { get; set; }
 
         private Endereco(int id)
@@ -16,17 +16,31 @@
             Id = id;
         }
 
-        public static Endereco NovoEndereco(int idEndereco, string logradouro, string numero, string bairro,
-            string cidade, string uf, string cep, string complemento)
+        public static Endereco NovoEndereco(int idEndereco, string logradouro, string bairro,
+            string cidade, string uf, string cep, string numero = "s/n", string complemento = null)
         {
             var endereco = new Endereco(idEndereco);
             endereco.Logradouro = logradouro;
-            endereco.Numero = numero;
+            if (string.IsNullOrEmpty(numero))
+            {
+                endereco.Numero = "s/n";
+            }
+            else
+            {
+                endereco.Numero = numero;
+            }
             endereco.Bairro = bairro;
             endereco.Cidade = cidade;
             endereco.UF = uf;
             endereco.CEP = cep;
-            endereco.Complemento = complemento;
+            if (string.IsNullOrEmpty(complemento))
+            {
+                endereco.Complemento = string.Empty;
+            }
+            else 
+            {
+                endereco.Complemento = complemento;
+            }
             return endereco;
         }
 
