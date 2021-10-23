@@ -6,7 +6,7 @@ namespace TechBeauty.Dominio.Modelo
     public class Cliente : Pessoa
     {
 
-        public Cliente(int id, string cpf, DateTime dataNascimento)
+        private Cliente(int id, string cpf, DateTime dataNascimento)
         {
             Id = id;
             CPF = cpf;
