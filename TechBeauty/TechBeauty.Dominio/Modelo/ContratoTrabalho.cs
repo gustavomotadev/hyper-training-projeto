@@ -13,25 +13,20 @@ namespace TechBeauty.Dominio.Modelo
         public List<Cargo> Cargos { get; private set; }
         public string CnpjCTPS { get; init; }
 
-        public ContratoTrabalho(int id, RegimeContratual regimeContratual, DateTime dataEntrada)
+        private ContratoTrabalho(int id, RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
         {
             Id = id;
             RegimeContratual = regimeContratual;
             DataEntrada = dataEntrada;
+            CnpjCTPS = cnpjCTPS;
         }
         public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
             DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
         {
-            var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada);
+            var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada, cnpjCTPS);
             contratoTrabalho.DataDesligamento = dataDesligamento;
             contratoTrabalho.Cargos = cargos;
             return contratoTrabalho;
-        }
-        public void Alterar(RegimeContratual regimeContratual, DateTime dataEntrada,
-            DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
-        {
-            DataDesligamento = dataDesligamento;
-            Cargos = cargos;
         }
 
         public void AlterarDataDesligamento(DateTime dataDesligamento)
@@ -48,14 +43,29 @@ namespace TechBeauty.Dominio.Modelo
         {
             return Cargos.FirstOrDefault(x => x.Id == id);
         }
-        public bool RemoverCargo(int id, Cargo cargo)
+
+        public bool RemoverCargo(int id)
         {
             if (Cargos.Count > 1)
             {
-                Cargos.Remove(SelecionarPorId(id));
-                return true;
+                return Cargos.Remove(SelecionarPorId(id));
             }
-            return false;
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool RemoverCargo(Cargo cargo)
+        {
+            if (Cargos.Count > 1)
+            {
+                return Cargos.Remove(cargo);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
