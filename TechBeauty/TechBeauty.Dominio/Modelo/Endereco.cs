@@ -13,7 +13,7 @@
         {
             Id = id;
         }
-        public static Endereco Criar(int idEndereco, string logradouro, string cidade, string uf, string numero, string complemento)
+        public static Endereco NovoEndereco(int idEndereco, string logradouro, string cidade, string uf, string numero, string complemento)
         {
             var endereco = new Endereco(idEndereco);
             endereco.Logradouro = logradouro;
