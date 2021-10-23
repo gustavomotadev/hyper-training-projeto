@@ -10,7 +10,7 @@ namespace TechBeauty.Dominio.Modelo
         {
             Id = id;
         }
-        public static Cliente Criar(int idCliente, string nome, string cpf, DateTime dataNascimento, 
+        public static Cliente NovoCliente(int idCliente, string nome, string cpf, DateTime dataNascimento, 
             List<Contato> contatos)
         {
             var cliente = new Cliente(idCliente);
