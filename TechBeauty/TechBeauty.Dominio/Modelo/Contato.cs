@@ -3,24 +3,22 @@
     public class Contato
     {
         public int Id { get; init; }
-        public TipoContato Tipo { get; private set; }
+        public TipoContato Tipo { get; init; }
         public string Valor { get; private set; }
 
-        public Contato(int id)
+        private Contato(int id, TipoContato tipo)
         {
             Id = id;
+            Tipo = tipo;
         }
         public static Contato NovoContato(int idContato, TipoContato tipo, string valor)
         {
-            var contato = new Contato(idContato);
-            contato.Tipo = tipo;
+            var contato = new Contato(idContato, tipo);
             contato.Valor = valor;
             return contato;
         }
-        public void Alterar(TipoContato tipo, string valor)
+        public void AlterarContato(string valor)
         {
-
-            Tipo = tipo;
             Valor = valor;
         }
 
