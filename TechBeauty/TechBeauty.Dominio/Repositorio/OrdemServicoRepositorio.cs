@@ -10,36 +10,36 @@ namespace TechBeauty.Dominio.Repositorio
 {
     public class OrdemServicoRepositorio
     {
-        public List<OrdemServico> TabelaOS { get; private set; } = new List<OrdemServico>();
+        public List<OrdemServico> TabelaOrdemServico { get; private set; } = new List<OrdemServico>();
 
-        public OrdemServicoRepositorio(ClienteRepositorio cliente) => Preencher(cliente);
+        public OrdemServicoRepositorio(ClienteRepositorio repoCliente, AgendamentoRepositorio repoAgendamento) => 
+            Preencher(repoCliente, repoAgendamento);
 
-        public void Incluir(OrdemServico os) => TabelaOS.Add(os);
+        public void Incluir(OrdemServico ordemServico) => TabelaOrdemServico.Add(ordemServico);
         
 
-        public OrdemServico SelecionarPorId(int id) => TabelaOS.FirstOrDefault(x => x.Id == id);
+        public OrdemServico SelecionarPorId(int id) => TabelaOrdemServico.FirstOrDefault(x => x.Id == id);
 
-        public void Alterar(int id, decimal precoTotal,
-            int duracaoTotal, Cliente cliente, StatusOS statusOs)
-        {
-            SelecionarPorId(id).Alterar(precoTotal, duracaoTotal, cliente, statusOs);
-        }
+        public void Excluir(int id) => TabelaOrdemServico.Remove(SelecionarPorId(id));
 
-        public void Excluir(int id) => TabelaOS.Remove(SelecionarPorId(id));
-
-        public void Preencher(ClienteRepositorio repoCliente)
+        public void Preencher(ClienteRepositorio repoCliente, AgendamentoRepositorio repoAgendamento)
         {
             (int id, decimal precoTotal, int duracaoTotal, int idCliente, 
-                StatusOS status)[] valoresOrdemServico =
+                StatusOS status, int[] idAgendamentos)[] valoresOrdemServico =
                 {
-                    (1, 30.00M, 40, 1, StatusOS.Concluido)
+                    (1, 30.00M, 40, 1, StatusOS.Concluido, new int[]{1})
                 };
 
             foreach (var ordemServico in valoresOrdemServico)
             {
                 var cliente = repoCliente.SelecionarPorId(ordemServico.idCliente);
-                Incluir(OrdemServico.Criar(ordemServico.id, ordemServico.precoTotal,
-                    ordemServico.duracaoTotal, cliente, ordemServico.status));
+                var agendamentos = new List<Agendamento>();
+                foreach (var idAgendamento in ordemServico.idAgendamentos)
+                {
+                    agendamentos.Add(repoAgendamento.SelecionarPorId(idAgendamento));
+                }
+                //TODO
+                //Incluir(OrdemServico.NovaOS());
             }
         }
     }

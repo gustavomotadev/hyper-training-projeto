@@ -1,50 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TechBeauty.Dominio.Modelo
 {
     public class Colaborador : Pessoa
     {
-        public string CarteiraTrabalho { get; private set; }
         public List<Servico> Servicos { get; private set; }
         public Endereco Endereco { get; private set; }
         public Genero Genero { get; private set; }
-        public string NomeSocial { get; private set; }
+        public string NomeSocial { get; private set; } = String.Empty;
         public ContratoTrabalho Contrato { get; private set; }
 
-        public static Colaborador Criar(int id, string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
-            Genero genero, string nomeSocial, ContratoTrabalho contrato)
+        private Colaborador(int id, string cpf, DateTime dataNascimento)
         {
-            var colaborador = new Colaborador();
-            colaborador.Id = id;
+            Id = id;
+            CPF = cpf;
+            DataNascimento = dataNascimento;
+            
+        }
+
+        public static Colaborador NovoColaborador(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
+            List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
+            Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
+        {
+            var colaborador = new Colaborador(idColaborador, cpf, dataNascimento);
             colaborador.Nome = nome;
-            colaborador.CPF = cpf;
-            colaborador.DataNascimento = dataNascimento;
             colaborador.Contatos = contatos;
-            colaborador.CarteiraTrabalho = carteiraDeTrabalho;
             colaborador.Servicos = servicos;
             colaborador.Endereco = endereco;
             colaborador.Genero = genero;
-            colaborador.NomeSocial = nomeSocial;
+            if (String.IsNullOrEmpty(nomeSocial))
+            {
+                colaborador.NomeSocial = String.Empty;
+            }
+            else
+            {
+                colaborador.NomeSocial = nomeSocial;
+            }
             colaborador.Contrato = contrato;
             return colaborador;
         }
 
-        public void Alterar(string nome, string cpf, DateTime dataNascimento, List<Contato> contatos, 
-            string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, Genero genero, 
-            string nomeSocial, ContratoTrabalho contrato)
+        public void AdicionarServico(Servico servico) => Servicos.Add(servico);
+
+        public Servico ObterServicoPorId(int id) => Servicos.FirstOrDefault(x => x.Id == id);
+
+        public bool RemoverServico(int id)
         {
-            Nome = nome;
-            CPF = cpf;
-            DataNascimento = dataNascimento;
-            Contatos = contatos;
-            CarteiraTrabalho = carteiraDeTrabalho;
-            Servicos = servicos;
-            Endereco = endereco;
-            Genero = genero;
-            NomeSocial = nomeSocial;
-            Contrato = contrato;
+            if (Servicos.Count > 1)
+            {
+                return Servicos.Remove(ObterServicoPorId(id));
+            }
+            else
+            { 
+                return false;
+            }
         }
+        public bool RemoverServico(Servico servico)
+        {
+            if (Servicos.Count > 1)
+            {
+                return Servicos.Remove(servico);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void MudarEndereco(string logradouro, string numero, string bairro,
+            string cidade, string uf, string cep, string complemento) =>
+            Endereco.MudarEndereco(logradouro, numero, bairro, cidade, uf, cep, complemento);
+
+        public void MudarDeCidade(string logradouro, string numero, string bairro,
+            string cidade, string complemento) =>
+            Endereco.MudarDeCidade(logradouro, numero, bairro, cidade, complemento);
+
+        public void MudarDeLogradouro(string logradouro, string numero, string bairro,
+            string complemento) => 
+            Endereco.MudarDeLogradouro(logradouro, numero, bairro, complemento);
+
+        public void MudarNumeroEComplemento(string numero, string complemento) =>
+            Endereco.MudarNumeroEComplemento(numero, complemento);
+
+        public void AlterarGenero(Genero genero) => Genero = genero;
+
+        public void AlterarNomeSocial(string nomeSocial) => NomeSocial = nomeSocial;
+
+        public void AlterarContrato(ContratoTrabalho contrato) => Contrato = contrato;
     }
 }

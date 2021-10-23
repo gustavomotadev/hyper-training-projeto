@@ -2,20 +2,17 @@
 {
     public class RegimeContratual
     {
-        public int Id { get; private set; }
-        public string Nome { get; private set; }
+        public int Id { get; init; }
+        public string TipoRegimeContratual { get; init; }
 
-        public static RegimeContratual Criar(int id, string nome)
+        private RegimeContratual(int id, string tipoRegimeContratual)
         {
-            var regimeContratual = new RegimeContratual();
-            regimeContratual.Id = id;
-            regimeContratual.Nome = nome;
-            return regimeContratual;
+            Id = id;
+            TipoRegimeContratual = tipoRegimeContratual;
         }
 
-        public void Alterar(string nome)
-        {
-            Nome = nome;
-        }
+        public static RegimeContratual AdicionarRegimeContratual(int idRegimeContratual, string tipoRegimeContratual) => 
+            new RegimeContratual(idRegimeContratual, tipoRegimeContratual);
+
     }
 }

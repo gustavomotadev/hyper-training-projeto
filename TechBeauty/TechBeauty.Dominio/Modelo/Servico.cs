@@ -2,16 +2,17 @@
 {
     public class Servico
     {
-        public int Id { get; private set; }
+        public int Id { get; init; }
         public string Nome { get; private set; }
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
 
-        public static Servico Criar(int id, string nome, decimal preco, string descricao, int duracaoEmMin)
+        private Servico(int id) => Id = id;
+
+        public static Servico NovoServico(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
         {
-            var servico = new Servico();
-            servico.Id = id;
+            var servico = new Servico(idServico);
             servico.Nome = nome;
             servico.Preco = preco;
             servico.Descricao = descricao;
@@ -26,5 +27,19 @@
             Descricao = descricao;
             DuracaoEmMin = duracaoEmMin;
         }
+
+        public void AlterarNomePreco(string nome, decimal preco)
+        {
+            Nome = nome;
+            Preco = preco;
+        }
+
+        public void AlterarNome(string nome) => Nome = nome;
+
+        public void AlterarPreco(decimal preco) => Preco = preco;
+
+        public void AlterarDescreicao(string descricao) => Descricao = descricao;
+
+        public void AlterarDuracao(int duracaoEmMin) => DuracaoEmMin = duracaoEmMin;
     }
 }

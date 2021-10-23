@@ -20,12 +20,11 @@ namespace TechBeauty.Csl
             var repoContato = new ContatoRepositorio(repoTipoContato);
             var repoContratoTrabalho = new ContratoTrabalhoRepositorio(repoRegimeContratual, repoCargo);
             var repoCliente = new ClienteRepositorio(repoContato);
-            var repoOrdemServico = new OrdemServicoRepositorio(repoCliente);
             var repoColaborador = new ColaboradorRepositorio(repoContato, repoServico, repoEndereco, repoGenero,
                 repoContratoTrabalho);
+            var repoAgendamento = new AgendamentoRepositorio(repoServico, repoColaborador);
+            var repoOrdemServico = new OrdemServicoRepositorio(repoCliente, repoAgendamento);
             var repoEscala = new EscalaRepositorio(repoColaborador);
-            var repoAgendamento = new AgendamentoRepositorio(repoServico, repoColaborador, repoOrdemServico);
-
 
             foreach (var x in repoGenero.TabelaGenero)
             {
@@ -64,7 +63,7 @@ namespace TechBeauty.Csl
                 Console.WriteLine($"Nome: {x.Nome}  Data Nascimento: {x.DataNascimento}  " +
                     $"CPF: {x.CPF}");
             }
-            foreach (var x in repoOrdemServico.TabelaOS)
+            foreach (var x in repoOrdemServico.TabelaOrdemServico)
             {
                 Console.WriteLine($"Número da OS: {x.Id} Cliente: {x.Cliente.Nome} " +
                     $"Preço: R$ {x.PrecoTotal} Status: {x.StatusOS} ");
@@ -85,7 +84,6 @@ namespace TechBeauty.Csl
                 Console.WriteLine($"Colaborador: {x.Colaborador.Nome}  Pessoa Atendida: {x.PessoaAtendida} " +
                     $"Servico: {x.Servico.Nome} Hora: {x.DataHoraExecucao}");
             }
-
         }
     }
 }

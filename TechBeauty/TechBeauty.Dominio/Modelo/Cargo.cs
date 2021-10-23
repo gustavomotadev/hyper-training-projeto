@@ -2,22 +2,30 @@
 {
     public class Cargo
     {
-        public int Id { get; private set; }
-        public string Nome { get; private set; }
+        public int Id { get; init; }
+        public string NomeCargo { get; private set; }
         public string Descricao { get; private set; }
 
-        public static Cargo Criar(int id, string nome, string descricao)
+        private Cargo(int id)
         {
-            var cargo = new Cargo();
-            cargo.Id = id;
-            cargo.Nome = nome;
+            Id = id;
+        }
+
+        public static Cargo NovoCargo(int idCargo, string nome, string descricao)
+        {
+            var cargo = new Cargo(idCargo);
+            cargo.NomeCargo = nome;
             cargo.Descricao = descricao;
             return cargo;
         }
 
-        public void Alterar(string nome, string descricao)
+        public void AlterarNome(string nome)
         {
-            Nome = nome;
+            NomeCargo = nome;
+        }
+
+        public void AlterarDescricao(string descricao)
+        {
             Descricao = descricao;
         }
     }
