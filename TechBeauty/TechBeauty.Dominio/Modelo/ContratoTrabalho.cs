@@ -21,20 +21,21 @@ namespace TechBeauty.Dominio.Modelo
         public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
             DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
         {
-            var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada)
+            var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada);
             contratoTrabalho.DataDesligamento = dataDesligamento;
-            contratoTrabalho.Cargos = cargos
+            contratoTrabalho.Cargos = cargos;
             return contratoTrabalho;
         }
         public void Alterar(RegimeContratual regimeContratual, DateTime dataEntrada,
             DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
         {
-
-            RegimeContratual = regimeContratual;
-            DataEntrada = dataEntrada;
             DataDesligamento = dataDesligamento;
             Cargos = cargos;
-            CnpjCTPS = cnpjCTPS;
+        }
+
+        public void AlterarDataDesligamento(DateTime dataDesligamento)
+        {
+            DataDesligamento = dataDesligamento;
         }
     }
 }
