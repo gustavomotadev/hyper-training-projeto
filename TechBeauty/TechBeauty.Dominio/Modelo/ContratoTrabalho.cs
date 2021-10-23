@@ -44,11 +44,15 @@ namespace TechBeauty.Dominio.Modelo
             Cargos.Add(cargo);
         }
 
+        public Cargo SelecionarPorId(int  id)
+        {
+            return Cargos.FirstOrDefault(x => x.Id == id)
+        }
         public bool RemoverCargo(int id, Cargo cargo)
         {
             if (Cargos.Count > 1)
             {
-                Cargos.Remove(Cargos.FirstOrDefault(x => x.Id == id));
+                Cargos.Remove(SelecionarPorId(id));
                 return true;
             }
             return false;
