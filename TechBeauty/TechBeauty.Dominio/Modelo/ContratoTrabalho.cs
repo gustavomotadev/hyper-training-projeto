@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -36,6 +37,21 @@ namespace TechBeauty.Dominio.Modelo
         public void AlterarDataDesligamento(DateTime dataDesligamento)
         {
             DataDesligamento = dataDesligamento;
+        }
+
+        public void AdicionarCargo(Cargo cargo)
+        {
+            Cargos.Add(cargo);
+        }
+
+        public bool RemoverCargo(int id, Cargo cargo)
+        {
+            if (Cargos.Count > 1)
+            {
+                Cargos.Remove(Cargos.FirstOrDefault(x => x.Id == id));
+                return true;
+            }
+            return false;
         }
     }
 }
