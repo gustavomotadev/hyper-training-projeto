@@ -17,9 +17,9 @@
             contato.Valor = valor;
             return contato;
         }
-        public void AlterarContato(string valor)
+        public void AlterarContato(string novoValor)
         {
-            Valor = valor;
+            Valor = novoValor;
         }
 
     }
