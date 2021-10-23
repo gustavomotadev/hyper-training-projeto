@@ -8,10 +8,8 @@
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
 
-        public Servico(int id)
-        {
-            Id = id;
-        }
+        private Servico(int id) => Id = id;
+
         public static Servico NovoServico(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
         {
             var servico = new Servico(idServico);
@@ -36,24 +34,12 @@
             Preco = preco;
         }
 
-        public void AlterarNome(string nome)
-        {
-            Nome = nome;
-        }
+        public void AlterarNome(string nome) => Nome = nome;
 
-        public void AlterarPreco(decimal preco)
-        {
-            Preco = preco;
-        }
+        public void AlterarPreco(decimal preco) => Preco = preco;
 
-        public void AlterarDescreicao(string descricao)
-        {
-            Descricao = descricao;
-        }
+        public void AlterarDescreicao(string descricao) => Descricao = descricao;
 
-        public void AlterarDuracao(int duracaoEmMin)
-        {
-            DuracaoEmMin = duracaoEmMin;
-        }
+        public void AlterarDuracao(int duracaoEmMin) => DuracaoEmMin = duracaoEmMin;
     }
 }
