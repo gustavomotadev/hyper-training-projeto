@@ -6,7 +6,7 @@
         public string NomeCargo { get; private set; }
         public string Descricao { get; private set; }
 
-        public Cargo(int id)
+        private Cargo(int id)
         {
             Id = id;
         }
