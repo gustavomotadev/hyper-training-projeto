@@ -3,7 +3,7 @@
     public class Cargo
     {
         public int Id { get; init; }
-        public string Nome { get; private set; }
+        public string NomeCargo { get; private set; }
         public string Descricao { get; private set; }
 
         public Cargo(int id)
@@ -11,17 +11,21 @@
             Id = id;
         }
 
-        public static Cargo Criar(int idCargo, string nome, string descricao)
+        public static Cargo NovoCargo(int idCargo, string nome, string descricao)
         {
             var cargo = new Cargo(idCargo);
-            cargo.Nome = nome;
+            cargo.NomeCargo = nome;
             cargo.Descricao = descricao;
             return cargo;
         }
 
-        public void Alterar(string nome, string descricao)
+        public void AlterarNome(string nome)
         {
-            Nome = nome;
+            NomeCargo = nome;
+        }
+
+        public void AlterarDescricao(string descricao)
+        {
             Descricao = descricao;
         }
     }
