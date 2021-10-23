@@ -11,10 +11,11 @@
         public string Complemento { get; private set; } = string.Empty;
         public string CEP { get; set; }
 
-        public Endereco(int id)
+        private Endereco(int id)
         {
             Id = id;
         }
+
         public static Endereco NovoEndereco(int idEndereco, string logradouro, string numero, string bairro,
             string cidade, string uf, string cep, string complemento)
         {
@@ -29,7 +30,7 @@
             return endereco;
         }
 
-        public void Alterar(string logradouro, string numero, string bairro,
+        public void MudarTudo(string logradouro, string numero, string bairro,
             string cidade, string uf, string cep, string complemento)
         {
             Logradouro = logradouro;
@@ -41,7 +42,7 @@
             Complemento = complemento;
         }
 
-        public void AlterarCidade(string logradouro, string numero, string bairro,
+        public void MudarDeCidade(string logradouro, string numero, string bairro,
             string cidade, string complemento)
         {
             Logradouro = logradouro;
@@ -51,7 +52,7 @@
             Complemento = complemento;
         }
 
-        public void AlterarLogradouro(string logradouro, string numero, string bairro,
+        public void MudarDeLogradouro(string logradouro, string numero, string bairro,
             string complemento)
         {
             Logradouro = logradouro;
@@ -60,9 +61,10 @@
             Complemento = complemento;
         }
 
-        public void AlterarNumero(string numero)
+        public void MudarNumeroEComplemento(string numero, string complemento)
         {
-            Numero = numero;   
+            Numero = numero;
+            Complemento = complemento;
         }
     }
 }
