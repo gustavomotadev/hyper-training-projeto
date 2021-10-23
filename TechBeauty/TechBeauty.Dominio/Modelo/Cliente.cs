@@ -6,17 +6,17 @@ namespace TechBeauty.Dominio.Modelo
     public class Cliente : Pessoa
     {
 
-        public Cliente(int id)
+        public Cliente(int id, string cpf, DateTime dataNascimento)
         {
             Id = id;
+            CPF = cpf;
+            DataNascimento = dataNascimento;
         }
         public static Cliente NovoCliente(int idCliente, string nome, string cpf, DateTime dataNascimento, 
             List<Contato> contatos)
         {
-            var cliente = new Cliente(idCliente);
+            var cliente = new Cliente(idCliente, cpf, dataNascimento);
             cliente.Nome = nome;
-            cliente.CPF = cpf;
-            cliente.DataNascimento = dataNascimento;
             cliente.Contatos = contatos;
             return cliente;
         }

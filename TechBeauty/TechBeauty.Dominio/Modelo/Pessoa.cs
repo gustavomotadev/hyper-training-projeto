@@ -7,18 +7,15 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; protected init; }
         public string Nome { get; protected set; }
-        public string CPF { get; protected set; }
-        public DateTime DataNascimento { get; protected set; }
+        public string CPF { get; init; }
+        public DateTime DataNascimento { get; init; }
         public List<Contato> Contatos { get; protected set; }
 
-        public void Alterar(string nome, string cpf, 
-            DateTime dataNascimento, List<Contato> contatos)
+        public void AlterarNome(string nome)
         {
             Nome = nome;
-            CPF = cpf;
-            DataNascimento = dataNascimento;
-            Contatos = contatos;
-
         }
+
+
     }
 }
