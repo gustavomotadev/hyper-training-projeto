@@ -10,7 +10,7 @@
         {
             Id = id;
         }
-        public static Contato Criar(int idContato, TipoContato tipo, string valor)
+        public static Contato NovoContato(int idContato, TipoContato tipo, string valor)
         {
             var contato = new Contato(idContato);
             contato.Tipo = tipo;
