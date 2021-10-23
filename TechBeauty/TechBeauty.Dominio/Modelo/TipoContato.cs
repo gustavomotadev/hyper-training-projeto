@@ -11,7 +11,7 @@
             Valor = valor;
         }
 
-        public static TipoContato Criar(int idTipoContato, string valor)
+        public static TipoContato AdicionarTipoContato(int idTipoContato, string valor)
         {
             var tipoContato = new TipoContato(idTipoContato, valor);
             
