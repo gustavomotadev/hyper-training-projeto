@@ -46,7 +46,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public Cargo SelecionarPorId(int  id)
         {
-            return Cargos.FirstOrDefault(x => x.Id == id)
+            return Cargos.FirstOrDefault(x => x.Id == id);
         }
         public bool RemoverCargo(int id, Cargo cargo)
         {
