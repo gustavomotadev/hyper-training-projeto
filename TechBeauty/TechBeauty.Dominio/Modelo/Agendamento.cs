@@ -4,7 +4,7 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Agendamento
     {
-        public int Id { get; private set; }
+        public int Id { get; init; }
         public Servico Servico { get; private set; }
         public Colaborador Colaborador { get; private set; }
         public string PessoaAtendida { get; private set; }
@@ -12,11 +12,16 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime DataHoraCriacao { get; private set; }
         public DateTime DataHoraExecucao { get; private set; }
 
-        public static Agendamento Criar(int id, Servico servico, Colaborador colaborador, string pessoaAtendida,
+        public Agendamento(int id)
+        {
+            Id = id;
+        }
+
+        public static Agendamento Criar(int idAgendamento, Servico servico, Colaborador colaborador, string pessoaAtendida,
           DateTime dataHora, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
-            var agendamento = new Agendamento();
-            agendamento.Id = id;
+            var agendamento = new Agendamento(idAgendamento);
+            
             agendamento.Servico = servico;
             agendamento.Colaborador = colaborador;
             agendamento.PessoaAtendida = pessoaAtendida;

@@ -2,14 +2,17 @@
 {
     public class Contato
     {
-        public int Id { get; private set; }
+        public int Id { get; init; }
         public TipoContato Tipo { get; private set; }
         public string Valor { get; private set; }
 
-        public static Contato Criar(int id, TipoContato tipo, string valor)
+        public Contato(int id)
         {
-            var contato = new Contato();
-            contato.Id = id;
+            Id = id;
+        }
+        public static Contato Criar(int idContato, TipoContato tipo, string valor)
+        {
+            var contato = new Contato(idContato);
             contato.Tipo = tipo;
             contato.Valor = valor;
             return contato;

@@ -2,19 +2,21 @@
 {
     public class TipoContato
     {
-        public int Id { get; private set; }
-        public string Valor { get; private set; }
+        public int Id { get; init; }
+        public string Valor { get; init; }
 
-        public static TipoContato Criar(int id, string valor)
+        public TipoContato(int id, string valor)
         {
-            var tipoContato = new TipoContato();
-            tipoContato.Id = id;
-            tipoContato.Valor = valor;
-            return tipoContato;
-        }
-        public void Alterar(string valor)
-        {
+            Id = id;
             Valor = valor;
         }
+
+        public static TipoContato Criar(int idTipoContato, string valor)
+        {
+            var tipoContato = new TipoContato(idTipoContato, valor);
+            
+            return tipoContato;
+        }
+        
     }
 }

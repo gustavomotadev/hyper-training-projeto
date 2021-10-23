@@ -2,17 +2,20 @@
 {
     public class Endereco
     {
-        public int Id { get; private set; }
+        public int Id { get; init; }
         public string Logradouro { get; private set; }
         public string Cidade { get; private set; }
         public string UF { get; private set; }
         public string Numero { get; private set; }
         public string Complemento { get; private set; }
 
-        public static Endereco Criar(int id, string logradouro, string cidade, string uf, string numero, string complemento)
+        public Endereco(int id )
         {
-            var endereco = new Endereco();
-            endereco.Id = id;
+            Id = id;
+        }
+        public static Endereco Criar(int idEndereco, string logradouro, string cidade, string uf, string numero, string complemento)
+        {
+            var endereco = new Endereco(idEndereco);
             endereco.Logradouro = logradouro;
             endereco.Cidade = cidade;
             endereco.UF = uf;

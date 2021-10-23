@@ -2,20 +2,22 @@
 {
     public class Genero
     {
-        public int Id { get; private set; }
-        public string Valor { get; private set; }
+        public int Id { get; init; }
+        public string Valor { get; init; }
 
-        public static Genero Criar(int id, string valor)
+        public Genero(int id, string valor)
         {
-            var genero = new Genero();
-            genero.Id = id;
-            genero.Valor = valor;
+            Id = id;
+            Valor = valor;
+        }
+
+        public static Genero Criar(int idGenero, string valorGenero)
+        {
+            var genero = new Genero(idGenero, valorGenero);
+            
             return genero;
         }
 
-        public void Alterar(string valor)
-        {
-            Valor = valor;
-        }
+        
     }
 }

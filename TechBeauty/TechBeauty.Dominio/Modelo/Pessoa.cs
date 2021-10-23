@@ -5,7 +5,7 @@ namespace TechBeauty.Dominio.Modelo
 {
     public abstract class Pessoa
     {
-        public int Id { get; protected set; }
+        public int Id { get; protected init; }
         public string Nome { get; protected set; }
         public string CPF { get; protected set; }
         public DateTime DataNascimento { get; protected set; }

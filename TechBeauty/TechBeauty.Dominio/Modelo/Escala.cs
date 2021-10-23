@@ -4,16 +4,19 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Escala
     {
-        public int Id { get; private set; }
+        public int Id { get; init; }
         public DateTime DataHoraEntrada { get; private set; }
         public DateTime DataHoraSaida { get; private set; }
         public Colaborador Colaborador { get; private set; }
 
-        public static Escala Criar(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida, 
+        public Escala(int id)
+        {
+            Id = id;
+        }
+        public static Escala Criar(int idEscala, DateTime dataHoraEntrada, DateTime dataHoraSaida, 
             Colaborador colaborador)
         {
-            var escala = new Escala();
-            escala.Id = id;
+            var escala = new Escala(idEscala);
             escala.DataHoraEntrada = dataHoraEntrada;
             escala.DataHoraEntrada = dataHoraSaida;
             escala.Colaborador = colaborador;

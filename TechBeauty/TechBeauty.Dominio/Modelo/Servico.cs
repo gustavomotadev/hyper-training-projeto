@@ -2,16 +2,19 @@
 {
     public class Servico
     {
-        public int Id { get; private set; }
+        public int Id { get; init; }
         public string Nome { get; private set; }
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
 
-        public static Servico Criar(int id, string nome, decimal preco, string descricao, int duracaoEmMin)
+        public Servico(int id)
         {
-            var servico = new Servico();
-            servico.Id = id;
+            Id = id;
+        }
+        public static Servico Criar(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
+        {
+            var servico = new Servico(idServico);
             servico.Nome = nome;
             servico.Preco = preco;
             servico.Descricao = descricao;

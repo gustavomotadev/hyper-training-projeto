@@ -12,12 +12,15 @@ namespace TechBeauty.Dominio.Modelo
         public string NomeSocial { get; private set; }
         public ContratoTrabalho Contrato { get; private set; }
 
-        public static Colaborador Criar(int id, string nome, string cpf, DateTime dataNascimento, 
+        public Colaborador(int id)
+        {
+            Id = id;
+        }
+        public static Colaborador Criar(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
             List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
             Genero genero, string nomeSocial, ContratoTrabalho contrato)
         {
-            var colaborador = new Colaborador();
-            colaborador.Id = id;
+            var colaborador = new Colaborador(idColaborador);
             colaborador.Nome = nome;
             colaborador.CPF = cpf;
             colaborador.DataNascimento = dataNascimento;
