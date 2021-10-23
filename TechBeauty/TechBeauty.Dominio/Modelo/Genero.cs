@@ -11,7 +11,7 @@
             Valor = valor;
         }
 
-        public static Genero Criar(int idGenero, string valorGenero)
+        public static Genero AdicionarGenero(int idGenero, string valorGenero)
         {
             var genero = new Genero(idGenero, valorGenero);
             
