@@ -5,19 +5,14 @@
         public int Id { get; init; }
         public string Valor { get; init; }
 
-        public Genero(int id, string valor)
+        private Genero(int id, string valor)
         {
             Id = id;
             Valor = valor;
         }
 
-        public static Genero AdicionarGenero(int idGenero, string valorGenero)
-        {
-            var genero = new Genero(idGenero, valorGenero);
-            
-            return genero;
-        }
-
+        public static Genero AdicionarGenero(int idGenero, string valorGenero) =>
+            new Genero(idGenero, valorGenero);
         
     }
 }
