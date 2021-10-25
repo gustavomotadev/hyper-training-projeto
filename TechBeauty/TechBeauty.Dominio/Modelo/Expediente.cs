@@ -117,6 +117,17 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-
+        public List<Escalado> ObterPrestadoresDeServico(List<Servico> servicos)
+        {
+            var prestadores = new List<Escalado>();
+            foreach (var escalado in Escalados)
+            {
+                if (!Enumerable.Except(servicos, escalado.Colaborador.Servicos).Any())
+                {
+                    prestadores.Add(escalado);
+                }
+            }
+            return prestadores;
+        }
     }
 }
