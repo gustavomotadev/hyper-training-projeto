@@ -1,4 +1,6 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class Endereco
     {
@@ -21,7 +23,7 @@
         {
             var endereco = new Endereco(idEndereco);
             endereco.Logradouro = logradouro;
-            if (string.IsNullOrEmpty(numero))
+            if (String.IsNullOrWhiteSpace(numero))
             {
                 endereco.Numero = "s/n";
             }
@@ -33,7 +35,7 @@
             endereco.Cidade = cidade;
             endereco.UF = uf;
             endereco.CEP = cep;
-            if (string.IsNullOrEmpty(complemento))
+            if (String.IsNullOrWhiteSpace(complemento))
             {
                 endereco.Complemento = string.Empty;
             }
