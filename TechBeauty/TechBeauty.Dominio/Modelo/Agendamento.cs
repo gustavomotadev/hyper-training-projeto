@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TechBeauty.Dominio.Modelo.Enumeradores;
 
 namespace TechBeauty.Dominio.Modelo
@@ -27,9 +28,23 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static Agendamento NovoAgendamento(int idDoAgendamento, Servico servico, Colaborador colaborador, 
-            string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao) =>
-            new Agendamento(idDoAgendamento, servico, colaborador, pessoaAtendida,
-            dataHoraCriacao, dataHoraExecucao);
+            string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
+        {
+            if (servico != null &&
+                colaborador != null &&
+                pessoaAtendida != null &&
+                colaborador.Servicos.Any(x => x.Id == servico.Id) &&
+                !String.IsNullOrWhiteSpace(pessoaAtendida) &&
+                dataHoraExecucao.AddMinutes(servico.DuracaoEmMin).Date == dataHoraExecucao.Date)
+            {
+                return new Agendamento(idDoAgendamento, servico, colaborador, pessoaAtendida,
+                    dataHoraCriacao, dataHoraExecucao);
+            }
+            else
+            {
+                return null;
+            }
+        }    
 
         public void AlterarStatusAgendamento(StatusAgendamento statusDoAgendamento) =>
             StatusAgendamento = statusDoAgendamento;

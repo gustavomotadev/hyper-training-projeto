@@ -25,7 +25,8 @@ namespace TechBeauty.Dominio.Modelo
             if (dataHoraAbertura.Date == dataHoraFechamento.Date &&
                 dataHoraAbertura < dataHoraFechamento &&
                 escalados != null &&
-                escalados.Count > 0)
+                escalados.Count > 0 &&
+                !escalados.Any(x => x == null))
             {
                 var expediente = new Expediente(id, dataHoraAbertura, dataHoraFechamento);
                 expediente.Escalados = escalados;
@@ -42,7 +43,8 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool AdicionarEscalado(Escalado escalado)
         {
-            if (escalado.DataHoraEntrada.Date >= DataHoraAbertura.Date &&
+            if (escalado != null &&
+                escalado.DataHoraEntrada.Date >= DataHoraAbertura.Date &&
                 escalado.DataHoraSaida.Date <= DataHoraFechamento.Date &&
                 !Escalados.Any(x => x.Colaborador.Id == escalado.Colaborador.Id))
             {
@@ -58,42 +60,59 @@ namespace TechBeauty.Dominio.Modelo
         public Agendamento ObterAgendamentoPorId(int id) =>
             AgendamentosDoDia.FirstOrDefault(x => x.Id == id);
 
-        public List<Agendamento> AgendamentosDoEscalado(Escalado escalado) =>
-            AgendamentosDoDia.Where(x => x.Colaborador.Id == escalado.Colaborador.Id).ToList();
+        public List<Agendamento> AgendamentosDoEscalado(Escalado escalado)
+        {
+            if (escalado != null)
+            {
+                return AgendamentosDoDia.Where(x => x.Colaborador.Id == escalado.Colaborador.Id).ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         private bool AgendamentoCabeNaEscala(Escalado escalado, Agendamento agendamento)
         {
-            if (agendamento.DataHoraExecucao >= escalado.DataHoraEntrada &&
-                agendamento.DataHoraFinal <= escalado.DataHoraSaida)
+            if (escalado != null &&
+                agendamento != null)
             {
-                var agendamentosFeitos = AgendamentosDoEscalado(escalado);
-                if (agendamentosFeitos.Count == 0)
+                if (agendamento.DataHoraExecucao >= escalado.DataHoraEntrada &&
+                    agendamento.DataHoraFinal <= escalado.DataHoraSaida)
                 {
-                    return true;
-                }
-                else
-                {
-                    if (agendamento.DataHoraFinal <= agendamentosFeitos[1].DataHoraExecucao ||
-                        agendamento.DataHoraExecucao >= agendamentosFeitos[-1].DataHoraFinal)
+                    var agendamentosFeitos = AgendamentosDoEscalado(escalado);
+                    if (agendamentosFeitos.Count == 0)
                     {
                         return true;
                     }
-                    else if (agendamentosFeitos.Count > 1)
-                    {
-                        for (int i = 1; i < agendamentosFeitos.Count; i++)
-                        {
-                            if (agendamento.DataHoraExecucao >= agendamentosFeitos[i-1].DataHoraFinal &&
-                                agendamento.DataHoraFinal <= agendamentosFeitos[i].DataHoraExecucao)
-                            {
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
                     else
                     {
-                        return false;
+                        if (agendamento.DataHoraFinal <= agendamentosFeitos[1].DataHoraExecucao ||
+                            agendamento.DataHoraExecucao >= agendamentosFeitos[-1].DataHoraFinal)
+                        {
+                            return true;
+                        }
+                        else if (agendamentosFeitos.Count > 1)
+                        {
+                            for (int i = 1; i < agendamentosFeitos.Count; i++)
+                            {
+                                if (agendamento.DataHoraExecucao >= agendamentosFeitos[i - 1].DataHoraFinal &&
+                                    agendamento.DataHoraFinal <= agendamentosFeitos[i].DataHoraExecucao)
+                                {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
@@ -104,12 +123,19 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool AdicionarAgendamento(Agendamento agendamento)
         {
-            var escalado =
-                Escalados.FirstOrDefault(x => x.Colaborador.Id == agendamento.Colaborador.Id);
-            if (escalado != null && AgendamentoCabeNaEscala(escalado, agendamento))
+            if (agendamento != null)
             {
-                AgendamentosDoDia.Add(agendamento);
-                return true;
+                var escalado =
+                Escalados.FirstOrDefault(x => x.Colaborador.Id == agendamento.Colaborador.Id);
+                if (escalado != null && AgendamentoCabeNaEscala(escalado, agendamento))
+                {
+                    AgendamentosDoDia.Add(agendamento);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -119,15 +145,24 @@ namespace TechBeauty.Dominio.Modelo
 
         public List<Escalado> ObterPrestadoresDeServico(List<Servico> servicos)
         {
-            var prestadores = new List<Escalado>();
-            foreach (var escalado in Escalados)
+            if (servicos != null &&
+                servicos.Count > 0 &&
+                !servicos.Any(x => x == null))
             {
-                if (!Enumerable.Except(servicos, escalado.Colaborador.Servicos).Any())
+                var prestadores = new List<Escalado>();
+                foreach (var escalado in Escalados)
                 {
-                    prestadores.Add(escalado);
+                    if (!Enumerable.Except(servicos, escalado.Colaborador.Servicos).Any())
+                    {
+                        prestadores.Add(escalado);
+                    }
                 }
+                return prestadores;
             }
-            return prestadores;
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -18,12 +18,22 @@ namespace TechBeauty.Dominio.Modelo
             DataHoraEntrada = dataHoraSaida;
             Colaborador = colaborador;
         }
+
         public static Escalado NovaEscala(int idEscala, DateTime dataHoraEntrada, 
             DateTime dataHoraSaida, Colaborador colaborador)
         {
-            var escala = new Escalado(idEscala, dataHoraEntrada, dataHoraSaida, colaborador);
-            escala.HorarioCumprido = false;
-            return escala;
+            if (colaborador != null &&
+                dataHoraEntrada.Date == dataHoraSaida.Date &&
+                dataHoraEntrada < dataHoraSaida)
+            {
+                var escala = new Escalado(idEscala, dataHoraEntrada, dataHoraSaida, colaborador);
+                escala.HorarioCumprido = false;
+                return escala;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void RegistrarPonto() => HorarioCumprido = true;
