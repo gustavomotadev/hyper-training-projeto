@@ -1,18 +1,29 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class RegimeContratual
     {
         public int Id { get; init; }
-        public string TipoRegimeContratual { get; init; }
+        public string NomeRegimeContratual { get; init; }
 
-        private RegimeContratual(int id, string tipoRegimeContratual)
+        private RegimeContratual(int id, string nomeRegimeContratual)
         {
             Id = id;
-            TipoRegimeContratual = tipoRegimeContratual;
+            NomeRegimeContratual = nomeRegimeContratual;
         }
 
-        public static RegimeContratual AdicionarRegimeContratual(int idRegimeContratual, string tipoRegimeContratual) => 
-            new RegimeContratual(idRegimeContratual, tipoRegimeContratual);
-
+        public static RegimeContratual NovoRegimeContratual(int idRegimeContratual, string nomeRegimeContratual)
+        {
+            if (nomeRegimeContratual != null &&
+                !String.IsNullOrWhiteSpace(nomeRegimeContratual))
+            {
+                return new RegimeContratual(idRegimeContratual, nomeRegimeContratual);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
