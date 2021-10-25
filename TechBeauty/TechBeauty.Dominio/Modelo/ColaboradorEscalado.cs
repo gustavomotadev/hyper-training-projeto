@@ -2,7 +2,7 @@
 
 namespace TechBeauty.Dominio.Modelo
 {
-    public class EscalaColaborador
+    public class ColaboradorEscalado
     {
         public int Id { get; init; }
         public DateTime DataHoraEntrada { get; init; }
@@ -10,7 +10,7 @@ namespace TechBeauty.Dominio.Modelo
         public Colaborador Colaborador { get; init; }
         public bool HorarioCumprido { get; private set; }
 
-        private EscalaColaborador(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
+        private ColaboradorEscalado(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
             Colaborador colaborador)
         {
             Id = id;
@@ -18,10 +18,10 @@ namespace TechBeauty.Dominio.Modelo
             DataHoraEntrada = dataHoraSaida;
             Colaborador = colaborador;
         }
-        public static EscalaColaborador NovaEscala(int idEscala, DateTime dataHoraEntrada, 
+        public static ColaboradorEscalado NovaEscala(int idEscala, DateTime dataHoraEntrada, 
             DateTime dataHoraSaida, Colaborador colaborador)
         {
-            var escala = new EscalaColaborador(idEscala, dataHoraEntrada, dataHoraSaida, colaborador);
+            var escala = new ColaboradorEscalado(idEscala, dataHoraEntrada, dataHoraSaida, colaborador);
             escala.HorarioCumprido = false;
             return escala;
         }
