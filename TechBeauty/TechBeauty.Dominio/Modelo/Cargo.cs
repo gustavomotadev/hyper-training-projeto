@@ -1,4 +1,6 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class Cargo
     {
@@ -13,20 +15,48 @@
 
         public static Cargo NovoCargo(int idCargo, string nome, string descricao)
         {
-            var cargo = new Cargo(idCargo);
-            cargo.NomeCargo = nome;
-            cargo.Descricao = descricao;
-            return cargo;
+            if (nome != null &&
+                descricao != null &&
+                !String.IsNullOrWhiteSpace(nome) &&
+                !String.IsNullOrWhiteSpace(descricao))
+            {
+                var cargo = new Cargo(idCargo);
+                cargo.NomeCargo = nome;
+                cargo.Descricao = descricao;
+                return cargo;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public void AlterarNome(string nome)
+        public bool AlterarNome(string nome)
         {
-            NomeCargo = nome;
+            if (nome != null &&
+                !String.IsNullOrWhiteSpace(nome))
+            {
+                NomeCargo = nome;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void AlterarDescricao(string descricao)
+        public bool AlterarDescricao(string descricao)
         {
-            Descricao = descricao;
+            if (descricao != null &&
+                !String.IsNullOrWhiteSpace(descricao))
+            {
+                Descricao = descricao;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
