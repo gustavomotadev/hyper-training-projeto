@@ -9,16 +9,16 @@ namespace TechBeauty.Dominio.Repositorio
 {
     public class EscalaRepositorio
     {
-        public List<ColaboradorEscalado> TabelaEscala { get; set; } = new List<ColaboradorEscalado>();
+        public List<Escalado> TabelaEscala { get; set; } = new List<Escalado>();
 
         public EscalaRepositorio(ColaboradorRepositorio repoColaborador)
         {
             Preencher(repoColaborador);
         }
 
-        public void Incluir(ColaboradorEscalado escala) => TabelaEscala.Add(escala);
+        public void Incluir(Escalado escala) => TabelaEscala.Add(escala);
 
-        public ColaboradorEscalado SelecionarPorId(int id) => TabelaEscala.FirstOrDefault(x => x.Id == id);
+        public Escalado SelecionarPorId(int id) => TabelaEscala.FirstOrDefault(x => x.Id == id);
 
         public void Alterar(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
             Colaborador colaborador) => SelecionarPorId(id).Alterar(dataHoraEntrada, dataHoraSaida, 
@@ -37,7 +37,7 @@ namespace TechBeauty.Dominio.Repositorio
             foreach (var escala in valoresEscala)
             {
                 var colaborador = repoColaborador.SelecionarPorId(escala.idColaborador);
-                Incluir(ColaboradorEscalado.Criar(escala.id, escala.dataHoraEntrada,
+                Incluir(Escalado.Criar(escala.id, escala.dataHoraEntrada,
                     escala.dataHoraSaida, colaborador));
             }
         }
