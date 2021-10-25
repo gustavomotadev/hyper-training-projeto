@@ -1,4 +1,6 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class Contato
     {
@@ -11,15 +13,35 @@
             Id = id;
             Tipo = tipo;
         }
+
         public static Contato NovoContato(int idContato, TipoContato tipo, string valor)
         {
-            var contato = new Contato(idContato, tipo);
-            contato.Valor = valor;
-            return contato;
+            if (tipo != null &&
+                valor != null &&
+                !String.IsNullOrWhiteSpace(valor))
+            {
+                var contato = new Contato(idContato, tipo);
+                contato.Valor = valor;
+                return contato;
+            }
+            else
+            {
+                return null;
+            }
         }
-        public void AlterarContato(string novoValor)
+
+        public bool AlterarContato(string novoValor)
         {
-            Valor = novoValor;
+            if (novoValor != null &&
+                !String.IsNullOrWhiteSpace(novoValor))
+            {
+                Valor = novoValor;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }
