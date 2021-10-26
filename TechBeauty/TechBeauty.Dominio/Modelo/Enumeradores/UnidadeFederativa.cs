@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechBeauty.Dominio.Modelo.Enumeradores
 {
-    public enum ListaUF
+    public enum UnidadeFederativa
     {
         AC,
         AL,

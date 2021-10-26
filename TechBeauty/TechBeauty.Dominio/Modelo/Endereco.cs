@@ -9,7 +9,7 @@ namespace TechBeauty.Dominio.Modelo
         public string Logradouro { get; private set; }
         public string Bairro { get; set; }
         public string Cidade { get; private set; }
-        public ListaUF UF { get; private set; }
+        public UnidadeFederativa UF { get; private set; }
         public string Numero { get; private set; } = "s/n";
         public string Complemento { get; private set; }
         public string CEP { get; set; }
@@ -22,7 +22,7 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static Endereco NovoEndereco(int idEndereco, string logradouro, string bairro,
-            string cidade, ListaUF uf, string cep, string numero = "s/n", string complemento = null)
+            string cidade, UnidadeFederativa uf, string cep, string numero = "s/n", string complemento = null)
         {
             if (!String.IsNullOrWhiteSpace(logradouro) &&
                 !String.IsNullOrWhiteSpace(bairro) &&
@@ -59,7 +59,7 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public bool MudarEndereco(string novoLogradouro, string novoNumero, string novoBairro,
-            string novaCidade, ListaUF uf, string novoCep, string novoComplemento)
+            string novaCidade, UnidadeFederativa uf, string novoCep, string novoComplemento)
         {
             if (novoLogradouro != null &&
                 !String.IsNullOrWhiteSpace(novoLogradouro) &&

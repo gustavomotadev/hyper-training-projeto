@@ -20,14 +20,6 @@
             return servico;
         }
 
-        public void Alterar(string nome, decimal preco, string descricao, int duracaoEmMin)
-        {
-            Nome = nome;
-            Preco = preco;
-            Descricao = descricao;
-            DuracaoEmMin = duracaoEmMin;
-        }
-
         public void AlterarNomePreco(string nome, decimal preco)
         {
             Nome = nome;
@@ -38,7 +30,7 @@
 
         public void AlterarPreco(decimal preco) => Preco = preco;
 
-        public void AlterarDescreicao(string descricao) => Descricao = descricao;
+        public void AlterarDescricao(string descricao) => Descricao = descricao;
 
         public void AlterarDuracao(int duracaoEmMin) => DuracaoEmMin = duracaoEmMin;
     }
