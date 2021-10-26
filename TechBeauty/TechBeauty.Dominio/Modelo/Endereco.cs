@@ -1,5 +1,6 @@
 ﻿using System;
 using TechBeauty.Dominio.Modelo.Enumeradores;
+using System.Text.RegularExpressions;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -14,11 +15,14 @@ namespace TechBeauty.Dominio.Modelo
         public string Complemento { get; private set; }
         public string CEP { get; set; }
 
-
-
         private Endereco(int id)
         {
             Id = id;
+        }
+
+        public static bool ValidarCEP(string cep)
+        {
+            return Regex.IsMatch(cep, @"^\d{5}-?\d{3}$");
         }
 
         public static Endereco NovoEndereco(int idEndereco, string logradouro, string bairro,
@@ -27,38 +31,40 @@ namespace TechBeauty.Dominio.Modelo
             if (!String.IsNullOrWhiteSpace(logradouro) &&
                 !String.IsNullOrWhiteSpace(bairro) &&
                 !String.IsNullOrWhiteSpace(cidade) &&
-                !String.IsNullOrWhiteSpace(cep))
+                !String.IsNullOrWhiteSpace(cep) &&
+                ValidarCEP(cep))
             {
                 var endereco = new Endereco(idEndereco);
                 endereco.Logradouro = logradouro;
-                    if (String.IsNullOrWhiteSpace(numero))
-                    {
-                        endereco.Numero = "s/n";
-                    }
-                    else
-                    {
-                        endereco.Numero = numero;
-                    }
+                if (String.IsNullOrWhiteSpace(numero))
+                {
+                    endereco.Numero = "s/n";
+                }
+                else
+                {
+                    endereco.Numero = numero;
+                }
                 endereco.Bairro = bairro;
                 endereco.Cidade = cidade;
                 endereco.UF = uf;
                 endereco.CEP = cep;
-                    if (String.IsNullOrWhiteSpace(complemento))
-                    {
-                        endereco.Complemento = string.Empty;
-                    }
-                    else
-                    {
-                        endereco.Complemento = complemento;
-                    }
+                if (String.IsNullOrWhiteSpace(complemento))
+                {
+                    endereco.Complemento = string.Empty;
+                }
+                else
+                {
+                    endereco.Complemento = complemento;
+                }
                 return endereco;
             }
-            
-            return null;
-            
+            else
+            {
+                return null;
+            } 
         }
 
-        public bool MudarEndereco(string novoLogradouro, string novoNumero, string novoBairro,
+        public bool MudarDeEndereco(string novoLogradouro, string novoNumero, string novoBairro,
             string novaCidade, UnidadeFederativa uf, string novoCep, string novoComplemento)
         {
             if (novoLogradouro != null &&
@@ -70,7 +76,8 @@ namespace TechBeauty.Dominio.Modelo
                 novaCidade != null &&
                 !String.IsNullOrWhiteSpace(novaCidade) &&
                 novoCep != null &&
-                !String.IsNullOrWhiteSpace(novoCep))
+                !String.IsNullOrWhiteSpace(novoCep) &&
+                ValidarCEP(novoCep))
             {
                 Logradouro = novoLogradouro;
                 Numero = novoNumero;
@@ -106,7 +113,8 @@ namespace TechBeauty.Dominio.Modelo
                 novaCidade != null &&
                 !String.IsNullOrWhiteSpace(novaCidade) &&
                 novoCep != null &&
-                !String.IsNullOrWhiteSpace(novoCep))
+                !String.IsNullOrWhiteSpace(novoCep) &&
+                ValidarCEP(novoCep))
             {
                 Logradouro = novoLogradouro;
                 Numero = novoNumero;
@@ -137,7 +145,8 @@ namespace TechBeauty.Dominio.Modelo
                 novoBairro != null &&
                 !String.IsNullOrWhiteSpace(novoBairro) &&
                 novoCep != null &&
-                !String.IsNullOrWhiteSpace(novoCep))
+                !String.IsNullOrWhiteSpace(novoCep) &&
+                ValidarCEP(novoCep))
             {
                 Logradouro = novoLogradouro;
                 Numero = novoNumero;
@@ -161,7 +170,7 @@ namespace TechBeauty.Dominio.Modelo
         {
 
             if (novoNumero != null &&
-                !String.IsNullOrWhiteSpace(novoNumero) &&)
+                !String.IsNullOrWhiteSpace(novoNumero))
             {
                 Numero = novoNumero;
                 if (String.IsNullOrWhiteSpace(novoComplemento))
