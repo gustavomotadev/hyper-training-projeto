@@ -9,8 +9,8 @@ namespace TechBeauty.Dominio.Modelo
         public int Id { get; set; }
         public DateTime DataHoraAbertura { get; init; }
         public DateTime DataHoraFechamento { get; init; }
-        public List<Escalado> Escalados { get; private set; }
-        public List<Agendamento> AgendamentosDoDia { get; private set; } = new List<Agendamento>();
+        public List<Turno> Turnos { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>();
 
         private Expediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento)
         {
@@ -20,16 +20,16 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public Expediente NovoExpediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento,
-            List<Escalado> escalados)
+            List<Turno> turnos)
         {
             if (dataHoraAbertura.Date == dataHoraFechamento.Date &&
                 dataHoraAbertura < dataHoraFechamento &&
-                escalados != null &&
-                escalados.Count > 0 &&
-                !escalados.Any(x => x == null))
+                turnos != null &&
+                turnos.Count > 0 &&
+                !turnos.Any(x => x == null))
             {
                 var expediente = new Expediente(id, dataHoraAbertura, dataHoraFechamento);
-                expediente.Escalados = escalados;
+                expediente.Turnos = turnos;
                 return expediente;
             }
             else
@@ -38,17 +38,17 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public Escalado ObterEscaladoPorId(int id) =>
-            Escalados.FirstOrDefault(x => x.Id == id);
+        public Turno ObterTurnoPorId(int id) =>
+            Turnos.FirstOrDefault(x => x.Id == id);
 
-        public bool AdicionarEscalado(Escalado escalado)
+        public bool AdicionarTurno(Turno turno)
         {
-            if (escalado != null &&
-                escalado.DataHoraEntrada.Date >= DataHoraAbertura.Date &&
-                escalado.DataHoraSaida.Date <= DataHoraFechamento.Date &&
-                !Escalados.Any(x => x.Colaborador.Id == escalado.Colaborador.Id))
+            if (turno != null &&
+                turno.DataHoraEntrada.Date >= DataHoraAbertura.Date &&
+                turno.DataHoraSaida.Date <= DataHoraFechamento.Date &&
+                !Turnos.Any(x => x.Colaborador.Id == turno.Colaborador.Id))
             {
-                Escalados.Add(escalado);
+                Turnos.Add(turno);
                 return true;
             }
             else
@@ -58,13 +58,13 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public Agendamento ObterAgendamentoPorId(int id) =>
-            AgendamentosDoDia.FirstOrDefault(x => x.Id == id);
+            Agendamentos.FirstOrDefault(x => x.Id == id);
 
-        public List<Agendamento> AgendamentosDoEscalado(Escalado escalado)
+        public List<Agendamento> AgendamentosDoTurno(Turno turno)
         {
-            if (escalado != null)
+            if (turno != null)
             {
-                return AgendamentosDoDia.Where(x => x.Colaborador.Id == escalado.Colaborador.Id).ToList();
+                return Agendamentos.Where(x => x.Colaborador.Id == turno.Colaborador.Id).ToList();
             }
             else
             {
@@ -72,15 +72,15 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        private bool AgendamentoCabeNaEscala(Escalado escalado, Agendamento agendamento)
+        private bool AgendamentoCabeNoTurno(Turno turno, Agendamento agendamento)
         {
-            if (escalado != null &&
+            if (turno != null &&
                 agendamento != null)
             {
-                if (agendamento.DataHoraExecucao >= escalado.DataHoraEntrada &&
-                    agendamento.DataHoraFinal <= escalado.DataHoraSaida)
+                if (agendamento.DataHoraExecucao >= turno.DataHoraEntrada &&
+                    agendamento.DataHoraFinal <= turno.DataHoraSaida)
                 {
-                    var agendamentosFeitos = AgendamentosDoEscalado(escalado);
+                    var agendamentosFeitos = AgendamentosDoTurno(turno);
                     if (agendamentosFeitos.Count == 0)
                     {
                         return true;
@@ -125,11 +125,11 @@ namespace TechBeauty.Dominio.Modelo
         {
             if (agendamento != null)
             {
-                var escalado =
-                Escalados.FirstOrDefault(x => x.Colaborador.Id == agendamento.Colaborador.Id);
-                if (escalado != null && AgendamentoCabeNaEscala(escalado, agendamento))
+                var turno =
+                Turnos.FirstOrDefault(x => x.Colaborador.Id == agendamento.Colaborador.Id);
+                if (turno != null && AgendamentoCabeNoTurno(turno, agendamento))
                 {
-                    AgendamentosDoDia.Add(agendamento);
+                    Agendamentos.Add(agendamento);
                     return true;
                 }
                 else
@@ -143,18 +143,18 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public List<Escalado> ObterPrestadoresDeServico(List<Servico> servicos)
+        public List<Turno> ObterPrestadoresDeServico(List<Servico> servicos)
         {
             if (servicos != null &&
                 servicos.Count > 0 &&
                 !servicos.Any(x => x == null))
             {
-                var prestadores = new List<Escalado>();
-                foreach (var escalado in Escalados)
+                var prestadores = new List<Turno>();
+                foreach (var turno in Turnos)
                 {
-                    if (!Enumerable.Except(servicos, escalado.Colaborador.Servicos).Any())
+                    if (!Enumerable.Except(servicos, turno.Colaborador.Servicos).Any())
                     {
-                        prestadores.Add(escalado);
+                        prestadores.Add(turno);
                     }
                 }
                 return prestadores;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechBeauty.Dominio.Modelo.Enumeradores
+namespace TechBeauty.Dominio.Modelo.Enumeracoes
 {
     public enum UnidadeFederativa
     {

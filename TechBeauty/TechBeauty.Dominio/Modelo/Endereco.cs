@@ -1,5 +1,5 @@
 ﻿using System;
-using TechBeauty.Dominio.Modelo.Enumeradores;
+using TechBeauty.Dominio.Modelo.Enumeracoes;
 using System.Text.RegularExpressions;
 
 namespace TechBeauty.Dominio.Modelo

@@ -1,4 +1,4 @@
-﻿namespace TechBeauty.Dominio.Modelo.Enumeradores
+﻿namespace TechBeauty.Dominio.Modelo.Enumeracoes
 {
     public enum StatusOS
     {
