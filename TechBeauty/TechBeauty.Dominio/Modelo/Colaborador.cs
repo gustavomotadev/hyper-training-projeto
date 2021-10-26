@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TechBeauty.Dominio.Modelo.Enumeradores;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -24,25 +25,56 @@ namespace TechBeauty.Dominio.Modelo
             List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
             Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
         {
-            var colaborador = new Colaborador(idColaborador, cpf, dataNascimento);
-            colaborador.Nome = nome;
-            colaborador.Contatos = contatos;
-            colaborador.Servicos = servicos;
-            colaborador.Endereco = endereco;
-            colaborador.Genero = genero;
-            if (String.IsNullOrEmpty(nomeSocial))
+            if (!String.IsNullOrWhiteSpace(nome) &&
+                !String.IsNullOrWhiteSpace(cpf) &&
+                Pessoa.ObterIdade(dataNascimento) >= 18 &&
+                Pessoa.ObterIdade(dataNascimento) <= 100 &&
+                contatos != null &&
+                contatos.Count > 0 &&
+                !contatos.Any(x => x == null) &&
+                !String.IsNullOrWhiteSpace(carteiraDeTrabalho) &&
+                servicos != null &&
+                servicos.Count > 0 &&
+                !servicos.Any(x => x == null) &&
+                endereco != null &&
+                genero != null &&
+                contrato != null)
             {
-                colaborador.NomeSocial = String.Empty;
+                var colaborador = new Colaborador(idColaborador, cpf, dataNascimento);
+                colaborador.Nome = nome;
+                colaborador.Contatos = contatos;
+                colaborador.Servicos = servicos;
+                colaborador.Endereco = endereco;
+                colaborador.Genero = genero;
+                if (String.IsNullOrEmpty(nomeSocial))
+                {
+                    colaborador.NomeSocial = String.Empty;
+                }
+                else
+                {
+                    colaborador.NomeSocial = nomeSocial;
+                }
+                colaborador.Contrato = contrato;
+                return colaborador;
             }
             else
             {
-                colaborador.NomeSocial = nomeSocial;
+                return null;
             }
-            colaborador.Contrato = contrato;
-            return colaborador;
         }
 
-        public void AdicionarServico(Servico servico) => Servicos.Add(servico);
+        public bool AdicionarServico(Servico servico)
+        {
+            if (servico != null)
+            {
+                Servicos.Add(servico);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public Servico ObterServicoPorId(int id) => Servicos.FirstOrDefault(x => x.Id == id);
 
@@ -57,9 +89,11 @@ namespace TechBeauty.Dominio.Modelo
                 return false;
             }
         }
+
         public bool RemoverServico(Servico servico)
         {
-            if (Servicos.Count > 1)
+            if (Servicos.Count > 1 &&
+                servico != null)
             {
                 return Servicos.Remove(servico);
             }
@@ -69,25 +103,59 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public void MudarEndereco(string logradouro, string numero, string bairro,
-            string cidade, string uf, string cep, string complemento) =>
-            Endereco.MudarEndereco(logradouro, numero, bairro, cidade, uf, cep, complemento);
+        public bool MudarEndereco(string novoLogradouro, string novoNumero, string novoBairro,
+            string novaCidade, UnidadeFederativa novaUF, string novoCep, string novoComplemento) =>
+            Endereco.MudarDeEndereco(novoLogradouro, novoNumero, novoBairro, novaCidade, novaUF, novoCep, novoComplemento);
 
-        public void MudarDeCidade(string logradouro, string numero, string bairro,
-            string cidade, string complemento) =>
-            Endereco.MudarDeCidade(logradouro, numero, bairro, cidade, complemento);
+        public bool MudarDeCidade(string novoLogradouro, string novoNumero, string novoBairro,
+            string novaCidade, string novonovoCep, string novoComplemento) =>
+            Endereco.MudarDeCidade(novoLogradouro, novoNumero, novoBairro, novaCidade, novonovoCep, novoComplemento);
 
-        public void MudarDeLogradouro(string logradouro, string numero, string bairro,
-            string complemento) => 
-            Endereco.MudarDeLogradouro(logradouro, numero, bairro, complemento);
+        public bool MudarDeLogradouro(string novoLogradouro, string novoNumero, string novoBairro,
+            string novoCep, string novoComplemento) => 
+            Endereco.MudarDeLogradouro(novoLogradouro, novoNumero, novoBairro, novoCep, novoComplemento);
 
-        public void MudarNumeroEComplemento(string numero, string complemento) =>
-            Endereco.MudarNumeroEComplemento(numero, complemento);
+        public bool MudarNumeroEComplemento(string novoNumero, string novoComplemento) =>
+            Endereco.MudarNumeroEComplemento(novoNumero, novoComplemento);
 
-        public void AlterarGenero(Genero genero) => Genero = genero;
+        public bool AlterarGenero(Genero genero)
+        {
+            if (genero != null)
+            {
+                Genero = genero;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-        public void AlterarNomeSocial(string nomeSocial) => NomeSocial = nomeSocial;
+        public bool AlterarNomeSocial(string nomeSocial)
+        {
+            if (!String.IsNullOrWhiteSpace(nomeSocial))
+            {
+                NomeSocial = nomeSocial;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-        public void AlterarContrato(ContratoTrabalho contrato) => Contrato = contrato;
+        public bool AlterarContrato(ContratoTrabalho contrato)
+        {
+            if (contrato != null)
+            {
+                Contrato = contrato;
+                return true;
+            }
+            else
+            {
+                Contrato = contrato;
+                return false;
+            }
+        }
     }
 }
