@@ -12,13 +12,30 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime DataNascimento { get; protected init; }
         public List<Contato> Contatos { get; protected set; }
 
-        public void AlterarNome(string nome)
+        public bool AlterarNome(string nome)
         {
-            Nome = nome;
+            if (!String.IsNullOrWhiteSpace(nome))
+            {
+                Nome = nome;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        public void AdicionarContato(Contato contato)
+
+        public bool AdicionarContato(Contato contato)
         {
-            Contatos.Add(contato);
+            if (contato != null)
+            {
+                Contatos.Add(contato);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Contato SelecionarPorId(int id)
@@ -53,7 +70,8 @@ namespace TechBeauty.Dominio.Modelo
         public bool AlterarUmContato(int idDoContatoAntigo, string novoValor)
         {
             var contatoAntigo = SelecionarPorId(idDoContatoAntigo);
-            if (contatoAntigo is not null)
+            if (contatoAntigo is not null &&
+                !String.IsNullOrWhiteSpace(novoValor))
             {
                 contatoAntigo.AlterarContato(novoValor);
                 return true;
@@ -68,7 +86,8 @@ namespace TechBeauty.Dominio.Modelo
         {
             // SelecionarPorId aqui serve para verificar se esse contato é dessa pessoa mesmo
             var contatoAntigoPresente = SelecionarPorId(contatoAntigo.Id);
-            if (contatoAntigoPresente is not null)
+            if (contatoAntigoPresente is not null &&
+                !String.IsNullOrWhiteSpace(novoValor))
             {
                 contatoAntigoPresente.AlterarContato(novoValor);
                 return true;
