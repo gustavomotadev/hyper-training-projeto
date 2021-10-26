@@ -18,7 +18,8 @@ namespace TechBeauty.Dominio.Modelo
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
                 !String.IsNullOrWhiteSpace(cpf) &&
-                dataNascimento >= new DateTime(1915,01,01) &&
+                Pessoa.ObterIdade(dataNascimento) >= 18 &&
+                Pessoa.ObterIdade(dataNascimento) <= 100 &&
                 contatos != null && 
                 contatos.Count > 0 && 
                 !contatos.Any(x => x == null))

@@ -78,5 +78,19 @@ namespace TechBeauty.Dominio.Modelo
                 return false;
             }
         }
+
+        public int ObterIdade()
+        {
+            var idade = DateTime.Today.Year - DataNascimento.Year;
+            if (DataNascimento.Date.AddYears(idade) > DateTime.Today) return idade -= 1;
+            else return idade;
+        }
+
+        public static int ObterIdade(DateTime dataNascimento)
+        {
+            var idade = DateTime.Today.Year - dataNascimento.Year;
+            if (dataNascimento.Date.AddYears(idade) > DateTime.Today) return idade -= 1;
+            else return idade;
+        }
     }
 }
