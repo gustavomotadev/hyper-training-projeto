@@ -20,23 +20,52 @@ namespace TechBeauty.Dominio.Modelo
             DataEntrada = dataEntrada;
             CnpjCTPS = cnpjCTPS;
         }
+
         public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
             DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
         {
-            var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada, cnpjCTPS);
-            contratoTrabalho.DataDesligamento = dataDesligamento;
-            contratoTrabalho.Cargos = cargos;
-            return contratoTrabalho;
+            if (regimeContratual != null &&
+                cargos != null &&
+                cargos.Count > 0 &&
+                !cargos.Any(x => x == null) &&
+                !String.IsNullOrWhiteSpace(cnpjCTPS) &&
+                ((dataDesligamento != null && dataDesligamento > dataEntrada) || dataDesligamento == null))
+            {
+                var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada, cnpjCTPS);
+                contratoTrabalho.DataDesligamento = dataDesligamento;
+                contratoTrabalho.Cargos = cargos;
+                return contratoTrabalho;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public void AlterarDataDesligamento(DateTime dataDesligamento)
+        public bool AlterarDataDesligamento(DateTime? dataDesligamento)
         {
-            DataDesligamento = dataDesligamento;
+            if ((dataDesligamento != null && dataDesligamento > DataEntrada) || dataDesligamento == null)
+            {
+                DataDesligamento = dataDesligamento;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void AdicionarCargo(Cargo cargo)
+        public bool AdicionarCargo(Cargo cargo)
         {
-            Cargos.Add(cargo);
+            if (cargo != null)
+            {
+                Cargos.Add(cargo);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Cargo SelecionarPorId(int  id)
@@ -58,7 +87,8 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool RemoverCargo(Cargo cargo)
         {
-            if (Cargos.Count > 1)
+            if (Cargos.Count > 1 &&
+                cargo != null)
             {
                 return Cargos.Remove(cargo);
             }
