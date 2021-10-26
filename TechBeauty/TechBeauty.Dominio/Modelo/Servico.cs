@@ -1,4 +1,6 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class Servico
     {
@@ -12,34 +14,74 @@
 
         public static Servico NovoServico(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
         {
-            var servico = new Servico(idServico);
-            servico.Nome = nome;
-            servico.Preco = preco;
-            servico.Descricao = descricao;
-            servico.DuracaoEmMin = duracaoEmMin;
-            return servico;
+            if (!String.IsNullOrWhiteSpace(nome) &&
+                preco > 0M &&
+                !String.IsNullOrWhiteSpace(descricao) &&
+                duracaoEmMin > 0)
+            {
+                var servico = new Servico(idServico);
+                servico.Nome = nome;
+                servico.Preco = preco;
+                servico.Descricao = descricao;
+                servico.DuracaoEmMin = duracaoEmMin;
+                return servico;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public void Alterar(string nome, decimal preco, string descricao, int duracaoEmMin)
+        public bool AlterarNome(string novoNome)
         {
-            Nome = nome;
-            Preco = preco;
-            Descricao = descricao;
-            DuracaoEmMin = duracaoEmMin;
+            if (!String.IsNullOrWhiteSpace(novoNome))
+            {
+                Nome = novoNome;
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
         }
 
-        public void AlterarNomePreco(string nome, decimal preco)
+        public bool AlterarPreco(decimal novoPreco)
         {
-            Nome = nome;
-            Preco = preco;
+            if (novoPreco > 0M)
+            {
+                Preco = novoPreco;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void AlterarNome(string nome) => Nome = nome;
+        public bool AlterarDescricao(string novaDescricao)
+        {
+            if (!String.IsNullOrWhiteSpace(novaDescricao))
+            {
+                Descricao = novaDescricao;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-        public void AlterarPreco(decimal preco) => Preco = preco;
-
-        public void AlterarDescreicao(string descricao) => Descricao = descricao;
-
-        public void AlterarDuracao(int duracaoEmMin) => DuracaoEmMin = duracaoEmMin;
+        public bool AlterarDuracao(int novaDuracaoEmMin)
+        {
+            if (novaDuracaoEmMin > 0)
+            {
+                DuracaoEmMin = novaDuracaoEmMin;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -15,10 +16,24 @@ namespace TechBeauty.Dominio.Modelo
         public static Cliente NovoCliente(int idCliente, string nome, string cpf, DateTime dataNascimento, 
             List<Contato> contatos)
         {
-            var cliente = new Cliente(idCliente, cpf, dataNascimento);
-            cliente.Nome = nome;
-            cliente.Contatos = contatos;
-            return cliente;
+            if (!String.IsNullOrWhiteSpace(nome) &&
+                !String.IsNullOrWhiteSpace(cpf) &&
+                Pessoa.ObterIdade(dataNascimento) >= 18 &&
+                Pessoa.ObterIdade(dataNascimento) <= 100 &&
+                contatos != null && 
+                contatos.Count > 0 && 
+                !contatos.Any(x => x == null))
+            {
+                var cliente = new Cliente(idCliente, cpf, dataNascimento);
+                cliente.Nome = nome;
+                cliente.Contatos = contatos;
+                return cliente;
+
+            } else
+            {
+                return null;
+            }
+            
         }
     }
 }

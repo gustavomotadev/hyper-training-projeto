@@ -1,4 +1,6 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class Genero
     {
@@ -11,8 +13,16 @@
             Valor = valor;
         }
 
-        public static Genero AdicionarGenero(int idGenero, string valorGenero) =>
-            new Genero(idGenero, valorGenero);
-        
+        public static Genero AdicionarGenero(int idGenero, string valorGenero)
+        {
+            if (!String.IsNullOrWhiteSpace(valorGenero))
+            {
+                return new Genero(idGenero, valorGenero);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

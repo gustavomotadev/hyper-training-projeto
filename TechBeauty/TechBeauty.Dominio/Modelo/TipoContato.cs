@@ -1,4 +1,6 @@
-﻿namespace TechBeauty.Dominio.Modelo
+﻿using System;
+
+namespace TechBeauty.Dominio.Modelo
 {
     public class TipoContato
     {
@@ -11,8 +13,16 @@
             Valor = valor;
         }
 
-        public static TipoContato NovoTipoContato(int idTipoContato, string valor) => 
-            new TipoContato(idTipoContato, valor);
-        
+        public static TipoContato NovoTipoContato(int idTipoContato, string valor)
+        {
+            if (!String.IsNullOrWhiteSpace(valor))
+            {
+                return new TipoContato(idTipoContato, valor);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

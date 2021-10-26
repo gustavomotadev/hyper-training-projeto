@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechBeauty.Dominio.Modelo;
-using TechBeauty.Dominio.Modelo.Enumeradores;
+using TechBeauty.Dominio.Modelo.Enumeracoes;
 
 namespace TechBeauty.Dominio.Repositorio
 {
