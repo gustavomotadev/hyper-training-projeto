@@ -15,8 +15,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public static RegimeContratual NovoRegimeContratual(int idRegimeContratual, string nomeRegimeContratual)
         {
-            if (nomeRegimeContratual != null &&
-                !String.IsNullOrWhiteSpace(nomeRegimeContratual))
+            if (!String.IsNullOrWhiteSpace(nomeRegimeContratual))
             {
                 return new RegimeContratual(idRegimeContratual, nomeRegimeContratual);
             }

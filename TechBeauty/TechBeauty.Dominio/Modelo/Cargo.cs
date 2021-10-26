@@ -15,9 +15,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public static Cargo NovoCargo(int idCargo, string nome, string descricao)
         {
-            if (nome != null &&
-                descricao != null &&
-                !String.IsNullOrWhiteSpace(nome) &&
+            if (!String.IsNullOrWhiteSpace(nome) &&
                 !String.IsNullOrWhiteSpace(descricao))
             {
                 var cargo = new Cargo(idCargo);
@@ -33,8 +31,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool AlterarNome(string nome)
         {
-            if (nome != null &&
-                !String.IsNullOrWhiteSpace(nome))
+            if (!String.IsNullOrWhiteSpace(nome))
             {
                 NomeCargo = nome;
                 return true;
@@ -47,8 +44,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool AlterarDescricao(string descricao)
         {
-            if (descricao != null &&
-                !String.IsNullOrWhiteSpace(descricao))
+            if (!String.IsNullOrWhiteSpace(descricao))
             {
                 Descricao = descricao;
                 return true;

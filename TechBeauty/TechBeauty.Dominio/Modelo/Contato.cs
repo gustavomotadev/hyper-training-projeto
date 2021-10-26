@@ -17,7 +17,6 @@ namespace TechBeauty.Dominio.Modelo
         public static Contato NovoContato(int idContato, TipoContato tipo, string valor)
         {
             if (tipo != null &&
-                valor != null &&
                 !String.IsNullOrWhiteSpace(valor))
             {
                 var contato = new Contato(idContato, tipo);
@@ -32,8 +31,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool AlterarContato(string novoValor)
         {
-            if (novoValor != null &&
-                !String.IsNullOrWhiteSpace(novoValor))
+            if (!String.IsNullOrWhiteSpace(novoValor))
             {
                 Valor = novoValor;
                 return true;
