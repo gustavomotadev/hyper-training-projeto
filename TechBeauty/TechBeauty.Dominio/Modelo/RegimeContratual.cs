@@ -10,7 +10,7 @@ namespace TechBeauty.Dominio.Modelo
         private RegimeContratual(int id, string nomeRegimeContratual)
         {
             Id = id;
-            NomeRegimeContratual = nomeRegimeContratual;
+            NomeRegimeContratual = nomeRegimeContratual.ToLower();
         }
 
         public static RegimeContratual NovoRegimeContratual(int idRegimeContratual, string nomeRegimeContratual)
