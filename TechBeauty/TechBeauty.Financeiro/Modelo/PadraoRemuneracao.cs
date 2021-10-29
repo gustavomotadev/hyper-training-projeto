@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechBeauty.Dominio.Modelo;
 
-namespace TechBeauty.Modulo_Financeiro.Modelo
+namespace TechBeauty.Financeiro.Modelo
 {
     public class PadraoRemuneracao
     {

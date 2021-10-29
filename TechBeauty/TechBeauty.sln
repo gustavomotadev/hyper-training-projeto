@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechBeauty.Csl", "TechBeaut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechBeauty.Dominio", "TechBeauty.Dominio\TechBeauty.Dominio.csproj", "{B8EAED76-DBE0-407A-949F-D3F1B276B612}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechBeauty.Modulo-Financeiro", "TechBeauty.Modulo-Financeiro\TechBeauty.Modulo-Financeiro.csproj", "{6F4FD596-C994-4F96-8F48-7A3110BED705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechBeauty.Financeiro", "TechBeauty.Financeiro\TechBeauty.Financeiro.csproj", "{6F4FD596-C994-4F96-8F48-7A3110BED705}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechBeauty.Modulo_Financeiro.Modelo
+namespace TechBeauty.Financeiro.Modelo
 {
     public class FormaPagamento
     {

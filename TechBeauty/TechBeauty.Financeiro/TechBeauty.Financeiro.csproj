@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>TechBeauty.Modulo_Financeiro</RootNamespace>
+    <RootNamespace>TechBeauty.Financeiro</RootNamespace>
     <ApplicationIcon />
     <StartupObject />
   </PropertyGroup>
