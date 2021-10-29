@@ -8,21 +8,21 @@ namespace TechBeauty.Financeiro.Modelo
 {
     public class FormaPagamento
     {
-        public int Id { get; private set; }
-        public string Tipo { get; private set; }
+        public int Id { get; init; }
+        public string Valor { get; init; }
 
 
-        private FormaPagamento(int id)
+        private FormaPagamento(int id, string valor)
         {
             Id = id;
+            Valor = valor;
         }
 
-        public static FormaPagamento NovaFormaPagamento(int idFormaPagamento, string tipo)
+        public static FormaPagamento NovaFormaPagamento(int idFormaPagamento, string valor)
         {
-            if (! String.IsNullOrWhiteSpace(tipo))
+            if (! String.IsNullOrWhiteSpace(valor))
             {
-                var formaPagamento = new FormaPagamento(idFormaPagamento);
-                formaPagamento.Tipo = tipo;
+                var formaPagamento = new FormaPagamento(idFormaPagamento, valor);
                 return formaPagamento;
             }
             else
