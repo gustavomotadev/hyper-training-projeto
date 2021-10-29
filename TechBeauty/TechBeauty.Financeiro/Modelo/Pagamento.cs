@@ -9,23 +9,25 @@ namespace TechBeauty.Financeiro.Modelo
 {
     public class Pagamento
     {
-        public int Id { get; private set; }
-        public OrdemServico OS { get; private set; }
-        public FormaPagamento FormasPagamento { get; private set; }
-        public DateTime DataPagamento { get; private set; }
+        public int Id { get; init; }
+        public OrdemServico OrdemServico { get; init; }
+        public FormaPagamento FormaPagamento { get; init; }
+        public DateTime DataPagamento { get; init; }
 
-        private Pagamento(int id)
+        private Pagamento(int id, OrdemServico ordemServico, FormaPagamento formasPagamento,
+            DateTime dataPagamento)
         {
             Id = id;
+            OrdemServico = ordemServico;
+            FormaPagamento = formasPagamento;
+            DataPagamento = dataPagamento;
         }
-        public static Pagamento NovoPagamento(int idPagamento, OrdemServico os, FormaPagamento formasPagamento,
-         DateTime dataPagamento)
+
+        public static Pagamento NovoPagamento(int idPagamento, OrdemServico ordemServico, 
+            FormaPagamento formasPagamento, DateTime dataPagamento)
         {
-            var novoPgt = new Pagamento(idPagamento);
-            novoPgt.OS = os;
-            novoPgt.FormasPagamento = formasPagamento;
-            novoPgt.DataPagamento = dataPagamento;
-            return novoPgt;
+            var novoPagamento = new Pagamento(idPagamento, ordemServico, formasPagamento, dataPagamento);
+            return novoPagamento;
         }
     }
 }
