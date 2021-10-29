@@ -11,13 +11,12 @@ namespace TechBeauty.Financeiro.Modelo
     {
         private static readonly TimeSpan jornadaMaxima = new TimeSpan(8,0,0);
         private static readonly decimal adicionalHoraExtraMinimo = 0.5M;
-        private static readonly decimal adicionalNoturnoMinimo = 0.2M;
+        public static TimeSpan JornadaMaxima => jornadaMaxima;
         public static decimal SalarioMinimoHora { get; private set; } = 5.00M;
         public Colaborador Colaborador { get; init; }
         public TimeSpan JornadaEsperada { get; private set; }
         public decimal SalarioHora { get; private set; }
-        public decimal Comissao { get; private set; }
-        public decimal AdicionalNoturno { get; private set; }
+        public decimal PercentualComissao { get; private set; }
         public decimal AdicionalHoraExtra { get; private set; }
 
         private PadraoRemuneracao(Colaborador colaborador)
@@ -31,25 +30,20 @@ namespace TechBeauty.Financeiro.Modelo
         }
 
         public static PadraoRemuneracao NovoPadraoRemuneracao(Colaborador colaborador, TimeSpan jornadaEsperada,
-            decimal salarioHora, decimal comissao, decimal adicionalNoturno, decimal adicionalHoraExtra)
+            decimal salarioHora, decimal percentualComissao, decimal adicionalHoraExtra)
         {
             if (colaborador != null &&
                 jornadaEsperada <= jornadaMaxima &&
-                salarioHora >= SalarioMinimoHora &&
-                comissao < 1 &&
-                comissao >= 0 &&
+                (salarioHora >= SalarioMinimoHora || colaborador.Contrato.RegimeContratual.Valor == "pj") &&
+                percentualComissao < 1 &&
+                percentualComissao >= 0 &&
                 adicionalHoraExtra < 1 &&
-                adicionalHoraExtra >= adicionalHoraExtraMinimo &&
-                adicionalNoturno < 1 &&
-                adicionalNoturno >= 0 &&
-                !(colaborador.Contrato.RegimeContratual.NomeRegimeContratual == "clt" &&
-                    adicionalNoturno < adicionalNoturnoMinimo))
+                adicionalHoraExtra >= adicionalHoraExtraMinimo)
             { 
                 var novaFormaRemunerar = new PadraoRemuneracao(colaborador);
                 novaFormaRemunerar.JornadaEsperada = jornadaEsperada;
                 novaFormaRemunerar.SalarioHora = salarioHora;
-                novaFormaRemunerar.Comissao = comissao;
-                novaFormaRemunerar.AdicionalNoturno = adicionalNoturno;
+                novaFormaRemunerar.PercentualComissao = percentualComissao;
                 novaFormaRemunerar.AdicionalHoraExtra = adicionalHoraExtra;
                 return novaFormaRemunerar;
             }
@@ -86,27 +80,12 @@ namespace TechBeauty.Financeiro.Modelo
             }
         }
 
-        public bool AlterarComissao(decimal comissao)
+        public bool AlterarPercentualComissao(decimal percentualComissao)
         {
-            if (comissao >= 0 &&
-                comissao < 1)
+            if (percentualComissao >= 0 &&
+                percentualComissao < 1)
             {
-                Comissao = comissao;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public bool AlterarAdicionalNoturno(decimal adicionalNoturno)
-        {
-            if (adicionalNoturno >= 0 &&
-                adicionalNoturno < 1 &&
-                !(Colaborador.Contrato.RegimeContratual.NomeRegimeContratual == "clt" &&
-                    adicionalNoturno < adicionalNoturnoMinimo))
-            {
-                AdicionalNoturno = adicionalNoturno;
+                PercentualComissao = percentualComissao;
                 return true;
             }
             else
