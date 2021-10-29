@@ -24,10 +24,18 @@ namespace TechBeauty.Financeiro.Modelo
         }
 
         public static Pagamento NovoPagamento(int idPagamento, OrdemServico ordemServico, 
-            FormaPagamento formasPagamento, DateTime dataPagamento)
+            FormaPagamento formaPagamento, DateTime dataPagamento)
         {
-            var novoPagamento = new Pagamento(idPagamento, ordemServico, formasPagamento, dataPagamento);
-            return novoPagamento;
+            if (ordemServico != null &&
+                formaPagamento != null)
+            {
+                var novoPagamento = new Pagamento(idPagamento, ordemServico, formaPagamento, dataPagamento);
+                return novoPagamento;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
