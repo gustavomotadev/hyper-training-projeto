@@ -51,12 +51,8 @@ namespace TechBeauty.Financeiro.Modelo
 
         private decimal CalcularComissao()
         {
-            decimal montante = 0.00M;
-            foreach (var servico in ServicosRealizados)
-            {
-                montante += servico.Preco;
-            }
-            return montante * PadraoRemuneracao.PercentualComissao;
+            decimal total = ServicosRealizados.Sum(x => x.Preco);
+            return total * PadraoRemuneracao.PercentualComissao; 
         }
 
         private decimal CalcularHoraExtra()
