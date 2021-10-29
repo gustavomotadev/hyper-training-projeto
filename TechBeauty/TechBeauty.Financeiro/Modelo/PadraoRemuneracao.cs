@@ -36,8 +36,11 @@ namespace TechBeauty.Financeiro.Modelo
             if (colaborador != null &&
                 jornadaEsperada <= jornadaMaxima &&
                 salarioHora >= SalarioMinimoHora &&
+                comissao < 1 &&
                 comissao >= 0 &&
+                adicionalHoraExtra < 1 &&
                 adicionalHoraExtra >= adicionalHoraExtraMinimo &&
+                adicionalNoturno < 1 &&
                 adicionalNoturno >= 0 &&
                 !(colaborador.Contrato.RegimeContratual.NomeRegimeContratual == "clt" &&
                     adicionalNoturno < adicionalNoturnoMinimo))
@@ -85,7 +88,8 @@ namespace TechBeauty.Financeiro.Modelo
 
         public bool AlterarComissao(decimal comissao)
         {
-            if (comissao >= 0 )
+            if (comissao >= 0 &&
+                comissao < 1)
             {
                 Comissao = comissao;
                 return true;
@@ -98,6 +102,7 @@ namespace TechBeauty.Financeiro.Modelo
         public bool AlterarAdicionalNoturno(decimal adicionalNoturno)
         {
             if (adicionalNoturno >= 0 &&
+                adicionalNoturno < 1 &&
                 !(Colaborador.Contrato.RegimeContratual.NomeRegimeContratual == "clt" &&
                     adicionalNoturno < adicionalNoturnoMinimo))
             {
@@ -112,7 +117,8 @@ namespace TechBeauty.Financeiro.Modelo
 
         public bool AlterarAdicionalHoraExtra(decimal adicionalHoraExtra)
         {
-            if (adicionalHoraExtra >= adicionalHoraExtraMinimo)
+            if (adicionalHoraExtra >= adicionalHoraExtraMinimo &&
+                adicionalHoraExtra < 1)
             {
                 AdicionalHoraExtra = adicionalHoraExtra;
                 return true;
