@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo.Enumeracoes;
 
 namespace TechBeauty.Dominio.Modelo
@@ -16,6 +17,7 @@ namespace TechBeauty.Dominio.Modelo
         public List<ContratoTrabalho> Contratos { get; private set; } //ef
         public List<Turno> Turnos { get; set; } //ef
         public List<Agendamento> Agendamentos { get; set; } //ef
+        public PadraoRemuneracao PadraoRemuneracao { get; set; } //ef
 
         private Colaborador(int id, string cpf, DateTime dataNascimento)
         {
