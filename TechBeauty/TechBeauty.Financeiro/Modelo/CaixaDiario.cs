@@ -9,6 +9,8 @@ namespace TechBeauty.Financeiro.Modelo
     class CaixaDiario
     {
         public static decimal CustoFixoPadrao { get; private set; } = 90.00M;
+        public static decimal PercentualEncargos { get; private set; } = 55.06M;
+        public static decimal PercentualSimplesNacional { get; private set; } = 0.06M;
         public DateTime Data { get; init; }
         public List<Pagamento> Pagamentos { get; init; }
         public List<RemuneracaoDiaria> Remuneracoes { get; init; }
@@ -89,14 +91,12 @@ namespace TechBeauty.Financeiro.Modelo
 
         private decimal CalcularEncargosTrabalhistas()
         {
-            //TODO
-            return 0.00M;
+            return PercentualEncargos * TotalSalario;
         }
 
         private decimal CalcularSimplesNacional()
         {
-            //TODO
-            return 0.00M;
+            return PercentualSimplesNacional * ReceitaBruta;
         }
 
         private decimal CalcularReceitaBruta()
