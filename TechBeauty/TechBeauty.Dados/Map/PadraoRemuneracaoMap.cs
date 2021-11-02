@@ -17,7 +17,7 @@ namespace TechBeauty.Dados.Map
 
             builder.HasKey(x => x.Id);
 
-            builder.HasOne()
+            builder.HasOne(pr => pr.Colaborador);
         }
     }
 }
