@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
@@ -33,6 +34,14 @@ namespace TechBeauty.Dados.Map
              .WithOne(c => c.Colaborador)
              .HasForeignKey(c => c.ColaboradorId);
 
+            builder.HasOne(x => x.PadraoRemuneracao)
+                .WithOne(p => p.Colaborador)
+                .HasForeignKey<PadraoRemuneracao>(p => p.ColaboradorId);
+
+            builder.HasMany<RemuneracaoDiaria>
+                (c => c.Remuneracoes)
+                .WithOne(r => r.Colaborador)
+                .HasForeignKey(r => r.ColaboradorId);
         }
     }
 }
