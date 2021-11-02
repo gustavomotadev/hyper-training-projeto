@@ -13,6 +13,7 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime? DataDesligamento { get; private set; }
         public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
         public string CNPJ_CTPS { get; init; }
+        public bool Vigente { get; set; }
 
         private ContratoTrabalho(int id, RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
         {

@@ -7,11 +7,15 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Colaborador : Pessoa
     {
-        public List<Servico> Servicos { get; private set; }
+        public List<ColaboradorServico> ColaboradoresServicos { get; set; } //ef
+        public int EnderecoId { get; set; } //ef
         public Endereco Endereco { get; private set; }
+        public int GeneroId { get; set; } //ef
         public Genero Genero { get; private set; }
         public string NomeSocial { get; private set; } = String.Empty;
-        public ContratoTrabalho Contrato { get; private set; }
+        public List<ContratoTrabalho> Contratos { get; private set; } //ef
+        public List<Turno> Turnos { get; set; } //ef
+        public List<Agendamento> Agendamentos { get; set; } //ef
 
         private Colaborador(int id, string cpf, DateTime dataNascimento)
         {

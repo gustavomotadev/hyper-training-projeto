@@ -15,7 +15,7 @@ namespace TechBeauty.Dados
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // User ID=carson; Password=123, caso seja autenticação usuário e senha do DB.
-            optionsBuilder.UseSqlServer("Server=DESKTOP-9LK3UQP; Database=TechBeautyDB; Trusted_Connection=True"); //Trusted é para autenticação com usuário do Windows.
+            optionsBuilder.UseSqlServer("Password=admin;Persist Security Info=True;User ID=tech-beauty-admin;Initial Catalog=TechBeauty;Data Source=DESKTOP-MOTA"); //Trusted é para autenticação com usuário do Windows.
             base.OnConfiguring(optionsBuilder);
         }
 

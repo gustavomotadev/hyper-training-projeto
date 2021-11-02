@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechBeauty.Dominio.Modelo
 {
-    public class CargoContratoTrabalho //entity framework
+    public class CargoContratoTrabalho //ef
     {
         public int Id { get; set; }
         public int CargoId { get; set; }
