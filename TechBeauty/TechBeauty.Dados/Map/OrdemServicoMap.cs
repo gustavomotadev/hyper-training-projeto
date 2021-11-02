@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
@@ -25,6 +26,10 @@ namespace TechBeauty.Dados.Map
                 (os => os.Agendamentos)
                 .WithOne(a => a.OrdemServico)
                 .HasForeignKey(a => a.OrdemServicoId);
+
+            builder.HasOne(x => x.Pagamento)
+                .WithOne(os => os.OrdemServico)
+                .HasForeignKey<Pagamento>(p => p.OrdemServicoId);
 
         }
     }
