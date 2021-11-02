@@ -9,6 +9,8 @@ namespace TechBeauty.Dominio.Modelo
         public int Id { get; init; }
         public int RegimeContratualId { get; set; } //ef
         public RegimeContratual RegimeContratual { get; init; }
+        public int ColaboradorId { get; set; } //ef
+        public Colaborador Colaborador { get; init; }
         public DateTime DataEntrada { get; init; }
         public DateTime? DataDesligamento { get; private set; }
         public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
