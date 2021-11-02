@@ -4,7 +4,7 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
 {
-    class TipoContatoMap : IEntityTypeConfiguration<TipoContato>
+    public class TipoContatoMap : IEntityTypeConfiguration<TipoContato>
     {
         public void Configure(EntityTypeBuilder<TipoContato> builder)
         {

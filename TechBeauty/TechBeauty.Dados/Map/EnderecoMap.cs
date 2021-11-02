@@ -5,7 +5,7 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
 {
-    class EnderecoMap : IEntityTypeConfiguration<Endereco>
+    public class EnderecoMap : IEntityTypeConfiguration<Endereco>
     {
         public void Configure(EntityTypeBuilder<Endereco> builder)
         {

@@ -4,7 +4,7 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
 {
-    class GeneroMap : IEntityTypeConfiguration<Genero>
+    public class GeneroMap : IEntityTypeConfiguration<Genero>
     {
         public void Configure(EntityTypeBuilder<Genero> builder)
         {

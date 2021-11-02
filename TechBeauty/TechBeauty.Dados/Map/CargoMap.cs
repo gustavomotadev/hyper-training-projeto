@@ -4,7 +4,7 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
 {
-    class CargoMap : IEntityTypeConfiguration<Cargo>
+    public class CargoMap : IEntityTypeConfiguration<Cargo>
     {
         public void Configure(EntityTypeBuilder<Cargo> builder)
         {
