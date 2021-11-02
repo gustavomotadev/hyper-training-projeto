@@ -10,9 +10,9 @@ namespace TechBeauty.Dominio.Financeiro
         public static decimal PercentualEncargos { get; private set; } = 55.06M;
         public static decimal PercentualSimplesNacional { get; private set; } = 0.06M;
         public int Id { get; init; }
-        public DateTime Data { get; init; }
         public List<Pagamento> Pagamentos { get; init; }
         public List<RemuneracaoDiaria> Remuneracoes { get; init; }
+        public DateTime Data { get; init; }
         public decimal TotalSalario { get; init; }
         public decimal TotalComissao { get; init; }
         public decimal TotalHoraExtra { get; init; }

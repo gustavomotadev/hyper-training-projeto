@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using TechBeauty.Financeiro.Modelo;
+using TechBeauty.Dominio.Financeiro;
 
 namespace TechBeauty.Dados.Map
 {
@@ -22,6 +22,10 @@ namespace TechBeauty.Dados.Map
                 (cd => cd.Remuneracoes)
                 .WithOne(r => r.CaixaDiario)
                 .HasForeignKey(r => r.CaixaDiarioId);
+
+            builder.Property(x => x.Data)
+                .HasColumnType("date")
+                .IsRequired();
 
             builder.Property(x => x.TotalSalario)
                 .HasColumnType("decimal(10,2)")
