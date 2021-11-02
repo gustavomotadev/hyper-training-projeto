@@ -26,12 +26,12 @@ namespace TechBeauty.Dados.Map
                .IsRequired();
 
             builder.Property(x => x.RegistroEntrada)
-               .HasColumnType("smalldatetime")
-               .IsRequired();
+               .HasColumnType("smalldatetime");
+
 
             builder.Property(x => x.RegistroSaida)
-               .HasColumnType("smalldatetime")
-               .IsRequired();
+               .HasColumnType("smalldatetime");
+               
         }
     }
 }
