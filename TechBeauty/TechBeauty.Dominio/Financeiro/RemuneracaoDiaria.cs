@@ -10,7 +10,7 @@ namespace TechBeauty.Dominio.Financeiro
         public int Id { get; set; }
         public int ColaboradorId { get; set; } //ef
         public Colaborador Colaborador { get; init; }
-        public List<Servico> ServicosRealizados { get; init; }
+        public List<RemuneracaoDiariaServico> RemuneracoesServicos { get; set; } //ef
         public int CaixaDiarioId { get; set; } //ef
         public CaixaDiario CaixaDiario { get; set; } //ef
         public TimeSpan HorasTrabalhadas { get; init; }

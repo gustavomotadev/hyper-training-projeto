@@ -18,6 +18,7 @@ namespace TechBeauty.Dominio.Modelo
         public List<Turno> Turnos { get; set; } //ef
         public List<Agendamento> Agendamentos { get; set; } //ef
         public PadraoRemuneracao PadraoRemuneracao { get; set; } //ef
+        public List<RemuneracaoDiaria> Remuneracoes { get; set; } //ef
 
         private Colaborador(int id, string cpf, DateTime dataNascimento)
         {

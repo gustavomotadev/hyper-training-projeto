@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechBeauty.Financeiro.Modelo;
+using TechBeauty.Dominio.Financeiro;
 
 namespace TechBeauty.Dados.Map
 {
@@ -17,7 +12,7 @@ namespace TechBeauty.Dados.Map
 
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(pr => pr.Colaborador);
+            //TODO
         }
     }
 }

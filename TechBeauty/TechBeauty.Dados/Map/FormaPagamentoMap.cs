@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using TechBeauty.Financeiro.Modelo;
+using TechBeauty.Dominio.Financeiro;
 
 namespace TechBeauty.Dados.Map
 {
