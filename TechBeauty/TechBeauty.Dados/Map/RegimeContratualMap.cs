@@ -13,7 +13,7 @@ namespace TechBeauty.Dados.Map
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Valor)
-                .HasColumnType("varchar(20)")
+                .HasColumnType("varchar(30)")
                 .IsRequired();
 
             builder.HasMany<ContratoTrabalho>
