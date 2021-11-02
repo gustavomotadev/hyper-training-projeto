@@ -7,18 +7,19 @@ namespace TechBeauty.Dominio.Modelo
     public class ContratoTrabalho
     {
         public int Id { get; init; }
+        public int RegimeContratualId { get; set; } //ef
         public RegimeContratual RegimeContratual { get; init; }
         public DateTime DataEntrada { get; init; }
         public DateTime? DataDesligamento { get; private set; }
-        public List<Cargo> Cargos { get; private set; }
-        public string CnpjCTPS { get; init; }
+        public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
+        public string CNPJ_CTPS { get; init; }
 
         private ContratoTrabalho(int id, RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
         {
             Id = id;
             RegimeContratual = regimeContratual;
             DataEntrada = dataEntrada;
-            CnpjCTPS = cnpjCTPS;
+            CNPJ_CTPS = cnpjCTPS;
         }
 
         public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,

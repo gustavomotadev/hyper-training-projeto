@@ -1,6 +1,7 @@
 ﻿using System;
 using TechBeauty.Dominio.Modelo.Enumeracoes;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -14,6 +15,7 @@ namespace TechBeauty.Dominio.Modelo
         public string Numero { get; private set; } = "s/n";
         public string Complemento { get; private set; }
         public string CEP { get; set; }
+        public List<Colaborador> Colaboradores { get; set; } //ef
 
         private Endereco(int id)
         {
@@ -22,7 +24,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public static bool ValidarCEP(string cep)
         {
-            return Regex.IsMatch(cep, @"^\d{5}-?\d{3}$");
+            return Regex.IsMatch(cep, @"^\d{8}$");
         }
 
         public static Endereco NovoEndereco(int idEndereco, string logradouro, string bairro,

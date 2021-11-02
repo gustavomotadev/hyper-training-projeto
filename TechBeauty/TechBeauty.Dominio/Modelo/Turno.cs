@@ -7,9 +7,12 @@ namespace TechBeauty.Dominio.Modelo
         public int Id { get; init; }
         public DateTime DataHoraEntrada { get; init; }
         public DateTime DataHoraSaida { get; init; }
+        public int ColaboradorId { get; set; } //ef
         public Colaborador Colaborador { get; init; }
         public DateTime? RegistroEntrada { get; set; } = null;
         public DateTime? RegistroSaida { get; set; } = null;
+        public int ExpedienteId { get; set; } //ef
+        public Expediente Expediente { get; set; } //ef
 
         private Turno(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
             Colaborador colaborador)

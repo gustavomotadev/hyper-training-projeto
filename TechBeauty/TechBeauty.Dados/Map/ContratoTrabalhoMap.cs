@@ -19,7 +19,7 @@ namespace TechBeauty.Dados.Map
             builder.Property(x => x.DataDesligamento)
                 .HasColumnType("date");
 
-            builder.Property(x => x.CnpjCTPS)
+            builder.Property(x => x.CNPJ_CTPS)
                 .HasColumnType("varchar(14)")
                 .IsRequired();
         }

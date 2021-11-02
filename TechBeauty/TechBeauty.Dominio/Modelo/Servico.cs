@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -9,6 +10,8 @@ namespace TechBeauty.Dominio.Modelo
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
+        public List<Agendamento> Agendamentos { get; set; } //ef
+        public List<ColaboradorServico> ColaboradoresServicos { get; set; } //ef
 
         private Servico(int id) => Id = id;
 
