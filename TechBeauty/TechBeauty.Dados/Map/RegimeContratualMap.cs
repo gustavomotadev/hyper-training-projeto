@@ -4,7 +4,7 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
 {
-    class RegimeContratualMap : IEntityTypeConfiguration<RegimeContratual>
+    public class RegimeContratualMap : IEntityTypeConfiguration<RegimeContratual>
     {
         public void Configure(EntityTypeBuilder<RegimeContratual> builder)
         {
