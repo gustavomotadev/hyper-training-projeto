@@ -143,6 +143,8 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
+        //TODO: reimplementar essa funcao
+        /*
         public List<Turno> ObterPrestadoresDeServico(List<Servico> servicos)
         {
             if (servicos != null &&
@@ -164,5 +166,6 @@ namespace TechBeauty.Dominio.Modelo
                 return null;
             }
         }
+        */
     }
 }

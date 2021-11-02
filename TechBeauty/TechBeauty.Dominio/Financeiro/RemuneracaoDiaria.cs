@@ -19,28 +19,28 @@ namespace TechBeauty.Dominio.Financeiro
         public decimal ValorHoraExtra { get; init; }
         public decimal ValorTotal => ValorSalario + ValorComissao + ValorHoraExtra; 
 
-        private RemuneracaoDiaria(PadraoRemuneracao padraoRemuneracao,
-            TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
+        private RemuneracaoDiaria(Colaborador colaborador,
+            TimeSpan horasTrabalhadas, List<RemuneracaoDiariaServico> servicosRealizados)
         {
-            PadraoRemuneracao = padraoRemuneracao;
+            Colaborador = colaborador;
             HorasTrabalhadas = horasTrabalhadas;
-            ServicosRealizados = servicosRealizados;
+            RemuneracoesServicos = servicosRealizados;
 
             ValorSalario = CalcularSalario();
             ValorComissao = CalcularComissao();
             ValorHoraExtra = CalcularHoraExtra();
         }
 
-        public RemuneracaoDiaria NovaRemuneracaoDiaria(PadraoRemuneracao padraoRemuneracao, 
-            TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
+        public RemuneracaoDiaria NovaRemuneracaoDiaria(Colaborador colaborador, 
+            TimeSpan horasTrabalhadas, List<RemuneracaoDiariaServico> servicosRealizados)
         {
-            if (padraoRemuneracao != null &&
+            if (colaborador != null &&
                 horasTrabalhadas <= PadraoRemuneracao.JornadaMaxima &&
                 servicosRealizados != null &&
                 servicosRealizados.Count > 0 &&
                 !servicosRealizados.Any(x => x == null))
             {
-                return new RemuneracaoDiaria(padraoRemuneracao, horasTrabalhadas, servicosRealizados);
+                return new RemuneracaoDiaria(colaborador, horasTrabalhadas, servicosRealizados);
             }
             else
             {
@@ -50,21 +50,21 @@ namespace TechBeauty.Dominio.Financeiro
 
         private decimal CalcularSalario()
         {
-            return (HorasTrabalhadas.Minutes * PadraoRemuneracao.SalarioHora) / 60.00M;
+            return (HorasTrabalhadas.Minutes * Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
         }
 
         private decimal CalcularComissao()
         {
-            decimal total = ServicosRealizados.Sum(x => x.Preco);
-            return total * PadraoRemuneracao.PercentualComissao; 
+            decimal total = RemuneracoesServicos.Sum(x => x.Servico.Preco);
+            return total * Colaborador.PadraoRemuneracao.PercentualComissao; 
         }
 
         private decimal CalcularHoraExtra()
         {
-            if (HorasTrabalhadas > PadraoRemuneracao.JornadaEsperada)
+            if (HorasTrabalhadas > Colaborador.PadraoRemuneracao.JornadaEsperada)
             {
-                return ((HorasTrabalhadas-PadraoRemuneracao.JornadaEsperada).Minutes * 
-                    PadraoRemuneracao.SalarioHora) / 60.00M;
+                return ((HorasTrabalhadas- Colaborador.PadraoRemuneracao.JornadaEsperada).Minutes *
+                    Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
             }
             else 
             {

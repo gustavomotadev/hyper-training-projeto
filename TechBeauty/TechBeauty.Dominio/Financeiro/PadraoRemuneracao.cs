@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Financeiro
@@ -32,7 +33,7 @@ namespace TechBeauty.Dominio.Financeiro
         {
             if (colaborador != null &&
                 jornadaEsperada <= jornadaMaxima &&
-                (salarioHora >= SalarioMinimoHora || colaborador.Contrato.RegimeContratual.Valor == "pj") &&
+                (salarioHora >= SalarioMinimoHora || colaborador.Contratos.FirstOrDefault(c => c.Vigente).RegimeContratual.Valor == "pj") && //TODO: garantir que colaborador sempre tenha um contrato ativo
                 percentualComissao < 1 &&
                 percentualComissao >= 0 &&
                 adicionalHoraExtra < 1 &&

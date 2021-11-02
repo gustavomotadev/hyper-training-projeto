@@ -29,7 +29,7 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static Colaborador NovoColaborador(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
+            List<Contato> contatos, string carteiraDeTrabalho, List<ColaboradorServico> servicos, Endereco endereco, 
             Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
@@ -45,12 +45,13 @@ namespace TechBeauty.Dominio.Modelo
                 !servicos.Any(x => x == null) &&
                 endereco != null &&
                 genero != null &&
-                contrato != null)
+                contrato != null &&
+                contrato.Vigente)
             {
                 var colaborador = new Colaborador(idColaborador, cpf, dataNascimento);
                 colaborador.Nome = nome;
                 colaborador.Contatos = contatos;
-                colaborador.Servicos = servicos;
+                colaborador.ColaboradoresServicos = servicos;
                 colaborador.Endereco = endereco;
                 colaborador.Genero = genero;
                 if (String.IsNullOrEmpty(nomeSocial))
@@ -61,7 +62,7 @@ namespace TechBeauty.Dominio.Modelo
                 {
                     colaborador.NomeSocial = nomeSocial;
                 }
-                colaborador.Contrato = contrato;
+                colaborador.Contratos.Add(contrato);
                 return colaborador;
             }
             else
@@ -70,11 +71,11 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public bool AdicionarServico(Servico servico)
+        public bool AdicionarServico(ColaboradorServico servico)
         {
             if (servico != null)
             {
-                Servicos.Add(servico);
+                ColaboradoresServicos.Add(servico);
                 return true;
             }
             else
@@ -83,8 +84,9 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public Servico ObterServicoPorId(int id) => Servicos.FirstOrDefault(x => x.Id == id);
+        public Servico ObterServicoPorId(int id) => ColaboradoresServicos.FirstOrDefault(x => x.ServicoId == id).Servico;
 
+        /*
         public bool RemoverServico(int id)
         {
             if (Servicos.Count > 1)
@@ -96,13 +98,14 @@ namespace TechBeauty.Dominio.Modelo
                 return false;
             }
         }
+        */
 
         public bool RemoverServico(Servico servico)
         {
-            if (Servicos.Count > 1 &&
+            if (ColaboradoresServicos.Count > 1 &&
                 servico != null)
             {
-                return Servicos.Remove(servico);
+                return ColaboradoresServicos.Remove(ColaboradoresServicos.FirstOrDefault(cs => cs.ServicoId == servico.Id));
             }
             else
             {
@@ -151,16 +154,20 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public bool AlterarContrato(ContratoTrabalho contrato)
+        public bool AlterarContrato(ContratoTrabalho novoContrato)
         {
-            if (contrato != null)
+            if (novoContrato != null &&
+                novoContrato.Vigente)
             {
-                Contrato = contrato;
+                foreach (var contrato in Contratos)
+                {
+                    contrato.alterarVigencia(false);
+                }
+                Contratos.Add(novoContrato);
                 return true;
             }
             else
             {
-                Contrato = contrato;
                 return false;
             }
         }

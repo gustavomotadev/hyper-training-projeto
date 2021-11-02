@@ -39,7 +39,7 @@ namespace TechBeauty.Dominio.Modelo
             if (servico != null &&
                 colaborador != null &&
                 pessoaAtendida != null &&
-                colaborador.Servicos.Any(x => x.Id == servico.Id) &&
+                colaborador.ColaboradoresServicos.Any(x => x.Servico.Id == servico.Id) &&
                 !String.IsNullOrWhiteSpace(pessoaAtendida) &&
                 dataHoraExecucao.AddMinutes(servico.DuracaoEmMin).Date == dataHoraExecucao.Date)
             {
