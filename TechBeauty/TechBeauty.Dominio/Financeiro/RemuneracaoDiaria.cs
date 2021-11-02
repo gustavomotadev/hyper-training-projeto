@@ -17,7 +17,9 @@ namespace TechBeauty.Dominio.Financeiro
         public decimal ValorSalario { get; init; }
         public decimal ValorComissao { get; init; }
         public decimal ValorHoraExtra { get; init; }
-        public decimal ValorTotal => ValorSalario + ValorComissao + ValorHoraExtra; 
+        public decimal ValorTotal => ValorSalario + ValorComissao + ValorHoraExtra;
+
+        private RemuneracaoDiaria() { }
 
         private RemuneracaoDiaria(Colaborador colaborador,
             TimeSpan horasTrabalhadas, List<RemuneracaoDiariaServico> servicosRealizados)

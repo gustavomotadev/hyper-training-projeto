@@ -22,6 +22,8 @@ namespace TechBeauty.Dominio.Financeiro
         public decimal ReceitaBruta { get; init; }
         public decimal ReceitaLiquida { get; init; }
 
+        private CaixaDiario() { }
+
         private CaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes, decimal custoFixo)
         {
             Data = data;

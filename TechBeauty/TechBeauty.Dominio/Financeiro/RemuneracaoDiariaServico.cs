@@ -9,5 +9,7 @@ namespace TechBeauty.Dominio.Financeiro
         public RemuneracaoDiaria RemuneracaoDiaria { get; set; }
         public int ServicoId { get; set; }
         public Servico Servico { get; set; }
+
+        private RemuneracaoDiariaServico() { }
     }
 }

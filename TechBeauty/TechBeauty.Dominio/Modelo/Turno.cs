@@ -14,6 +14,8 @@ namespace TechBeauty.Dominio.Modelo
         public int ExpedienteId { get; set; } //ef
         public Expediente Expediente { get; set; } //ef
 
+        private Turno() { }
+
         private Turno(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
             Colaborador colaborador)
         {

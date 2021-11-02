@@ -14,6 +14,8 @@ namespace TechBeauty.Dominio.Financeiro
         public CaixaDiario CaixaDiario { get; set; } //ef
         public DateTime DataPagamento { get; init; }
 
+        private Pagamento() { }
+
         private Pagamento(int id, OrdemServico ordemServico, FormaPagamento formasPagamento,
             DateTime dataPagamento)
         {

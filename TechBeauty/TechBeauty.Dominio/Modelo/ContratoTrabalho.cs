@@ -17,6 +17,8 @@ namespace TechBeauty.Dominio.Modelo
         public string CNPJ_CTPS { get; init; }
         public bool Vigente { get; set; }
 
+        private ContratoTrabalho() { }
+
         private ContratoTrabalho(int id, RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
         {
             Id = id;

@@ -17,6 +17,8 @@ namespace TechBeauty.Dominio.Modelo
         public string CEP { get; set; }
         public List<Colaborador> Colaboradores { get; set; } //ef
 
+        private Endereco() { }
+
         private Endereco(int id)
         {
             Id = id;

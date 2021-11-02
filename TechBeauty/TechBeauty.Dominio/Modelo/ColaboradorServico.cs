@@ -7,5 +7,7 @@
         public Colaborador Colaborador { get; set; }
         public int ServicoId { get; set; }
         public Servico Servico { get; set; }
+
+        private ColaboradorServico() { }
     }
 }

@@ -12,6 +12,8 @@ namespace TechBeauty.Dominio.Modelo
         public List<Turno> Turnos { get; private set; }
         public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>();
 
+        private Expediente() { }
+
         private Expediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento)
         {
             Id = id;

@@ -22,6 +22,8 @@ namespace TechBeauty.Dominio.Modelo
         public int DuracaoEmMin => Servico.DuracaoEmMin; //fora do banco
         public DateTime DataHoraFinal => DataHoraExecucao.AddMinutes(DuracaoEmMin); //fora do banco
 
+        private Agendamento() { }
+
         private Agendamento(int id, Servico servico, Colaborador colaborador, string pessoaAtendida,
           DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {

@@ -13,5 +13,7 @@ namespace TechBeauty.Dominio.Modelo
         public Cargo Cargo { get; set; }
         public int ContratoTrabalhoId { get; set; }
         public ContratoTrabalho ContratoTrabalho { get; set; }
+
+        private CargoContratoTrabalho() { }
     }
 }

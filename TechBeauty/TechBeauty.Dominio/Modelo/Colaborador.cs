@@ -20,6 +20,8 @@ namespace TechBeauty.Dominio.Modelo
         public PadraoRemuneracao PadraoRemuneracao { get; set; } //ef
         public List<RemuneracaoDiaria> Remuneracoes { get; set; } //ef
 
+        private Colaborador() { }
+
         private Colaborador(int id, string cpf, DateTime dataNascimento)
         {
             Id = id;

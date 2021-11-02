@@ -10,6 +10,8 @@ namespace TechBeauty.Dominio.Modelo
         public string Descricao { get; private set; }
         public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
 
+        private Cargo() { }
+
         private Cargo(int id)
         {
             Id = id;

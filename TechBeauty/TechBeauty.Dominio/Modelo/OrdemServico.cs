@@ -16,6 +16,8 @@ namespace TechBeauty.Dominio.Modelo
         public decimal PrecoTotal => Agendamentos.Sum(x => x.Servico.Preco);
         public int DuracaoTotal => Agendamentos.Sum(x => x.Servico.DuracaoEmMin);
 
+        private OrdemServico() { }
+
         private OrdemServico(int id, Cliente cliente)
         {
             Id = id;

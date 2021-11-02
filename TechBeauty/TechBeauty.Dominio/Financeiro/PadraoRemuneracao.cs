@@ -18,6 +18,8 @@ namespace TechBeauty.Dominio.Financeiro
         public decimal PercentualComissao { get; private set; }
         public decimal AdicionalHoraExtra { get; private set; }
 
+        private PadraoRemuneracao() { }
+
         private PadraoRemuneracao(Colaborador colaborador)
         {
             Colaborador = colaborador;

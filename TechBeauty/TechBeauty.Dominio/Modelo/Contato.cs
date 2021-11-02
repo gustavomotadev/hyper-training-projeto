@@ -11,6 +11,8 @@ namespace TechBeauty.Dominio.Modelo
         public int PessoaId { get; set; } //ef
         public Pessoa Pessoa { get; set; } //ef
 
+        private Contato() { }
+
         private Contato(int id, TipoContato tipo)
         {
             Id = id;

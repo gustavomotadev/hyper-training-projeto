@@ -8,6 +8,8 @@ namespace TechBeauty.Dominio.Modelo
     {
         public List<OrdemServico> OrdensServicos { get; set; } //EF
 
+        private Cliente() { }
+
         private Cliente(int id, string cpf, DateTime dataNascimento)
         {
             Id = id;

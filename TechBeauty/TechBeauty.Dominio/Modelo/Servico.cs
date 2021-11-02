@@ -15,6 +15,8 @@ namespace TechBeauty.Dominio.Modelo
         public List<ColaboradorServico> ColaboradoresServicos { get; set; } //ef
         public List<RemuneracaoDiariaServico> RemuneracoesServicos { get; set; } //ef
 
+        private Servico() { }
+
         private Servico(int id) => Id = id;
 
         public static Servico NovoServico(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)

@@ -12,6 +12,8 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime DataNascimento { get; protected init; }
         public List<Contato> Contatos { get; protected set; }
 
+        protected Pessoa() { }
+
         public bool AlterarNome(string nome)
         {
             if (!String.IsNullOrWhiteSpace(nome))

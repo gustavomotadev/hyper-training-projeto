@@ -9,6 +9,8 @@ namespace TechBeauty.Dominio.Financeiro
         public string Valor { get; init; }
         public List<Pagamento> Pagamentos { get; set; } //ef
 
+        private FormaPagamento() { }
+
         private FormaPagamento(int id, string valor)
         {
             Id = id;
