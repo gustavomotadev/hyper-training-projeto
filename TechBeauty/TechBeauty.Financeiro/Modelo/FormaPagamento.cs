@@ -10,7 +10,7 @@ namespace TechBeauty.Financeiro.Modelo
     {
         public int Id { get; init; }
         public string Valor { get; init; }
-
+        public List<Pagamento> Pagamentos { get; set; } //ef
 
         private FormaPagamento(int id, string valor)
         {

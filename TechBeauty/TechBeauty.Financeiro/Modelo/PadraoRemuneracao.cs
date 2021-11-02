@@ -13,6 +13,8 @@ namespace TechBeauty.Financeiro.Modelo
         private static readonly decimal adicionalHoraExtraMinimo = 0.5M;
         public static TimeSpan JornadaMaxima => jornadaMaxima;
         public static decimal SalarioMinimoHora { get; private set; } = 5.00M;
+        public int Id { get; set; }
+        public int ColaboradorId { get; set; } //ef
         public Colaborador Colaborador { get; init; }
         public TimeSpan JornadaEsperada { get; private set; }
         public decimal SalarioHora { get; private set; }

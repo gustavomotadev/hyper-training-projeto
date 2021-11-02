@@ -5,11 +5,15 @@ using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Financeiro.Modelo
 {
-    class RemuneracaoDiaria
+    public class RemuneracaoDiaria
     {
+        public int Id { get; set; }
+        public int PadraoRemuneracaoId { get; set; } //ef
         public PadraoRemuneracao PadraoRemuneracao { get; init; }
-        public TimeSpan HorasTrabalhadas { get; init; }
         public List<Servico> ServicosRealizados { get; init; }
+        public int CaixaDiarioId { get; set; } //ef
+        public CaixaDiario CaixaDiario { get; set; } //ef
+        public TimeSpan HorasTrabalhadas { get; init; }
         public decimal ValorSalario { get; init; }
         public decimal ValorComissao { get; init; }
         public decimal ValorHoraExtra { get; init; }
