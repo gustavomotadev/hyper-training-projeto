@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TechBeauty.Dominio.Modelo
 {
     public class Cargo
     {
         public int Id { get; init; }
-        public string NomeCargo { get; private set; }
+        public string Nome { get; private set; }
         public string Descricao { get; private set; }
+        public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
 
         private Cargo(int id)
         {
@@ -19,7 +21,7 @@ namespace TechBeauty.Dominio.Modelo
                 !String.IsNullOrWhiteSpace(descricao))
             {
                 var cargo = new Cargo(idCargo);
-                cargo.NomeCargo = nome;
+                cargo.Nome = nome;
                 cargo.Descricao = descricao;
                 return cargo;
             }
@@ -33,7 +35,7 @@ namespace TechBeauty.Dominio.Modelo
         {
             if (!String.IsNullOrWhiteSpace(nome))
             {
-                NomeCargo = nome;
+                Nome = nome;
                 return true;
             }
             else
