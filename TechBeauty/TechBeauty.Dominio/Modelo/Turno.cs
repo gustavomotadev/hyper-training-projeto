@@ -8,7 +8,8 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime DataHoraEntrada { get; init; }
         public DateTime DataHoraSaida { get; init; }
         public Colaborador Colaborador { get; init; }
-        public bool HorarioCumprido { get; private set; }
+        public DateTime? RegistroEntrada { get; set; } = null;
+        public DateTime? RegistroSaida { get; set; } = null;
 
         private Turno(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
             Colaborador colaborador)
@@ -27,7 +28,6 @@ namespace TechBeauty.Dominio.Modelo
                 dataHoraEntrada < dataHoraSaida)
             {
                 var turno = new Turno(idTurno, dataHoraEntrada, dataHoraSaida, colaborador);
-                turno.HorarioCumprido = false;
                 return turno;
             }
             else
@@ -36,7 +36,11 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public void RegistrarPonto() => HorarioCumprido = true;
+        public void RegistrarPontoEntrada(DateTime dataHora) => 
+            RegistroEntrada = dataHora;
+
+        public void RegistrarPontoSaida(DateTime dataHora) =>
+            RegistroSaida = dataHora;
 
     }
 }
