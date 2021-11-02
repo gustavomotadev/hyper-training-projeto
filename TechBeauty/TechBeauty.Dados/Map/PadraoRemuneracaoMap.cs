@@ -12,7 +12,21 @@ namespace TechBeauty.Dados.Map
 
             builder.HasKey(x => x.Id);
 
-            //TODO
+            builder.Property(x => x.JornadaEsperada)
+                .HasColumnType("time")
+                .IsRequired();
+
+            builder.Property(x => x.SalarioHora)
+                .HasColumnType("decimal(10,2)")
+                .IsRequired();
+
+            builder.Property(x => x.PercentualComissao)
+                .HasColumnType("decimal(2,2)")
+                .IsRequired();
+
+            builder.Property(x => x.AdicionalHoraExtra)
+                .HasColumnType("decimal(2,2)")
+                .IsRequired();
         }
     }
 }
