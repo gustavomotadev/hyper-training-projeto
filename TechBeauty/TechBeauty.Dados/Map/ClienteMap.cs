@@ -14,6 +14,11 @@ namespace TechBeauty.Dados.Map
         public void Configure(EntityTypeBuilder<Cliente> builder)
         {
             builder.ToTable("Cliente");
+
+            builder.HasMany<OrdemServico>
+                (cl => cl.OrdensServicos)
+                .WithOne(os => os.Cliente)
+                .HasForeignKey(os => os.ClienteId);
         }
     }
 }

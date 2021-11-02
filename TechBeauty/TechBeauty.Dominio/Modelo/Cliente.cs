@@ -6,6 +6,7 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Cliente : Pessoa
     {
+        public List<OrdemServico> OrdensServicos { get; set; } //EF
 
         private Cliente(int id, string cpf, DateTime dataNascimento)
         {
