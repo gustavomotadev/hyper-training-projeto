@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TechBeauty.Financeiro.Modelo
+namespace TechBeauty.Dominio.Financeiro
 {
     public class FormaPagamento
     {
         public int Id { get; init; }
         public string Valor { get; init; }
         public List<Pagamento> Pagamentos { get; set; } //ef
+
+        private FormaPagamento() { }
 
         private FormaPagamento(int id, string valor)
         {

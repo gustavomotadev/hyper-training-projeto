@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechBeauty.Dominio.Modelo;
 
-namespace TechBeauty.Financeiro.Modelo
+namespace TechBeauty.Dominio.Financeiro
 {
     public class PadraoRemuneracao
     {
@@ -20,6 +17,8 @@ namespace TechBeauty.Financeiro.Modelo
         public decimal SalarioHora { get; private set; }
         public decimal PercentualComissao { get; private set; }
         public decimal AdicionalHoraExtra { get; private set; }
+
+        private PadraoRemuneracao() { }
 
         private PadraoRemuneracao(Colaborador colaborador)
         {
@@ -36,7 +35,7 @@ namespace TechBeauty.Financeiro.Modelo
         {
             if (colaborador != null &&
                 jornadaEsperada <= jornadaMaxima &&
-                (salarioHora >= SalarioMinimoHora || colaborador.Contrato.RegimeContratual.Valor == "pj") &&
+                (salarioHora >= SalarioMinimoHora || colaborador.Contratos.FirstOrDefault(c => c.Vigente).RegimeContratual.Valor == "pj") && //TODO: garantir que colaborador sempre tenha um contrato ativo
                 percentualComissao < 1 &&
                 percentualComissao >= 0 &&
                 adicionalHoraExtra < 1 &&

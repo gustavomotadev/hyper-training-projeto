@@ -5,13 +5,18 @@ namespace TechBeauty.Dominio.Modelo
     public class Contato
     {
         public int Id { get; init; }
-        public TipoContato Tipo { get; init; }
+        public int TipoContatoId { get; set; } //ef
+        public TipoContato TipoContato { get; init; }
         public string Valor { get; private set; }
+        public int PessoaId { get; set; } //ef
+        public Pessoa Pessoa { get; set; } //ef
+
+        private Contato() { }
 
         private Contato(int id, TipoContato tipo)
         {
             Id = id;
-            Tipo = tipo;
+            TipoContato = tipo;
         }
 
         public static Contato NovoContato(int idContato, TipoContato tipo, string valor)

@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
@@ -19,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TechBeauty.Dados\TechBeauty.Dados.csproj" />
     <ProjectReference Include="..\TechBeauty.Dominio\TechBeauty.Dominio.csproj" />
   </ItemGroup>
 

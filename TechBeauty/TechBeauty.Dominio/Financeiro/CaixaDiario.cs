@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TechBeauty.Financeiro.Modelo
+namespace TechBeauty.Dominio.Financeiro
 {
     public class CaixaDiario
     {
@@ -12,9 +10,9 @@ namespace TechBeauty.Financeiro.Modelo
         public static decimal PercentualEncargos { get; private set; } = 55.06M;
         public static decimal PercentualSimplesNacional { get; private set; } = 0.06M;
         public int Id { get; init; }
-        public DateTime Data { get; init; }
         public List<Pagamento> Pagamentos { get; init; }
         public List<RemuneracaoDiaria> Remuneracoes { get; init; }
+        public DateTime Data { get; init; }
         public decimal TotalSalario { get; init; }
         public decimal TotalComissao { get; init; }
         public decimal TotalHoraExtra { get; init; }
@@ -23,6 +21,8 @@ namespace TechBeauty.Financeiro.Modelo
         public decimal SimplesNacional { get; init; }
         public decimal ReceitaBruta { get; init; }
         public decimal ReceitaLiquida { get; init; }
+
+        private CaixaDiario() { }
 
         private CaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes, decimal custoFixo)
         {

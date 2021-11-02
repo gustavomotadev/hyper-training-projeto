@@ -4,13 +4,15 @@ using System.Linq;
 
 namespace TechBeauty.Dominio.Modelo
 {
-    class Expediente
+    public class Expediente
     {
         public int Id { get; set; }
         public DateTime DataHoraAbertura { get; init; }
         public DateTime DataHoraFechamento { get; init; }
         public List<Turno> Turnos { get; private set; }
         public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>();
+
+        private Expediente() { }
 
         private Expediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento)
         {
@@ -143,6 +145,8 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
+        //TODO: reimplementar essa funcao
+        /*
         public List<Turno> ObterPrestadoresDeServico(List<Servico> servicos)
         {
             if (servicos != null &&
@@ -164,5 +168,6 @@ namespace TechBeauty.Dominio.Modelo
                 return null;
             }
         }
+        */
     }
 }

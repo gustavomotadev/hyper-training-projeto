@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TechBeauty.Dominio.Modelo;
 
-namespace TechBeauty.Financeiro.Modelo
+namespace TechBeauty.Dominio.Financeiro
 {
     public class Pagamento
     {
@@ -17,6 +13,8 @@ namespace TechBeauty.Financeiro.Modelo
         public int CaixaDiarioId { get; set; } //ef
         public CaixaDiario CaixaDiario { get; set; } //ef
         public DateTime DataPagamento { get; init; }
+
+        private Pagamento() { }
 
         private Pagamento(int id, OrdemServico ordemServico, FormaPagamento formasPagamento,
             DateTime dataPagamento)
