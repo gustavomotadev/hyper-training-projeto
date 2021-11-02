@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TechBeauty.Dominio.Modelo
 {
-    class Expediente
+    public class Expediente
     {
         public int Id { get; set; }
         public DateTime DataHoraAbertura { get; init; }
