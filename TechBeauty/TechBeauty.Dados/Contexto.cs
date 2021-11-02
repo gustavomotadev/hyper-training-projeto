@@ -42,9 +42,29 @@ namespace TechBeauty.Dados
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new AgendamentoMap());
+            modelBuilder.ApplyConfiguration(new CaixaDiarioMap());
             modelBuilder.ApplyConfiguration(new CargoContratoTrabalhoMap());
-            modelBuilder.ApplyConfiguration(new RegimeContratualMap());
+            modelBuilder.ApplyConfiguration(new CargoMap());
+            modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new ColaboradorMap());
+            modelBuilder.ApplyConfiguration(new ColaboradorServicoMap());
+            modelBuilder.ApplyConfiguration(new ContatoMap());
             modelBuilder.ApplyConfiguration(new ContratoTrabalhoMap());
+            modelBuilder.ApplyConfiguration(new EnderecoMap());
+            modelBuilder.ApplyConfiguration(new ExpedienteMap());
+            modelBuilder.ApplyConfiguration(new FormaPagamentoMap());
+            modelBuilder.ApplyConfiguration(new GeneroMap());
+            modelBuilder.ApplyConfiguration(new OrdemServicoMap());
+            modelBuilder.ApplyConfiguration(new PadraoRemuneracaoMap());
+            modelBuilder.ApplyConfiguration(new PagamentoMap());
+            modelBuilder.ApplyConfiguration(new PessoaMap());
+            modelBuilder.ApplyConfiguration(new RegimeContratualMap());
+            modelBuilder.ApplyConfiguration(new RemuneracaoDiariaMap());
+            modelBuilder.ApplyConfiguration(new RemuneracaoDiariaServicoMap());
+            modelBuilder.ApplyConfiguration(new ServicoMap());
+            modelBuilder.ApplyConfiguration(new TipoContatoMap());
+            modelBuilder.ApplyConfiguration(new TurnoMap());
 
             base.OnModelCreating(modelBuilder);
         }
