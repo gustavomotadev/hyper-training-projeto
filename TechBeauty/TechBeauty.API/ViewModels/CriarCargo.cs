@@ -5,8 +5,8 @@ namespace TechBeauty.API.ViewModels
     public class CriarCargo
     {
         [Required]
-        public string Nome { get; private set; }
+        public string Nome { get; set; }
         [Required]
-        public string Descricao { get; private set; }
+        public string Descricao { get; set; }
     }
 }
