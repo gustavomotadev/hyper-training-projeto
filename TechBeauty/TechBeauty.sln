@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechBeauty.Dominio", "TechB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechBeauty.Dados", "TechBeauty.Dados\TechBeauty.Dados.csproj", "{54506648-3690-40E7-9385-D258166BCB77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechBeauty.API", "TechBeauty.API\TechBeauty.API.csproj", "{9963A35E-FA66-4BA9-BA1E-BB728794995D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{54506648-3690-40E7-9385-D258166BCB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54506648-3690-40E7-9385-D258166BCB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54506648-3690-40E7-9385-D258166BCB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9963A35E-FA66-4BA9-BA1E-BB728794995D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9963A35E-FA66-4BA9-BA1E-BB728794995D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9963A35E-FA66-4BA9-BA1E-BB728794995D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9963A35E-FA66-4BA9-BA1E-BB728794995D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
