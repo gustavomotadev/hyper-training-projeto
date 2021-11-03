@@ -33,6 +33,10 @@ namespace TechBeauty.Dados.Map
             builder.Property(x => x.DuracaoEmMin)
                 .HasColumnType("int")
                 .IsRequired();
+
+            builder.HasMany<Colaborador>
+                (s => s.Colaboradores)
+                .WithMany(c => c.Servicos);
         }
     }
 }

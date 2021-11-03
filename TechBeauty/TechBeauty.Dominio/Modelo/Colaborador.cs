@@ -8,7 +8,7 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Colaborador : Pessoa
     {
-        public List<ColaboradorServico> ColaboradoresServicos { get; set; } //ef
+        public List<Servico> Servicos { get; set; } //ef
         public int EnderecoId { get; set; } //ef
         public Endereco Endereco { get; private set; }
         public int GeneroId { get; set; } //ef
@@ -31,7 +31,7 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static Colaborador NovoColaborador(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, string carteiraDeTrabalho, List<ColaboradorServico> servicos, Endereco endereco, 
+            List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
             Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
@@ -53,7 +53,7 @@ namespace TechBeauty.Dominio.Modelo
                 var colaborador = new Colaborador(idColaborador, cpf, dataNascimento);
                 colaborador.Nome = nome;
                 colaborador.Contatos = contatos;
-                colaborador.ColaboradoresServicos = servicos;
+                colaborador.Servicos = servicos;
                 colaborador.Endereco = endereco;
                 colaborador.Genero = genero;
                 if (String.IsNullOrEmpty(nomeSocial))
@@ -73,11 +73,11 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public bool AdicionarServico(ColaboradorServico servico)
+        public bool AdicionarServico(Servico servico)
         {
             if (servico != null)
             {
-                ColaboradoresServicos.Add(servico);
+                Servicos.Add(servico);
                 return true;
             }
             else
@@ -86,7 +86,7 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public Servico ObterServicoPorId(int id) => ColaboradoresServicos.FirstOrDefault(x => x.ServicoId == id).Servico;
+        public Servico ObterServicoPorId(int id) => Servicos.FirstOrDefault(x => x.Id == id);
 
         /*
         public bool RemoverServico(int id)
@@ -104,10 +104,10 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool RemoverServico(Servico servico)
         {
-            if (ColaboradoresServicos.Count > 1 &&
+            if (Servicos.Count > 1 &&
                 servico != null)
             {
-                return ColaboradoresServicos.Remove(ColaboradoresServicos.FirstOrDefault(cs => cs.ServicoId == servico.Id));
+                return Servicos.Remove(servico);
             }
             else
             {

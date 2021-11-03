@@ -42,6 +42,10 @@ namespace TechBeauty.Dados.Map
                 (c => c.Remuneracoes)
                 .WithOne(r => r.Colaborador)
                 .HasForeignKey(r => r.ColaboradorId);
+
+            builder.HasMany<Servico>
+                (c => c.Servicos)
+                .WithMany(s => s.Colaboradores);
         }
     }
 }
