@@ -21,7 +21,7 @@ namespace TechBeauty.Dominio.Modelo
             DataHoraFechamento = dataHoraFechamento;
         }
 
-        public Expediente NovoExpediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento,
+        public static Expediente NovoExpediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento,
             List<Turno> turnos)
         {
             if (dataHoraAbertura.Date == dataHoraFechamento.Date &&
