@@ -13,7 +13,7 @@ namespace TechBeauty.Dominio.Modelo
         public int DuracaoEmMin { get; private set; }
         public List<Agendamento> Agendamentos { get; set; } //ef
         public List<Colaborador> Colaboradores { get; set; } //ef
-        public List<RemuneracaoDiariaServico> RemuneracoesServicos { get; set; } //ef
+        public List<RemuneracaoDiaria> Remuneracoes { get; set; } //ef
 
         private Servico() { }
 

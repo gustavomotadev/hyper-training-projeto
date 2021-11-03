@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechBeauty.Dominio.Financeiro;
+using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
 {
@@ -32,6 +33,10 @@ namespace TechBeauty.Dados.Map
             builder.Property(x => x.ValorHoraExtra)
                 .HasColumnType("decimal(10,2)")
                 .IsRequired();
+
+            builder.HasMany<Servico>
+                (rd => rd.Servicos)
+                .WithMany(s => s.Remuneracoes);
         }
     }
 }

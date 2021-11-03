@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dados.Map
@@ -37,6 +38,10 @@ namespace TechBeauty.Dados.Map
             builder.HasMany<Colaborador>
                 (s => s.Colaboradores)
                 .WithMany(c => c.Servicos);
+
+            builder.HasMany<RemuneracaoDiaria>
+                (s => s.Remuneracoes)
+                .WithMany(rd => rd.Servicos);
         }
     }
 }
