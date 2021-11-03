@@ -26,7 +26,6 @@ namespace TechBeauty.Dados
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<RegimeContratual> RegimeContratual { get; set; }
         public DbSet<RemuneracaoDiaria> RemuneracaoDiaria { get; set; }
-        //public DbSet<RemuneracaoDiariaServico> RemuneracaoDiariaServico { get; set; }
         public DbSet<Servico> Servico { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<Turno> Turno { get; set; }
@@ -58,7 +57,6 @@ namespace TechBeauty.Dados
             modelBuilder.ApplyConfiguration(new PessoaMap());
             modelBuilder.ApplyConfiguration(new RegimeContratualMap());
             modelBuilder.ApplyConfiguration(new RemuneracaoDiariaMap());
-            //modelBuilder.ApplyConfiguration(new RemuneracaoDiariaServicoMap());
             modelBuilder.ApplyConfiguration(new ServicoMap());
             modelBuilder.ApplyConfiguration(new TipoContatoMap());
             modelBuilder.ApplyConfiguration(new TurnoMap());
