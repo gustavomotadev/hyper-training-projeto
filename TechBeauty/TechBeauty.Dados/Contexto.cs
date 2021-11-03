@@ -11,7 +11,7 @@ namespace TechBeauty.Dados
         public DbSet<Agendamento> Agendamento { get; set; }
         public DbSet<CaixaDiario> CaixaDiario { get; set; }
         public DbSet<Cargo> Cargo { get; set; }
-        public DbSet<CargoContratoTrabalho> CargoContratoTrabalho { get; set; }
+        
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Colaborador> Colaborador { get; set; }
         public DbSet<ColaboradorServico> ColaboradorServico { get; set; }
@@ -36,7 +36,7 @@ namespace TechBeauty.Dados
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // User ID=carson; Password=123, caso seja autenticação usuário e senha do DB.
-            optionsBuilder.UseSqlServer("Password=admin;Persist Security Info=True;User ID=tech-beauty-admin;Initial Catalog=TechBeauty;Data Source=DESKTOP-MOTA"); //Trusted é para autenticação com usuário do Windows.
+            optionsBuilder.UseSqlServer("Server=DESKTOP-9LK3UQP; Database=TechBeautyDB; Trusted_Connection=True"); //Trusted é para autenticação com usuário do Windows.
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -44,7 +44,6 @@ namespace TechBeauty.Dados
         {
             modelBuilder.ApplyConfiguration(new AgendamentoMap());
             modelBuilder.ApplyConfiguration(new CaixaDiarioMap());
-            modelBuilder.ApplyConfiguration(new CargoContratoTrabalhoMap());
             modelBuilder.ApplyConfiguration(new CargoMap());
             modelBuilder.ApplyConfiguration(new ClienteMap());
             modelBuilder.ApplyConfiguration(new ColaboradorMap());
