@@ -8,4 +8,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controladores\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TechBeauty.Dados\TechBeauty.Dados.csproj" />
+    <ProjectReference Include="..\TechBeauty.Dominio\TechBeauty.Dominio.csproj" />
+  </ItemGroup>
+
 </Project>
