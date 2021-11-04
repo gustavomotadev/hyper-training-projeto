@@ -37,7 +37,7 @@ namespace TechBeauty.API.Controladores
             else return NotFound();
         }
 
-        [HttpPost(template: "TipoContato")]
+        [HttpPost(template: "Genero")]
         public IActionResult Post([FromBody] CriarGenero viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();

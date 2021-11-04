@@ -11,17 +11,16 @@ namespace TechBeauty.Dominio.Financeiro
 
         private FormaPagamento() { }
 
-        private FormaPagamento(int id, string valor)
+        private FormaPagamento(string valor)
         {
-            Id = id;
             Valor = valor;
         }
 
-        public static FormaPagamento NovaFormaPagamento(int idFormaPagamento, string valor)
+        public static FormaPagamento NovaFormaPagamento(string valor)
         {
             if (! String.IsNullOrWhiteSpace(valor))
             {
-                var formaPagamento = new FormaPagamento(idFormaPagamento, valor);
+                var formaPagamento = new FormaPagamento(valor);
                 return formaPagamento;
             }
             else

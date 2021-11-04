@@ -31,7 +31,7 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static Colaborador NovoColaborador(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco, 
+            List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco,
             Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
