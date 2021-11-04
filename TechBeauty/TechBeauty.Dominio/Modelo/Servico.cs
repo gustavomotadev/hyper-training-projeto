@@ -16,17 +16,14 @@ namespace TechBeauty.Dominio.Modelo
         public List<RemuneracaoDiaria> Remuneracoes { get; set; } //ef
 
         private Servico() { }
-
-        private Servico(int id) => Id = id;
-
-        public static Servico NovoServico(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
+        public static Servico NovoServico(string nome, decimal preco, string descricao, int duracaoEmMin)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
                 preco > 0M &&
                 !String.IsNullOrWhiteSpace(descricao) &&
                 duracaoEmMin > 0)
             {
-                var servico = new Servico(idServico);
+                var servico = new Servico();
                 servico.Nome = nome;
                 servico.Preco = preco;
                 servico.Descricao = descricao;
