@@ -10,12 +10,8 @@ namespace TechBeauty.API.ViewModels
     {
         [Required]
         public DateTime Data { get; set; }
-        [Required]
-        public List<int> Pagamentos { get; set; }
-        [Required]
-        public List<int> Remuneracoes { get; set; }
-        
-        public static decimal CustoFixoPadrao { get; set; }
+               
+        public decimal CustoFixo { get; set; }
 
 
     }
