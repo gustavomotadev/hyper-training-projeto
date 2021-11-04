@@ -14,16 +14,6 @@ namespace TechBeauty.API.Controladores
     [Route(template: "TechBeautyV1")]
     public class ControleFormaPagamento : ControllerBase
     {
-<<<<<<< HEAD:TechBeauty/TechBeauty.API/Controladores/ControleFormasPagamento.cs
-=======
-        private readonly RepositorioBase<FormaPagamento> _formaPagamento;
-
-        public ControleFormaPagamento()
-        {
-            _formaPagamento = new RepositorioBase<FormaPagamento>();
-        }
-
->>>>>>> 069ae85b06cc446f91ae204546e9013d079bf379:TechBeauty/TechBeauty.API/Controladores/ControleFormaPagamento.cs
         [HttpGet]
         [Route(template: "FormaPagamento")]
         public IActionResult Get()
