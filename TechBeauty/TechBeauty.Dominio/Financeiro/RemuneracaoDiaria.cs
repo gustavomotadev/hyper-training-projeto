@@ -10,7 +10,7 @@ namespace TechBeauty.Dominio.Financeiro
         public int Id { get; set; }
         public int ColaboradorId { get; set; } //ef
         public Colaborador Colaborador { get; init; }
-        public List<RemuneracaoDiariaServico> RemuneracoesServicos { get; set; } //ef
+        public List<Servico> Servicos { get; set; } //ef
         public int CaixaDiarioId { get; set; } //ef
         public CaixaDiario CaixaDiario { get; set; } //ef
         public TimeSpan HorasTrabalhadas { get; init; }
@@ -22,11 +22,11 @@ namespace TechBeauty.Dominio.Financeiro
         private RemuneracaoDiaria() { }
 
         private RemuneracaoDiaria(Colaborador colaborador,
-            TimeSpan horasTrabalhadas, List<RemuneracaoDiariaServico> servicosRealizados)
+            TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
         {
             Colaborador = colaborador;
             HorasTrabalhadas = horasTrabalhadas;
-            RemuneracoesServicos = servicosRealizados;
+            Servicos = servicosRealizados;
 
             ValorSalario = CalcularSalario();
             ValorComissao = CalcularComissao();
@@ -34,7 +34,7 @@ namespace TechBeauty.Dominio.Financeiro
         }
 
         public RemuneracaoDiaria NovaRemuneracaoDiaria(Colaborador colaborador, 
-            TimeSpan horasTrabalhadas, List<RemuneracaoDiariaServico> servicosRealizados)
+            TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
         {
             if (colaborador != null &&
                 horasTrabalhadas <= PadraoRemuneracao.JornadaMaxima &&
@@ -57,7 +57,7 @@ namespace TechBeauty.Dominio.Financeiro
 
         private decimal CalcularComissao()
         {
-            decimal total = RemuneracoesServicos.Sum(x => x.Servico.Preco);
+            decimal total = Servicos.Sum(x => x.Preco);
             return total * Colaborador.PadraoRemuneracao.PercentualComissao; 
         }
 

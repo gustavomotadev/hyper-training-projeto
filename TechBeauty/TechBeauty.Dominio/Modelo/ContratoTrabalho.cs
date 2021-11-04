@@ -13,7 +13,7 @@ namespace TechBeauty.Dominio.Modelo
         public Colaborador Colaborador { get; init; }
         public DateTime DataEntrada { get; init; }
         public DateTime? DataDesligamento { get; private set; }
-        public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
+        public List<Cargo> Cargos { get; set; } //ef
         public string CNPJ_CTPS { get; init; }
         public bool Vigente { get; set; }
 
@@ -28,7 +28,7 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
-            DateTime? dataDesligamento, List<CargoContratoTrabalho> cargos, string cnpjCTPS)
+            DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
         {
             if (regimeContratual != null &&
                 cargos != null &&
@@ -39,7 +39,7 @@ namespace TechBeauty.Dominio.Modelo
             {
                 var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada, cnpjCTPS);
                 contratoTrabalho.DataDesligamento = dataDesligamento;
-                contratoTrabalho.CargosContratosTrabalho = cargos;
+                contratoTrabalho.Cargos = cargos;
                 return contratoTrabalho;
             }
             else
@@ -61,11 +61,11 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public bool AdicionarCargo(CargoContratoTrabalho cargo)
+        public bool AdicionarCargo(Cargo cargo)
         {
             if (cargo != null)
             {
-                CargosContratosTrabalho.Add(cargo);
+                Cargos.Add(cargo);
                 return true;
             }
             else
@@ -74,7 +74,7 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public Cargo ObterCargoPorId(int id) => CargosContratosTrabalho.FirstOrDefault(x => x.CargoId == id).Cargo;
+        public Cargo ObterCargoPorId(int id) => Cargos.FirstOrDefault(x => x.Id == id);
 
         /*
         public bool RemoverCargo(int id)
@@ -90,12 +90,12 @@ namespace TechBeauty.Dominio.Modelo
         }
         */
 
-        public bool RemoverServico(Cargo cargo)
+        public bool RemoverCargo(Cargo cargo)
         {
-            if (CargosContratosTrabalho.Count > 1 &&
+            if (Cargos.Count > 1 &&
                 cargo != null)
             {
-                return CargosContratosTrabalho.Remove(CargosContratosTrabalho.FirstOrDefault(cs => cs.CargoId == cargo.Id));
+                return Cargos.Remove(cargo);
             }
             else
             {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TechBeauty.Dados;
 
 namespace TechBeauty.Dados.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20211103225901_ajuste_colaborador_servico")]
+    partial class ajuste_colaborador_servico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,21 +49,6 @@ namespace TechBeauty.Dados.Migrations
                     b.HasIndex("ServicosId");
 
                     b.ToTable("ColaboradorServico");
-                });
-
-            modelBuilder.Entity("RemuneracaoDiariaServico", b =>
-                {
-                    b.Property<int>("RemuneracoesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServicosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RemuneracoesId", "ServicosId");
-
-                    b.HasIndex("ServicosId");
-
-                    b.ToTable("RemuneracaoDiariaServico");
                 });
 
             modelBuilder.Entity("TechBeauty.Dominio.Financeiro.CaixaDiario", b =>
@@ -212,6 +199,28 @@ namespace TechBeauty.Dados.Migrations
                     b.HasIndex("ColaboradorId");
 
                     b.ToTable("RemuneracaoDiaria");
+                });
+
+            modelBuilder.Entity("TechBeauty.Dominio.Financeiro.RemuneracaoDiariaServico", b =>
+                {
+                    b.Property<int>("RemuneracaoDiariaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("RemuneracaoDiariaId", "ServicoId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("RemuneracaoDiaria_Servico");
                 });
 
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Agendamento", b =>
@@ -605,21 +614,6 @@ namespace TechBeauty.Dados.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RemuneracaoDiariaServico", b =>
-                {
-                    b.HasOne("TechBeauty.Dominio.Financeiro.RemuneracaoDiaria", null)
-                        .WithMany()
-                        .HasForeignKey("RemuneracoesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TechBeauty.Dominio.Modelo.Servico", null)
-                        .WithMany()
-                        .HasForeignKey("ServicosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TechBeauty.Dominio.Financeiro.PadraoRemuneracao", b =>
                 {
                     b.HasOne("TechBeauty.Dominio.Modelo.Colaborador", "Colaborador")
@@ -675,6 +669,25 @@ namespace TechBeauty.Dados.Migrations
                     b.Navigation("CaixaDiario");
 
                     b.Navigation("Colaborador");
+                });
+
+            modelBuilder.Entity("TechBeauty.Dominio.Financeiro.RemuneracaoDiariaServico", b =>
+                {
+                    b.HasOne("TechBeauty.Dominio.Financeiro.RemuneracaoDiaria", "RemuneracaoDiaria")
+                        .WithMany("RemuneracoesServicos")
+                        .HasForeignKey("RemuneracaoDiariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechBeauty.Dominio.Modelo.Servico", "Servico")
+                        .WithMany("RemuneracoesServicos")
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RemuneracaoDiaria");
+
+                    b.Navigation("Servico");
                 });
 
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Agendamento", b =>
@@ -826,6 +839,11 @@ namespace TechBeauty.Dados.Migrations
                     b.Navigation("Pagamentos");
                 });
 
+            modelBuilder.Entity("TechBeauty.Dominio.Financeiro.RemuneracaoDiaria", b =>
+                {
+                    b.Navigation("RemuneracoesServicos");
+                });
+
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Endereco", b =>
                 {
                     b.Navigation("Colaboradores");
@@ -863,6 +881,8 @@ namespace TechBeauty.Dados.Migrations
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Servico", b =>
                 {
                     b.Navigation("Agendamentos");
+
+                    b.Navigation("RemuneracoesServicos");
                 });
 
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.TipoContato", b =>
