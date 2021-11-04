@@ -42,7 +42,7 @@ namespace TechBeauty.API.Controladores
 
             _tipoContato.Incluir(novo);
 
-            return Created(uri: $"TechBeautyV1/RegimeContratual/{novo.Id}", novo);
+            return Created(uri: $"TechBeautyV1/TipoContato/{novo.Id}", novo);
         }
 
         [HttpDelete(template: "TipoContato/{id}")]
