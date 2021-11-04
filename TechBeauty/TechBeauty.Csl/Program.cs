@@ -11,13 +11,13 @@ namespace TechBeauty.Csl
 
         static void Main(string[] args)
         {
-            var repoRegimeContratual = new RepositorioBase<RegimeContratual>();
+            //var repoRegimeContratual = new RepositorioBase<RegimeContratual>();
 
-            var regime1 = RegimeContratual.NovoRegimeContratual("clt");
-            var regime2 = RegimeContratual.NovoRegimeContratual("pj");
+            //var regime1 = RegimeContratual.NovoRegimeContratual("clt");
+            //var regime2 = RegimeContratual.NovoRegimeContratual("pj");
 
-            repoRegimeContratual.Incluir(regime1);
-            repoRegimeContratual.Incluir(regime2);
+            //repoRegimeContratual.Incluir(regime1);
+            //repoRegimeContratual.Incluir(regime2);
         }
     }
 }

@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TechBeauty.Dados;
+using TechBeauty.Dados.Repositorios;
+using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.API
 {
@@ -22,7 +24,7 @@ namespace TechBeauty.API
         {
 
             services.AddControllers();
-            services.AddDbContext<Contexto>();
+            //services.AddDbContext<Contexto>(); //do exemplo da web
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TechBeauty.API", Version = "v1" });
