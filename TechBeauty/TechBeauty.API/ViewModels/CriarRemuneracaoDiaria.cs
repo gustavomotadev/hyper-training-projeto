@@ -15,7 +15,7 @@ namespace TechBeauty.API.ViewModels
         [Required]
         public TimeSpan HorasTrabalhadas { get; set; }
         [Required]
-        public List<int> ServicosRealizados { get; set; }
+        public List<int> ServicosRealizadosId { get; set; }
 
     }
 }

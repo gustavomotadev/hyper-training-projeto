@@ -10,7 +10,6 @@ namespace TechBeauty.API.ViewModels
     {
         [Required]
         public int ClienteId { get; set; }
-        [Required]
-        public List<int> Agendamentos { get; set; }
+        
     }
 }
