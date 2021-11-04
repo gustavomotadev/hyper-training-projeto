@@ -12,17 +12,12 @@ namespace TechBeauty.Dominio.Modelo
 
         private Cargo() { }
 
-        private Cargo(int id)
-        {
-            Id = id;
-        }
-
-        public static Cargo NovoCargo(int idCargo, string nome, string descricao)
+        public static Cargo NovoCargo(string nome, string descricao)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
                 !String.IsNullOrWhiteSpace(descricao))
             {
-                var cargo = new Cargo(idCargo);
+                var cargo = new Cargo();
                 cargo.Nome = nome;
                 cargo.Descricao = descricao;
                 return cargo;
