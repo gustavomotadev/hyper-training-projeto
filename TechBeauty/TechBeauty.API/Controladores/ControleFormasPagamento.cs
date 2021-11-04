@@ -25,7 +25,7 @@ namespace TechBeauty.API.Controladores
         [Route(template: "FormaPagamento")]
         public IActionResult Get()
         {
-            var todos = _formaPagamento;
+            var todos = _formaPagamento.SelecionarTodos();
             return Ok(todos);
         }
 

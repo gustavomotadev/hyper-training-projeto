@@ -20,7 +20,7 @@ namespace TechBeauty.API.Controladores
         [Route(template: "TipoContato")]
         public IActionResult Get()
         {
-            var todos = _tipoContato;
+            var todos = _tipoContato.SelecionarTodos();
             return Ok(todos);
         }
 

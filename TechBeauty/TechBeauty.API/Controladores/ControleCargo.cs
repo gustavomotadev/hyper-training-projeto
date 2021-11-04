@@ -24,7 +24,7 @@ namespace TechBeauty.API.Controladores
         [Route(template: "Cargo")]
         public IActionResult Get()
         {
-            var todos = _cargo;
+            var todos = _cargo.SelecionarTodos();
             return Ok(todos);
         }
 
