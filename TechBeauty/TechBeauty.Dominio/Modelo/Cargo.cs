@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace TechBeauty.Dominio.Modelo
 {
-    public class Cargo
+    public class Cargo 
     {
-        public int Id { get; init; }
+        public int Id { get; init; } = 0;
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
         public List<ContratoTrabalho> ContratosTrabalhos { get; set; } //ef

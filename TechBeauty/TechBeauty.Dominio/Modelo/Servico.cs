@@ -6,7 +6,7 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Servico
     {
-        public int Id { get; init; }
+        public int Id { get; init; } = 0;
         public string Nome { get; private set; }
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
