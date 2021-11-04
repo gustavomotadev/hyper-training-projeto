@@ -14,18 +14,11 @@ namespace TechBeauty.API.Controladores
     [Route(template: "TechBeautyV1")]
     public class ControleRegimeContratual : ControllerBase
     {
-        private readonly RepositorioBase<RegimeContratual> _repoRegimeContratual;
-
-        public ControleRegimeContratual()
-        {
-            _repoRegimeContratual = new RepositorioBase<RegimeContratual>();
-        }
-
         [HttpGet]
         [Route(template: "RegimeContratual")] 
         public IActionResult Get()
         {
-            var todos = _repoRegimeContratual.SelecionarTodos();
+            var todos = RepositorioDominio.RegimeContratual.SelecionarTodos();
             return Ok(todos);
         }
 
@@ -33,7 +26,7 @@ namespace TechBeauty.API.Controladores
         [Route(template: "RegimeContratual/{id}")]
         public IActionResult GetPorId([FromRoute] int id)
         {
-            var escolhido = _repoRegimeContratual.SelecionarPorChave(id);
+            var escolhido = RepositorioDominio.RegimeContratual.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
             else return NotFound();
         }
@@ -45,7 +38,7 @@ namespace TechBeauty.API.Controladores
 
             var novo = RegimeContratual.NovoRegimeContratual(viewModel.Valor);
 
-            _repoRegimeContratual.Incluir(novo);
+            RepositorioDominio.RegimeContratual.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/RegimeContratual/{novo.Id}", novo);
         }
@@ -53,10 +46,10 @@ namespace TechBeauty.API.Controladores
         [HttpDelete(template: "RegimeContratual/{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var excluido = _repoRegimeContratual.SelecionarPorChave(id);
+            var excluido = RepositorioDominio.RegimeContratual.SelecionarPorChave(id);
             if (excluido == null) return NotFound();
 
-            _repoRegimeContratual.Excluir(excluido);
+            RepositorioDominio.RegimeContratual.Excluir(excluido);
             return Ok(excluido);
         }
     }

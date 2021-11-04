@@ -13,18 +13,11 @@ namespace TechBeauty.API.Controladores
     [Route(template: "TechBeautyV1")]
     public class ControleServico : ControllerBase
     {
-        private readonly RepositorioBase<Servico> _servico;
-
-        public ControleServico()
-        {
-            _servico = new RepositorioBase<Servico>();
-        }
-
         [HttpGet]
         [Route(template: "Servico")]
         public IActionResult Get()
         {
-            var todos = _servico.SelecionarTodos();
+            var todos = RepositorioDominio.Servico.SelecionarTodos();
             return Ok(todos);
         }
 
@@ -32,7 +25,7 @@ namespace TechBeauty.API.Controladores
         [Route(template: "Servico/{id}")]
         public IActionResult GetPorId([FromRoute] int id)
         {
-            var escolhido = _servico.SelecionarPorChave(id);
+            var escolhido = RepositorioDominio.Servico.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
             else return NotFound();
         }
@@ -45,7 +38,7 @@ namespace TechBeauty.API.Controladores
             var novo = Servico.NovoServico(viewModel.Nome, viewModel.Preco, viewModel.Descricao, 
                 viewModel.DuracaoEmMin);
 
-            _servico.Incluir(novo);
+            RepositorioDominio.Servico.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Servico/{novo.Id}", novo);
         }
@@ -53,10 +46,10 @@ namespace TechBeauty.API.Controladores
         [HttpDelete(template: "Servico/{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var excluido = _servico.SelecionarPorChave(id);
+            var excluido = RepositorioDominio.Servico.SelecionarPorChave(id);
             if (excluido == null) return NotFound();
 
-            _servico.Excluir(excluido);
+            RepositorioDominio.Servico.Excluir(excluido);
             return Ok(excluido);
         }
     }
