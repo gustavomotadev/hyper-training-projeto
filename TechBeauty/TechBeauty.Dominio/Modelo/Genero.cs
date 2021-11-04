@@ -11,17 +11,17 @@ namespace TechBeauty.Dominio.Modelo
 
         private Genero() { }
 
-        private Genero(int id, string valor)
+        private Genero(string valor)
         {
-            Id = id;
+            
             Valor = valor;
         }
 
-        public static Genero AdicionarGenero(int idGenero, string valorGenero)
+        public static Genero AdicionarGenero(string valorGenero)
         {
             if (!String.IsNullOrWhiteSpace(valorGenero))
             {
-                return new Genero(idGenero, valorGenero);
+                return new Genero(valorGenero);
             }
             else
             {
