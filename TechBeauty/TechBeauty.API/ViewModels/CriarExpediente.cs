@@ -11,7 +11,7 @@ namespace TechBeauty.API.ViewModels
         [Required]
         public DateTime DataHoraAbertura { get; set; }
         [Required]
-        public DateTime DataHoraFechamento { get; set; 
+        public DateTime DataHoraFechamento { get; set; }
         
     }
 }
