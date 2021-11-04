@@ -11,17 +11,16 @@ namespace TechBeauty.Dominio.Modelo
 
         private TipoContato() { }
 
-        private TipoContato(int id, string valor)
+        private TipoContato(string valor)
         {
-            Id = id;
             Valor = valor;
         }
 
-        public static TipoContato NovoTipoContato(int idTipoContato, string valor)
+        public static TipoContato NovoTipoContato(string valor)
         {
             if (!String.IsNullOrWhiteSpace(valor))
             {
-                return new TipoContato(idTipoContato, valor);
+                return new TipoContato(valor);
             }
             else
             {
