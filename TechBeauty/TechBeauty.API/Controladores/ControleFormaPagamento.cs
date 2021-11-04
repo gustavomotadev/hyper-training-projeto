@@ -12,11 +12,11 @@ namespace TechBeauty.API.Controladores
 {
     [ApiController]
     [Route(template: "TechBeautyV1")]
-    public class ControleFormasPagamento : ControllerBase
+    public class ControleFormaPagamento : ControllerBase
     {
         private readonly RepositorioBase<FormaPagamento> _formaPagamento;
 
-        public ControleFormasPagamento()
+        public ControleFormaPagamento()
         {
             _formaPagamento = new RepositorioBase<FormaPagamento>();
         }
