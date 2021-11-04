@@ -15,9 +15,7 @@ namespace TechBeauty.API.ViewModels
         [Required]
         public DateTime DataHoraEntrada { get; set; }
         [Required]
-        public DateTime DataHoraSaida { get; set; }
-        
-        public DateTime? RegistroEntrada { get; set; }
-        public DateTime? RegistroSaida { get; set; }   
+        public DateTime DataHoraSaida { get; set; } 
+       
     }
 }
