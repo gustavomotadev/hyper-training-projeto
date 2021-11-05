@@ -24,10 +24,9 @@ namespace TechBeauty.Dominio.Modelo
 
         private Agendamento() { }
 
-        private Agendamento(int id, Servico servico, Colaborador colaborador, string pessoaAtendida,
+        private Agendamento(Servico servico, Colaborador colaborador, string pessoaAtendida,
           DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
-            Id = id;
             Servico = servico;
             Colaborador = colaborador;
             PessoaAtendida = pessoaAtendida;
@@ -35,7 +34,7 @@ namespace TechBeauty.Dominio.Modelo
             DataHoraExecucao = dataHoraExecucao;
         }
 
-        public static Agendamento NovoAgendamento(int idDoAgendamento, Servico servico, Colaborador colaborador, 
+        public static Agendamento NovoAgendamento(Servico servico, Colaborador colaborador, 
             string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
             if (servico != null &&
@@ -45,7 +44,7 @@ namespace TechBeauty.Dominio.Modelo
                 !String.IsNullOrWhiteSpace(pessoaAtendida) &&
                 dataHoraExecucao.AddMinutes(servico.DuracaoEmMin).Date == dataHoraExecucao.Date)
             {
-                return new Agendamento(idDoAgendamento, servico, colaborador, pessoaAtendida,
+                return new Agendamento(servico, colaborador, pessoaAtendida,
                     dataHoraCriacao, dataHoraExecucao);
             }
             else
