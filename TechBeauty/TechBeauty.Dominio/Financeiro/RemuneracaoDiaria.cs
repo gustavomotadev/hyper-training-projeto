@@ -21,9 +21,10 @@ namespace TechBeauty.Dominio.Financeiro
 
         private RemuneracaoDiaria() { }
 
-        private RemuneracaoDiaria(Colaborador colaborador,
+        private RemuneracaoDiaria(CaixaDiario caixaDiario, Colaborador colaborador,
             TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
         {
+            CaixaDiario = caixaDiario;
             Colaborador = colaborador;
             HorasTrabalhadas = horasTrabalhadas;
             Servicos = servicosRealizados;
@@ -33,7 +34,7 @@ namespace TechBeauty.Dominio.Financeiro
             ValorHoraExtra = CalcularHoraExtra();
         }
 
-        public RemuneracaoDiaria NovaRemuneracaoDiaria(Colaborador colaborador, 
+        public static RemuneracaoDiaria NovaRemuneracaoDiaria(CaixaDiario caixaDiario, Colaborador colaborador, 
             TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
         {
             if (colaborador != null &&
@@ -42,7 +43,7 @@ namespace TechBeauty.Dominio.Financeiro
                 servicosRealizados.Count > 0 &&
                 !servicosRealizados.Any(x => x == null))
             {
-                return new RemuneracaoDiaria(colaborador, horasTrabalhadas, servicosRealizados);
+                return new RemuneracaoDiaria(caixaDiario, colaborador, horasTrabalhadas, servicosRealizados);
             }
             else
             {
