@@ -13,7 +13,7 @@ namespace TechBeauty.API.ViewModels
         [Required]
         public int CaixaDiarioId { get; set; }
         [Required]
-        public TimeSpan HorasTrabalhadas { get; set; }
+        public CriarTimeSpan HorasTrabalhadas { get; set; }
         [Required]
         public List<int> ServicosRealizadosId { get; set; }
 
