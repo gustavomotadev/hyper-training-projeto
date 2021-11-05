@@ -16,22 +16,23 @@ namespace TechBeauty.Dominio.Financeiro
 
         private Pagamento() { }
 
-        private Pagamento(int id, OrdemServico ordemServico, FormaPagamento formasPagamento,
+        private Pagamento(CaixaDiario caixaDiario, OrdemServico ordemServico, FormaPagamento formasPagamento,
             DateTime dataPagamento)
         {
-            Id = id;
+            CaixaDiario = caixaDiario;
             OrdemServico = ordemServico;
             FormaPagamento = formasPagamento;
             DataPagamento = dataPagamento;
         }
 
-        public static Pagamento NovoPagamento(int idPagamento, OrdemServico ordemServico, 
+        public static Pagamento NovoPagamento(CaixaDiario caixaDiario, OrdemServico ordemServico, 
             FormaPagamento formaPagamento, DateTime dataPagamento)
         {
             if (ordemServico != null &&
-                formaPagamento != null)
+                formaPagamento != null &&
+                caixaDiario != null)
             {
-                var novoPagamento = new Pagamento(idPagamento, ordemServico, formaPagamento, dataPagamento);
+                var novoPagamento = new Pagamento(caixaDiario, ordemServico, formaPagamento, dataPagamento);
                 return novoPagamento;
             }
             else
