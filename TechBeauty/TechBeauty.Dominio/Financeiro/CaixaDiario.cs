@@ -23,7 +23,7 @@ namespace TechBeauty.Dominio.Financeiro
         public decimal ReceitaLiquida { get; init; }
 
         private CaixaDiario() { }
-
+        //TO DO
         private CaixaDiario(DateTime data, decimal custoFixo)
         {
             Data = data;
@@ -37,7 +37,7 @@ namespace TechBeauty.Dominio.Financeiro
             ReceitaBruta = CalcularReceitaBruta();
             ReceitaLiquida = CalcularReceitaLiquida();
         }
-
+        //TO DO
         private CaixaDiario(DateTime data)
         {
             Data = data;

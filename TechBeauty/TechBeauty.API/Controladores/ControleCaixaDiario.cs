@@ -7,7 +7,7 @@ using TechBeauty.API.ViewModels;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Financeiro;
 
-namespace TechBeauty.API.Controladores
+namespace TechBeauty.API.Controladores //TO DO
 {
     [ApiController]
     [Route(template: "TechBeautyV1")]
@@ -30,7 +30,7 @@ namespace TechBeauty.API.Controladores
             else return NotFound();
         }
 
-        [HttpPost(template: "CaixaDiario")]
+        [HttpPost(template: "CaixaDiario")] //TO DO
         public IActionResult Post([FromBody] CriarCaixaDiario viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
