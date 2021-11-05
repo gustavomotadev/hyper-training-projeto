@@ -16,23 +16,22 @@ namespace TechBeauty.Dominio.Modelo
 
         private Turno() { }
 
-        private Turno(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
+        private Turno(DateTime dataHoraEntrada, DateTime dataHoraSaida,
             Colaborador colaborador)
         {
-            Id = id;
             DataHoraEntrada = dataHoraEntrada;
             DataHoraEntrada = dataHoraSaida;
             Colaborador = colaborador;
         }
 
-        public static Turno NovoTurno(int idTurno, DateTime dataHoraEntrada, 
+        public static Turno NovoTurno(DateTime dataHoraEntrada, 
             DateTime dataHoraSaida, Colaborador colaborador)
         {
             if (colaborador != null &&
                 dataHoraEntrada.Date == dataHoraSaida.Date &&
                 dataHoraEntrada < dataHoraSaida)
             {
-                var turno = new Turno(idTurno, dataHoraEntrada, dataHoraSaida, colaborador);
+                var turno = new Turno(dataHoraEntrada, dataHoraSaida, colaborador);
                 return turno;
             }
             else
