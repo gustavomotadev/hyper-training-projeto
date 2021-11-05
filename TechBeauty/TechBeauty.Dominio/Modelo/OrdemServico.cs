@@ -11,28 +11,23 @@ namespace TechBeauty.Dominio.Modelo
         public int ClienteId { get; set; } //ef
         public Cliente Cliente { get; init; }
         public StatusOS StatusOS { get; private set; } = StatusOS.Pendente;
-        public List<Agendamento> Agendamentos { get; private set; }
+        public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>();
         public Pagamento Pagamento { get; set; } //ef
         public decimal PrecoTotal => Agendamentos.Sum(x => x.Servico.Preco);
         public int DuracaoTotal => Agendamentos.Sum(x => x.Servico.DuracaoEmMin);
 
         private OrdemServico() { }
 
-        private OrdemServico(int id, Cliente cliente)
+        private OrdemServico(Cliente cliente)
         {
-            Id = id;
             Cliente = cliente;
         }
 
-        public static OrdemServico NovaOS(int idDaOS, Cliente clienteDaOS, List<Agendamento> agendamentosIniciaisDaOS)
+        public static OrdemServico NovaOS(Cliente clienteDaOS)
         {
-            if (clienteDaOS != null &&
-                agendamentosIniciaisDaOS != null &&
-                agendamentosIniciaisDaOS.Count > 0 &&
-                !agendamentosIniciaisDaOS.Any(x => x == null))
+            if (clienteDaOS != null)
             {
-                var os = new OrdemServico(idDaOS, clienteDaOS);
-                os.Agendamentos = agendamentosIniciaisDaOS;
+                var os = new OrdemServico(clienteDaOS);
                 return os;
             }
 
@@ -59,28 +54,5 @@ namespace TechBeauty.Dominio.Modelo
         public Agendamento ObterAgendamentoPorId(int id) {
             return Agendamentos.FirstOrDefault(x => x.Id == id);
         }
-
-
-        public bool RemoverAgendamento(int id)
-        {
-            if (Agendamentos.Count > 1)
-            {
-                Agendamentos.Remove(ObterAgendamentoPorId(id));
-                return true;
-            }
-            return false;
-        }
-
-        public bool RemoverAgendamento(Agendamento agendamentoAntigo)
-        {
-            if (Agendamentos.Count > 1)
-            {
-                Agendamentos.Remove(agendamentoAntigo);
-                return true;
-            }
-
-            return false;
-        }
-
     }
 }
