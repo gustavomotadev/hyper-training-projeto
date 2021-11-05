@@ -10,8 +10,8 @@ namespace TechBeauty.Dominio.Financeiro
         public static decimal PercentualEncargos { get; private set; } = 55.06M;
         public static decimal PercentualSimplesNacional { get; private set; } = 0.06M;
         public int Id { get; init; }
-        public List<Pagamento> Pagamentos { get; init; }
-        public List<RemuneracaoDiaria> Remuneracoes { get; init; }
+        public List<Pagamento> Pagamentos { get; init; } = new List<Pagamento>();
+        public List<RemuneracaoDiaria> Remuneracoes { get; init; } = new List<RemuneracaoDiaria>();
         public DateTime Data { get; init; }
         public decimal TotalSalario { get; init; }
         public decimal TotalComissao { get; init; }
@@ -24,11 +24,9 @@ namespace TechBeauty.Dominio.Financeiro
 
         private CaixaDiario() { }
 
-        private CaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes, decimal custoFixo)
+        private CaixaDiario(DateTime data, decimal custoFixo)
         {
             Data = data;
-            Pagamentos = pagamentos;
-            Remuneracoes = remuneracoes;
             CustoFixo = custoFixo;
 
             TotalSalario = CalcularTotalSalario();
@@ -40,17 +38,24 @@ namespace TechBeauty.Dominio.Financeiro
             ReceitaLiquida = CalcularReceitaLiquida();
         }
 
-        public CaixaDiario NovoCaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes, decimal custoFixo)
+        private CaixaDiario(DateTime data)
         {
-            if (pagamentos != null &&
-                pagamentos.Count > 0 &&
-                !pagamentos.Any(x => x == null) &&
-                remuneracoes != null &&
-                remuneracoes.Count > 0 &&
-                !remuneracoes.Any(x => x == null) &&
-                custoFixo >= 0)
+            Data = data;
+
+            TotalSalario = CalcularTotalSalario();
+            TotalComissao = CalcularTotalComissao();
+            TotalHoraExtra = CalcularTotalHoraExtra();
+            EncargosTrabalhistas = CalcularEncargosTrabalhistas();
+            SimplesNacional = CalcularSimplesNacional();
+            ReceitaBruta = CalcularReceitaBruta();
+            ReceitaLiquida = CalcularReceitaLiquida();
+        }
+
+        public static CaixaDiario NovoCaixaDiario(DateTime data, decimal custoFixo)
+        {
+            if (custoFixo >= 0)
             {
-                return new CaixaDiario(data, pagamentos, remuneracoes, custoFixo);
+                return new CaixaDiario(data, custoFixo);
             }
             else
             {
@@ -58,21 +63,11 @@ namespace TechBeauty.Dominio.Financeiro
             }
         }
 
-        public CaixaDiario NovoCaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes)
+        public CaixaDiario NovoCaixaDiario(DateTime data)
         {
-            if (pagamentos != null &&
-                pagamentos.Count > 0 &&
-                !pagamentos.Any(x => x == null) &&
-                remuneracoes != null &&
-                remuneracoes.Count > 0 &&
-                !remuneracoes.Any(x => x == null))
-            {
-                return new CaixaDiario(data, pagamentos, remuneracoes, CustoFixoPadrao);
-            }
-            else
-            {
-                return null;
-            }
+            
+            return new CaixaDiario(data, CustoFixoPadrao);
+            
         }
 
         private decimal CalcularTotalSalario()
