@@ -15,19 +15,18 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime? DataDesligamento { get; private set; }
         public List<Cargo> Cargos { get; set; } //ef
         public string CNPJ_CTPS { get; init; }
-        public bool Vigente { get; set; }
+        public bool Vigente { get; set; } = true;
 
         private ContratoTrabalho() { }
 
-        private ContratoTrabalho(int id, RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
+        private ContratoTrabalho(RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
         {
-            Id = id;
             RegimeContratual = regimeContratual;
             DataEntrada = dataEntrada;
             CNPJ_CTPS = cnpjCTPS;
         }
 
-        public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
+        public static ContratoTrabalho NovoContratoTrabalho(RegimeContratual regimeContratual, DateTime dataEntrada,
             DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
         {
             if (regimeContratual != null &&
@@ -37,7 +36,7 @@ namespace TechBeauty.Dominio.Modelo
                 !String.IsNullOrWhiteSpace(cnpjCTPS) &&
                 ((dataDesligamento != null && dataDesligamento > dataEntrada) || dataDesligamento == null))
             {
-                var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada, cnpjCTPS);
+                var contratoTrabalho = new ContratoTrabalho(regimeContratual, dataEntrada, cnpjCTPS);
                 contratoTrabalho.DataDesligamento = dataDesligamento;
                 contratoTrabalho.Cargos = cargos;
                 return contratoTrabalho;

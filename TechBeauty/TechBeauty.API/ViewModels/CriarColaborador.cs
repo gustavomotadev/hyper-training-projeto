@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using TechBeauty.Dominio.Financeiro;
-using TechBeauty.Dominio.Modelo;
-using TechBeauty.Dominio.Modelo.Enumeracoes;
 
 namespace TechBeauty.API.ViewModels
 {
@@ -67,8 +62,30 @@ namespace TechBeauty.API.ViewModels
         public string Cidade { get;  set; }
         public int? UF { get;  set; }
         public string Numero { get;  set; } = "s/n";
-        public string Complemento { get;  set; }
+        public string Complemento { get; set; } = "";
         public string CEP { get; set; }
-       
+
+        public bool validarEndereco()
+        {
+            if (EnderecoId is null)
+            {
+                if (Logradouro is null ||
+                    Bairro is null ||
+                    Cidade is null ||
+                    UF is null ||
+                    CEP is null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

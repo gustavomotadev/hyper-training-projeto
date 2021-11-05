@@ -14,7 +14,7 @@ namespace TechBeauty.Dominio.Modelo
         public int GeneroId { get; set; } //ef
         public Genero Genero { get; private set; }
         public string NomeSocial { get; private set; } = String.Empty;
-        public List<ContratoTrabalho> Contratos { get; private set; } //ef
+        public List<ContratoTrabalho> Contratos { get; private set; } = new List<ContratoTrabalho>(); //ef
         public List<Turno> Turnos { get; set; } //ef
         public List<Agendamento> Agendamentos { get; set; } //ef
         public PadraoRemuneracao PadraoRemuneracao { get; set; } //ef
@@ -22,16 +22,14 @@ namespace TechBeauty.Dominio.Modelo
 
         private Colaborador() { }
 
-        private Colaborador(int id, string cpf, DateTime dataNascimento)
+        private Colaborador(string cpf, DateTime dataNascimento)
         {
-            Id = id;
             CPF = cpf;
             DataNascimento = dataNascimento;
-            
         }
 
-        public static Colaborador NovoColaborador(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, string carteiraDeTrabalho, List<Servico> servicos, Endereco endereco,
+        public static Colaborador NovoColaborador(string nome, string cpf, DateTime dataNascimento, 
+            List<Contato> contatos, List<Servico> servicos, Endereco endereco,
             Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
@@ -41,7 +39,6 @@ namespace TechBeauty.Dominio.Modelo
                 contatos != null &&
                 contatos.Count > 0 &&
                 !contatos.Any(x => x == null) &&
-                !String.IsNullOrWhiteSpace(carteiraDeTrabalho) &&
                 servicos != null &&
                 servicos.Count > 0 &&
                 !servicos.Any(x => x == null) &&
@@ -50,7 +47,7 @@ namespace TechBeauty.Dominio.Modelo
                 contrato != null &&
                 contrato.Vigente)
             {
-                var colaborador = new Colaborador(idColaborador, cpf, dataNascimento);
+                var colaborador = new Colaborador(cpf, dataNascimento);
                 colaborador.Nome = nome;
                 colaborador.Contatos = contatos;
                 colaborador.Servicos = servicos;

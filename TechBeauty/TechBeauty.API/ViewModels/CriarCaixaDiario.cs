@@ -11,8 +11,6 @@ namespace TechBeauty.API.ViewModels
         [Required]
         public DateTime Data { get; set; }
                
-        public decimal CustoFixo { get; set; }
-
-
+        public decimal? CustoFixo { get; set; }
     }
 }

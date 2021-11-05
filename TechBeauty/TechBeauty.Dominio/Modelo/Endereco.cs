@@ -19,17 +19,12 @@ namespace TechBeauty.Dominio.Modelo
 
         private Endereco() { }
 
-        private Endereco(int id)
-        {
-            Id = id;
-        }
-
         public static bool ValidarCEP(string cep)
         {
             return Regex.IsMatch(cep, @"^\d{8}$");
         }
 
-        public static Endereco NovoEndereco(int idEndereco, string logradouro, string bairro,
+        public static Endereco NovoEndereco(string logradouro, string bairro,
             string cidade, UnidadeFederativa uf, string cep, string numero = "s/n", string complemento = null)
         {
             if (!String.IsNullOrWhiteSpace(logradouro) &&
@@ -38,7 +33,7 @@ namespace TechBeauty.Dominio.Modelo
                 !String.IsNullOrWhiteSpace(cep) &&
                 ValidarCEP(cep))
             {
-                var endereco = new Endereco(idEndereco);
+                var endereco = new Endereco();
                 endereco.Logradouro = logradouro;
                 if (String.IsNullOrWhiteSpace(numero))
                 {

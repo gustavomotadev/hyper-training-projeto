@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TechBeauty.API.ViewModels;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Financeiro;
@@ -35,7 +31,7 @@ namespace TechBeauty.API.Controladores //TO DO
         {
             if (!ModelState.IsValid) return BadRequest();
             
-            var novo = CaixaDiario.NovoCaixaDiario(viewModel.Data, viewModel.CustoFixo);
+            var novo = CaixaDiario.NovoCaixaDiario(viewModel.Data.Date, viewModel.CustoFixo);
 
             RepositorioDominio.CaixaDiario.Incluir(novo);
 
