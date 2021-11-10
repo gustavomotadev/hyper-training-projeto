@@ -10,7 +10,7 @@ namespace TechBeauty.Dominio.Modelo
         public string Nome { get; protected set; }
         public string CPF { get; protected init; }
         public DateTime DataNascimento { get; protected init; }
-        public List<Contato> Contatos { get; protected set; }
+        public List<Contato> Contatos { get; protected set; } = new List<Contato>();
 
         protected Pessoa() { }
 

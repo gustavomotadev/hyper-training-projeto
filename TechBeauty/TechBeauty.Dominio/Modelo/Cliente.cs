@@ -6,7 +6,7 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Cliente : Pessoa
     {
-        public List<OrdemServico> OrdensServicos { get; set; } //EF
+        public List<OrdemServico> OrdensServicos { get; set; } = new List<OrdemServico>(); //EF
 
         private Cliente() { }
 

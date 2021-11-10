@@ -15,7 +15,7 @@ namespace TechBeauty.Dominio.Modelo
         public string Numero { get; private set; } = "s/n";
         public string Complemento { get; private set; }
         public string CEP { get; set; }
-        public List<Colaborador> Colaboradores { get; set; } //ef
+        public List<Colaborador> Colaboradores { get; set; } = new List<Colaborador>(); //ef
 
         private Endereco() { }
 
