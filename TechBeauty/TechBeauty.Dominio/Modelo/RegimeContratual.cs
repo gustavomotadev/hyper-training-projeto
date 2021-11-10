@@ -7,7 +7,7 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; init; }
         public string Valor { get; init; }
-        public List<ContratoTrabalho> ContratosDeTrabalho { get; set; } //ef
+        public List<ContratoTrabalho> ContratosDeTrabalho { get; set; } = new List<ContratoTrabalho>(); //ef
 
         private RegimeContratual() { }
 

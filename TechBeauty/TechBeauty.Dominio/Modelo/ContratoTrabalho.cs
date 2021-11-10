@@ -13,7 +13,7 @@ namespace TechBeauty.Dominio.Modelo
         public Colaborador Colaborador { get; init; }
         public DateTime DataEntrada { get; init; }
         public DateTime? DataDesligamento { get; private set; }
-        public List<Cargo> Cargos { get; set; } //ef
+        public List<Cargo> Cargos { get; set; } = new List<Cargo>(); //ef
         public string CNPJ_CTPS { get; init; }
         public bool Vigente { get; set; } = true;
 

@@ -15,10 +15,10 @@ namespace TechBeauty.Dominio.Modelo
         public Genero Genero { get; private set; }
         public string NomeSocial { get; private set; } = String.Empty;
         public List<ContratoTrabalho> Contratos { get; private set; } = new List<ContratoTrabalho>(); //ef
-        public List<Turno> Turnos { get; set; } //ef
-        public List<Agendamento> Agendamentos { get; set; } //ef
+        public List<Turno> Turnos { get; set; } = new List<Turno>();  //ef
+        public List<Agendamento> Agendamentos { get; set; } = new List<Agendamento>(); //ef
         public PadraoRemuneracao PadraoRemuneracao { get; set; } //ef
-        public List<RemuneracaoDiaria> Remuneracoes { get; set; } //ef
+        public List<RemuneracaoDiaria> Remuneracoes { get; set; } = new List<RemuneracaoDiaria>(); //ef
 
         private Colaborador() { }
 
