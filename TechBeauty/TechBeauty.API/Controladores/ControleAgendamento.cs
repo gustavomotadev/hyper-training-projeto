@@ -29,7 +29,7 @@ namespace TechBeauty.API.Controladores
             if (escolhido is not null) return Ok(escolhido);
             else return NotFound();
         }
-
+        
         // TO DO - Cosntrutor de Agendamento.
         /*[HttpPost(template: "Agendamento")]
         public IActionResult Post([FromBody] CriarAgendamento viewModel)
