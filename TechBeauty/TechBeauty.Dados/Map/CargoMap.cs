@@ -21,7 +21,7 @@ namespace TechBeauty.Dados.Map
                 .IsRequired();
 
             builder.HasMany<ContratoTrabalho>
-                (c => c.ContratosTrabalhos)
+                (c => c.Contratos)
                 .WithMany(ct => ct.Cargos);
         }
     }

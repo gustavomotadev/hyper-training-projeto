@@ -37,19 +37,6 @@ namespace TechBeauty.API.Controladores
                 !viewModel.validarEndereco()) 
                 return BadRequest();
 
-            ///*
-
-            /*
-            var servicos = new List<Servico>();
-            Servico servico = null;
-            foreach (var servicoId in viewModel.IdServicos)
-            {
-                servico = RepositorioDominio.Servico.SelecionarPorChave(servicoId);
-                if (servico is null) return BadRequest();
-                servicos.Add(servico);
-            }
-            */
-
             Endereco endereco = null;
             if (viewModel.EnderecoId is not null)
             {
@@ -68,7 +55,18 @@ namespace TechBeauty.API.Controladores
             var regime = RepositorioDominio.RegimeContratual.SelecionarPorChave(viewModel.RegimeContratualId);
             if (regime is null) return BadRequest();
 
-            /*
+            //////////////////
+            var servicos = new List<Servico>();
+            Servico servico = null;
+            foreach (var servicoId in viewModel.IdServicos)
+            {
+                servico = RepositorioDominio.Servico.SelecionarPorChave(servicoId);
+                if (servico is null) return BadRequest();
+                servicos.Add(servico);
+            }
+            //////////////////
+
+            //////////////////
             var cargos = new List<Cargo>();
             Cargo cargo = null;
             foreach (var cargoId in viewModel.IdCargos)
@@ -77,20 +75,17 @@ namespace TechBeauty.API.Controladores
                 if (cargo is null) return BadRequest();
                 cargos.Add(cargo);
             }
-            */
+            //////////////////
 
-            //if (novo is null) return NotFound();
-
-            ///*
             RepositorioDominio.Endereco.Incluir(endereco);
 
             var novo = Colaborador.NovoColaborador(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento.Date,
-                null, null, endereco.Id, viewModel.GeneroId, viewModel.NomeSocial);
+                null, servicos, endereco.Id, viewModel.GeneroId, viewModel.NomeSocial);
 
             RepositorioDominio.Colaborador.Incluir(novo);
 
             var contrato = ContratoTrabalho.NovoContratoTrabalho(viewModel.RegimeContratualId, viewModel.DataEntrada,
-                viewModel.DataDesligamento, null, viewModel.CNPJ_CTPS, novo.Id);
+                viewModel.DataDesligamento, cargos, viewModel.CNPJ_CTPS, novo.Id);
 
             RepositorioDominio.ContratoTrabalho.Incluir(contrato);
 
@@ -123,13 +118,32 @@ namespace TechBeauty.API.Controladores
             {
                 RepositorioDominio.Contato.Incluir(c);
             }
-            
+
+            /*
+            //var servicos = new List<Servico>();
+            Servico servico = null;
+            foreach (var servicoId in viewModel.IdServicos)
+            {
+                servico = RepositorioDominio.Servico.SelecionarPorChave(servicoId);
+                if (servico is null) return BadRequest();
+                //servicos.Add(servico);
+                servico.Colaboradores.Add(novo);
+            }
+            RepositorioDominio.Servico.SalvarAlteracoes();
+
+            //var cargos = new List<Cargo>();
+            Cargo cargo = null;
+            foreach (var cargoId in viewModel.IdCargos)
+            {
+                cargo = RepositorioDominio.Cargo.SelecionarPorChave(cargoId);
+                if (cargo is null) return BadRequest();
+                //cargos.Add(cargo);
+                cargo.Contratos.Add(contrato);
+            }
+            RepositorioDominio.Cargo.SalvarAlteracoes();
+            */
 
             return Created(uri: $"TechBeautyV1/Colaborador/{novo.Id}", novo);
-            //*/
-            //*/
-
-            //return Ok(); //debug
         }
 
         [HttpDelete(template: "Colaborador/{id}")]

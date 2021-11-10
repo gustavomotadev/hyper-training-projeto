@@ -25,7 +25,7 @@ namespace TechBeauty.Dados.Map
 
             builder.HasMany<Cargo>
                 (ct => ct.Cargos)
-                .WithMany(c => c.ContratosTrabalhos);
+                .WithMany(c => c.Contratos);
 
         }
     }

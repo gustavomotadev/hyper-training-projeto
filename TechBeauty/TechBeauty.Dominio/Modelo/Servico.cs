@@ -11,9 +11,9 @@ namespace TechBeauty.Dominio.Modelo
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
-        public List<Agendamento> Agendamentos { get; set; } //ef
-        public List<Colaborador> Colaboradores { get; set; } //ef
-        public List<RemuneracaoDiaria> Remuneracoes { get; set; } //ef
+        public List<Agendamento> Agendamentos { get; set; } = new List<Agendamento>(); //ef
+        public List<Colaborador> Colaboradores { get; set; } = new List<Colaborador>(); //ef
+        public List<RemuneracaoDiaria> Remuneracoes { get; set; } = new List<RemuneracaoDiaria>(); //ef
 
         private Servico() { }
         public static Servico NovoServico(string nome, decimal preco, string descricao, int duracaoEmMin)

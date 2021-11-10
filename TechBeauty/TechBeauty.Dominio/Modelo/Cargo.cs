@@ -8,7 +8,7 @@ namespace TechBeauty.Dominio.Modelo
         public int Id { get; init; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public List<ContratoTrabalho> ContratosTrabalhos { get; set; } //ef
+        public List<ContratoTrabalho> Contratos { get; set; } = new List<ContratoTrabalho>(); //ef
 
         private Cargo() { }
 
