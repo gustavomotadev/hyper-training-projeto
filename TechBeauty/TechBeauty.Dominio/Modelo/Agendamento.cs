@@ -24,27 +24,22 @@ namespace TechBeauty.Dominio.Modelo
 
         private Agendamento() { }
 
-        private Agendamento(Servico servico, Colaborador colaborador, string pessoaAtendida,
+        private Agendamento(int servicoId, int colaboradorId, string pessoaAtendida,
           DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
-            Servico = servico;
-            Colaborador = colaborador;
+            ServicoId = servicoId;
+            ColaboradorId = colaboradorId;
             PessoaAtendida = pessoaAtendida;
             DataHoraCriacao = dataHoraCriacao;
             DataHoraExecucao = dataHoraExecucao;
         }
 
-        public static Agendamento NovoAgendamento(Servico servico, Colaborador colaborador, 
+        public static Agendamento NovoAgendamento(int servicoId, int colaboradorId, 
             string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
-            if (servico != null &&
-                colaborador != null &&
-                pessoaAtendida != null &&
-                colaborador.Servicos.Any(x => x.Id == servico.Id) &&
-                !String.IsNullOrWhiteSpace(pessoaAtendida) &&
-                dataHoraExecucao.AddMinutes(servico.DuracaoEmMin).Date == dataHoraExecucao.Date)
+            if (!String.IsNullOrWhiteSpace(pessoaAtendida))
             {
-                return new Agendamento(servico, colaborador, pessoaAtendida,
+                return new Agendamento(servicoId, colaboradorId, pessoaAtendida,
                     dataHoraCriacao, dataHoraExecucao);
             }
             else
