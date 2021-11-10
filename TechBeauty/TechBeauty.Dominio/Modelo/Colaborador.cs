@@ -29,30 +29,20 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static Colaborador NovoColaborador(string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, List<Servico> servicos, Endereco endereco,
-            Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
+            List<Contato> contatos, List<Servico> servicos, int enderecoId,
+            int generoId, string nomeSocial = null)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
                 !String.IsNullOrWhiteSpace(cpf) &&
                 Pessoa.ObterIdade(dataNascimento) >= 18 &&
-                Pessoa.ObterIdade(dataNascimento) <= 100 &&
-                contatos != null &&
-                contatos.Count > 0 &&
-                !contatos.Any(x => x == null) &&
-                servicos != null &&
-                servicos.Count > 0 &&
-                !servicos.Any(x => x == null) &&
-                endereco != null &&
-                genero != null &&
-                contrato != null &&
-                contrato.Vigente)
+                Pessoa.ObterIdade(dataNascimento) <= 100)
             {
                 var colaborador = new Colaborador(cpf, dataNascimento);
                 colaborador.Nome = nome;
                 colaborador.Contatos = contatos;
                 colaborador.Servicos = servicos;
-                colaborador.Endereco = endereco;
-                colaborador.Genero = genero;
+                colaborador.EnderecoId = enderecoId;
+                colaborador.GeneroId = generoId;
                 if (String.IsNullOrEmpty(nomeSocial))
                 {
                     colaborador.NomeSocial = String.Empty;
@@ -61,7 +51,7 @@ namespace TechBeauty.Dominio.Modelo
                 {
                     colaborador.NomeSocial = nomeSocial;
                 }
-                colaborador.Contratos.Add(contrato);
+                //colaborador.Contratos.Add(contrato);
                 return colaborador;
             }
             else

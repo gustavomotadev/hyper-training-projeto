@@ -44,6 +44,8 @@ namespace TechBeauty.API.Controladores
             RepositorioDominio.Expediente.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Expediente/{novo.Id}", novo);*/
+
+            return Ok(); //todo
         }
 
         [HttpDelete(template: "Expediente/{id}")]

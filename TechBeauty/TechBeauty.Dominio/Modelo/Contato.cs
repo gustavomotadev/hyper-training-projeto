@@ -13,18 +13,18 @@ namespace TechBeauty.Dominio.Modelo
 
         private Contato() { }
 
-        private Contato(TipoContato tipo)
+        private Contato(int tipoContatoId)
         {
-            TipoContato = tipo;
+            TipoContatoId = tipoContatoId;
         }
 
-        public static Contato NovoContato(TipoContato tipo, string valor)
+        public static Contato NovoContato(int tipoContatoId, string valor, int pessoaId)
         {
-            if (tipo != null &&
-                !String.IsNullOrWhiteSpace(valor))
+            if (!String.IsNullOrWhiteSpace(valor))
             {
-                var contato = new Contato(tipo);
+                var contato = new Contato(tipoContatoId);
                 contato.Valor = valor;
+                contato.PessoaId = pessoaId;
                 return contato;
             }
             else

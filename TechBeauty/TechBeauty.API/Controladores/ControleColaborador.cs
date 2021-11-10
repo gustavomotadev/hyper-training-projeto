@@ -38,31 +38,8 @@ namespace TechBeauty.API.Controladores
                 return BadRequest();
 
             ///*
-            var contatos = new List<Contato>();
 
-            var tipoContato = RepositorioDominio.TipoContato.SelecionarPorChave(viewModel.TipoContato1Id);
-            if (tipoContato is null) return BadRequest();
-            var contato = Contato.NovoContato(tipoContato, viewModel.Contato1);
-            contatos.Add(contato);
-
-            if (viewModel.TipoContato2Id is not null &&
-                viewModel.Contato2 is not null)
-            {
-                tipoContato = RepositorioDominio.TipoContato.SelecionarPorChave(viewModel.TipoContato2Id);
-                if (tipoContato is null) return BadRequest();
-                contato = Contato.NovoContato(tipoContato, viewModel.Contato2);
-                contatos.Add(contato);
-            }
-
-            if (viewModel.TipoContato3Id is not null &&
-                viewModel.Contato3 is not null)
-            {
-                tipoContato = RepositorioDominio.TipoContato.SelecionarPorChave(viewModel.TipoContato3Id);
-                if (tipoContato is null) return BadRequest();
-                contato = Contato.NovoContato(tipoContato, viewModel.Contato3);
-                contatos.Add(contato);
-            }
-
+            /*
             var servicos = new List<Servico>();
             Servico servico = null;
             foreach (var servicoId in viewModel.IdServicos)
@@ -71,6 +48,7 @@ namespace TechBeauty.API.Controladores
                 if (servico is null) return BadRequest();
                 servicos.Add(servico);
             }
+            */
 
             Endereco endereco = null;
             if (viewModel.EnderecoId is not null)
@@ -90,6 +68,7 @@ namespace TechBeauty.API.Controladores
             var regime = RepositorioDominio.RegimeContratual.SelecionarPorChave(viewModel.RegimeContratualId);
             if (regime is null) return BadRequest();
 
+            /*
             var cargos = new List<Cargo>();
             Cargo cargo = null;
             foreach (var cargoId in viewModel.IdCargos)
@@ -98,21 +77,47 @@ namespace TechBeauty.API.Controladores
                 if (cargo is null) return BadRequest();
                 cargos.Add(cargo);
             }
-
-            var contrato = ContratoTrabalho.NovoContratoTrabalho(regime, viewModel.DataEntrada, 
-                viewModel.DataDesligamento, cargos, viewModel.CNPJ_CTPS);
-
-            var novo = Colaborador.NovoColaborador(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento.Date, 
-                contatos, servicos, endereco, genero, contrato, viewModel.NomeSocial);
+            */
 
             //if (novo is null) return NotFound();
 
             ///*
             RepositorioDominio.Endereco.Incluir(endereco);
 
+            var novo = Colaborador.NovoColaborador(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento.Date,
+                null, null, endereco.Id, viewModel.GeneroId, viewModel.NomeSocial);
+
             RepositorioDominio.Colaborador.Incluir(novo);
 
+            var contrato = ContratoTrabalho.NovoContratoTrabalho(viewModel.RegimeContratualId, viewModel.DataEntrada,
+                viewModel.DataDesligamento, null, viewModel.CNPJ_CTPS, novo.Id);
+
             RepositorioDominio.ContratoTrabalho.Incluir(contrato);
+
+            var contatos = new List<Contato>();
+
+            var tipoContato = RepositorioDominio.TipoContato.SelecionarPorChave(viewModel.TipoContato1Id);
+            if (tipoContato is null) return BadRequest();
+            var contato = Contato.NovoContato(viewModel.TipoContato1Id, viewModel.Contato1, novo.Id); //final
+            contatos.Add(contato);
+
+            if (viewModel.TipoContato2Id is not null &&
+                viewModel.Contato2 is not null)
+            {
+                tipoContato = RepositorioDominio.TipoContato.SelecionarPorChave(viewModel.TipoContato2Id);
+                if (tipoContato is null) return BadRequest();
+                contato = Contato.NovoContato((int) viewModel.TipoContato2Id, viewModel.Contato2, novo.Id); //final
+                contatos.Add(contato);
+            }
+
+            if (viewModel.TipoContato3Id is not null &&
+                viewModel.Contato3 is not null)
+            {
+                tipoContato = RepositorioDominio.TipoContato.SelecionarPorChave(viewModel.TipoContato3Id);
+                if (tipoContato is null) return BadRequest();
+                contato = Contato.NovoContato((int) viewModel.TipoContato3Id, viewModel.Contato3, novo.Id); //final
+                contatos.Add(contato);
+            }
 
             foreach (var c in contatos)
             {

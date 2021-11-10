@@ -19,26 +19,23 @@ namespace TechBeauty.Dominio.Modelo
 
         private ContratoTrabalho() { }
 
-        private ContratoTrabalho(RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
+        private ContratoTrabalho(int regimeContratualId, DateTime dataEntrada, string cnpjCTPS)
         {
-            RegimeContratual = regimeContratual;
+            RegimeContratualId = regimeContratualId;
             DataEntrada = dataEntrada;
             CNPJ_CTPS = cnpjCTPS;
         }
 
-        public static ContratoTrabalho NovoContratoTrabalho(RegimeContratual regimeContratual, DateTime dataEntrada,
-            DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS)
+        public static ContratoTrabalho NovoContratoTrabalho(int regimeContratualId, DateTime dataEntrada,
+            DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS, int colaboradorId)
         {
-            if (regimeContratual != null &&
-                cargos != null &&
-                cargos.Count > 0 &&
-                !cargos.Any(x => x == null) &&
-                !String.IsNullOrWhiteSpace(cnpjCTPS) &&
+            if (!String.IsNullOrWhiteSpace(cnpjCTPS) &&
                 ((dataDesligamento != null && dataDesligamento > dataEntrada) || dataDesligamento == null))
             {
-                var contratoTrabalho = new ContratoTrabalho(regimeContratual, dataEntrada, cnpjCTPS);
+                var contratoTrabalho = new ContratoTrabalho(regimeContratualId, dataEntrada, cnpjCTPS);
                 contratoTrabalho.DataDesligamento = dataDesligamento;
                 contratoTrabalho.Cargos = cargos;
+                contratoTrabalho.ColaboradorId = colaboradorId;
                 return contratoTrabalho;
             }
             else
