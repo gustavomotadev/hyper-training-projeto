@@ -41,15 +41,7 @@ namespace TechBeauty.Dominio.Financeiro
 
         public static CaixaDiario NovoCaixaDiario(DateTime data, decimal? custoFixo)
         {
-            if (custoFixo == null ||
-                custoFixo >= 0)
-            {
                 return new CaixaDiario(data, custoFixo);
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public bool AdicionarPagamento(Pagamento pagamento)

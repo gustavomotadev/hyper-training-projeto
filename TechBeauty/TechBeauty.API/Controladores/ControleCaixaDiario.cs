@@ -29,7 +29,7 @@ namespace TechBeauty.API.Controladores //TO DO
         [HttpPost(template: "CaixaDiario")] //TO DO
         public IActionResult Post([FromBody] CriarCaixaDiario viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
             
             var novo = CaixaDiario.NovoCaixaDiario(viewModel.Data.Date, viewModel.CustoFixo);
 
