@@ -35,7 +35,7 @@ namespace TechBeauty.API.Controladores
 
             if (cliente is null) return BadRequest();
 
-            var novo = OrdemServico.NovaOS(cliente);
+            var novo = OrdemServico.NovaOS(viewModel.ClienteId);
 
             RepositorioDominio.OrdemServico.Incluir(novo);
 

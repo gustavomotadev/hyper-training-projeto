@@ -55,37 +55,15 @@ namespace TechBeauty.API.Controladores
             var regime = RepositorioDominio.RegimeContratual.SelecionarPorChave(viewModel.RegimeContratualId);
             if (regime is null) return BadRequest();
 
-            //////////////////
-            var servicos = new List<Servico>();
-            Servico servico = null;
-            foreach (var servicoId in viewModel.IdServicos)
-            {
-                servico = RepositorioDominio.Servico.SelecionarPorChave(servicoId);
-                if (servico is null) return BadRequest();
-                servicos.Add(servico);
-            }
-            //////////////////
-
-            //////////////////
-            var cargos = new List<Cargo>();
-            Cargo cargo = null;
-            foreach (var cargoId in viewModel.IdCargos)
-            {
-                cargo = RepositorioDominio.Cargo.SelecionarPorChave(cargoId);
-                if (cargo is null) return BadRequest();
-                cargos.Add(cargo);
-            }
-            //////////////////
-
             RepositorioDominio.Endereco.Incluir(endereco);
 
             var novo = Colaborador.NovoColaborador(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento.Date,
-                null, servicos, endereco.Id, viewModel.GeneroId, viewModel.NomeSocial);
+                null, null, endereco.Id, viewModel.GeneroId, viewModel.NomeSocial);
 
             RepositorioDominio.Colaborador.Incluir(novo);
 
             var contrato = ContratoTrabalho.NovoContratoTrabalho(viewModel.RegimeContratualId, viewModel.DataEntrada,
-                viewModel.DataDesligamento, cargos, viewModel.CNPJ_CTPS, novo.Id);
+                viewModel.DataDesligamento, null, viewModel.CNPJ_CTPS, novo.Id);
 
             RepositorioDominio.ContratoTrabalho.Incluir(contrato);
 
@@ -119,29 +97,27 @@ namespace TechBeauty.API.Controladores
                 RepositorioDominio.Contato.Incluir(c);
             }
 
-            /*
-            //var servicos = new List<Servico>();
+            var servicos = new List<Servico>();
             Servico servico = null;
             foreach (var servicoId in viewModel.IdServicos)
             {
                 servico = RepositorioDominio.Servico.SelecionarPorChave(servicoId);
                 if (servico is null) return BadRequest();
-                //servicos.Add(servico);
-                servico.Colaboradores.Add(novo);
+                servicos.Add(servico);
             }
-            RepositorioDominio.Servico.SalvarAlteracoes();
+            novo.Servicos = servicos;
+            RepositorioDominio.Colaborador.Alterar(novo);
 
-            //var cargos = new List<Cargo>();
+            var cargos = new List<Cargo>();
             Cargo cargo = null;
             foreach (var cargoId in viewModel.IdCargos)
             {
                 cargo = RepositorioDominio.Cargo.SelecionarPorChave(cargoId);
                 if (cargo is null) return BadRequest();
-                //cargos.Add(cargo);
-                cargo.Contratos.Add(contrato);
+                cargos.Add(cargo);
             }
-            RepositorioDominio.Cargo.SalvarAlteracoes();
-            */
+            contrato.Cargos = cargos;
+            RepositorioDominio.ContratoTrabalho.Alterar(contrato);
 
             return Created(uri: $"TechBeautyV1/Colaborador/{novo.Id}", novo);
         }

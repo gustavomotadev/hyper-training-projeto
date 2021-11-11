@@ -35,7 +35,7 @@ namespace TechBeauty.API.ViewModels
             if (!ModelState.IsValid) return BadRequest();
             var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(viewModel.ColaboradorId);
             if (colaborador is null) return BadRequest();
-            var novo = Turno.NovoTurno(viewModel.DataHoraEntrada, viewModel.DataHoraSaida, colaborador);
+            var novo = Turno.NovoTurno(viewModel.DataHoraEntrada, viewModel.DataHoraSaida, viewModel.ColaboradorId);
 
             RepositorioDominio.Turno.Incluir(novo);
 
