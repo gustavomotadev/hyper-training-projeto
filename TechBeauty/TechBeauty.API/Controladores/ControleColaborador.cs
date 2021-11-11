@@ -57,12 +57,12 @@ namespace TechBeauty.API.Controladores
             RepositorioDominio.Endereco.Incluir(endereco);
 
             var novo = Colaborador.NovoColaborador(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento.Date,
-                null, null, endereco.Id, viewModel.GeneroId, viewModel.NomeSocial);
+                endereco.Id, viewModel.GeneroId, viewModel.NomeSocial);
 
             RepositorioDominio.Colaborador.Incluir(novo);
 
             var contrato = ContratoTrabalho.NovoContratoTrabalho(viewModel.RegimeContratualId, viewModel.DataEntrada,
-                viewModel.DataDesligamento, null, viewModel.CNPJ_CTPS, novo.Id);
+                viewModel.DataDesligamento, viewModel.CNPJ_CTPS, novo.Id);
 
             RepositorioDominio.ContratoTrabalho.Incluir(contrato);
 
@@ -96,26 +96,28 @@ namespace TechBeauty.API.Controladores
                 RepositorioDominio.Contato.Incluir(c);
             }
 
-            var servicos = new List<Servico>();
+            //var servicos = new List<Servico>();
             Servico servico = null;
             foreach (var servicoId in viewModel.IdServicos)
             {
                 servico = RepositorioDominio.Servico.SelecionarPorChave(servicoId);
                 if (servico is null) return BadRequest();
-                servicos.Add(servico);
+                //servicos.Add(servico);
+                novo.AdicionarServico(servico);
             }
-            novo.Servicos = servicos;
+            //novo.Servicos = servicos;
             RepositorioDominio.Colaborador.Alterar(novo);
 
-            var cargos = new List<Cargo>();
+            //var cargos = new List<Cargo>();
             Cargo cargo = null;
             foreach (var cargoId in viewModel.IdCargos)
             {
                 cargo = RepositorioDominio.Cargo.SelecionarPorChave(cargoId);
                 if (cargo is null) return BadRequest();
-                cargos.Add(cargo);
+                //cargos.Add(cargo);
+                contrato.AdicionarCargo(cargo);
             }
-            contrato.Cargos = cargos;
+            //contrato.Cargos = cargos;
             RepositorioDominio.ContratoTrabalho.Alterar(contrato);
 
             var padraoRemuneracao = PadraoRemuneracao.NovoPadraoRemuneracao(novo.Id,

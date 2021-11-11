@@ -27,11 +27,10 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static ContratoTrabalho NovoContratoTrabalho(int regimeContratualId, DateTime dataEntrada,
-            DateTime? dataDesligamento, List<Cargo> cargos, string cnpjCTPS, int colaboradorId)
+            DateTime? dataDesligamento, string cnpjCTPS, int colaboradorId)
         {
             var contratoTrabalho = new ContratoTrabalho(regimeContratualId, dataEntrada, cnpjCTPS);
             contratoTrabalho.DataDesligamento = dataDesligamento;
-            contratoTrabalho.Cargos = cargos;
             contratoTrabalho.ColaboradorId = colaboradorId;
             return contratoTrabalho;
         }

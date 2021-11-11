@@ -8,7 +8,7 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Colaborador : Pessoa
     {
-        public List<Servico> Servicos { get; private set; } //ef
+        public List<Servico> Servicos { get; private set; } = new List<Servico>(); //ef
         public int EnderecoId { get; private set; } //ef
         public Endereco Endereco { get; private set; }
         public int GeneroId { get; private set; } //ef
@@ -29,13 +29,10 @@ namespace TechBeauty.Dominio.Modelo
         }
 
         public static Colaborador NovoColaborador(string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, List<Servico> servicos, int enderecoId,
-            int generoId, string nomeSocial = null)
+            int enderecoId, int generoId, string nomeSocial = null)
         {
             var colaborador = new Colaborador(cpf, dataNascimento);
             colaborador.Nome = nome;
-            colaborador.Contatos = contatos;
-            colaborador.Servicos = servicos;
             colaborador.EnderecoId = enderecoId;
             colaborador.GeneroId = generoId;
             if (String.IsNullOrEmpty(nomeSocial))
