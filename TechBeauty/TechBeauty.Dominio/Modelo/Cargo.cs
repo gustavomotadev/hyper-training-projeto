@@ -16,18 +16,10 @@ namespace TechBeauty.Dominio.Modelo
 
         public static Cargo NovoCargo(string nome, string descricao)
         {
-            if (!String.IsNullOrWhiteSpace(nome) &&
-                !String.IsNullOrWhiteSpace(descricao))
-            {
-                var cargo = new Cargo();
-                cargo.Nome = nome;
-                cargo.Descricao = descricao;
-                return cargo;
-            }
-            else
-            {
-                return null;
-            }
+            var cargo = new Cargo();
+            cargo.Nome = nome;
+            cargo.Descricao = descricao;
+            return cargo;
         }
 
         public bool AlterarNome(string nome)

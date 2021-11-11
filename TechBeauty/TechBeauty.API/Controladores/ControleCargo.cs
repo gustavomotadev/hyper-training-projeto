@@ -40,7 +40,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Cargo")]
         public IActionResult Post([FromBody] CriarCargo viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = Cargo.NovoCargo(viewModel.Nome, viewModel.Descricao);
 
