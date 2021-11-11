@@ -45,7 +45,7 @@ namespace TechBeauty.API.Controladores
             if (caixaDiario is null) return BadRequest();
 
             var novo = RemuneracaoDiaria.NovaRemuneracaoDiaria(viewModel.CaixaDiarioId, viewModel.ColaboradorId, 
-                new TimeSpan(viewModel.HorasTrabalhadas.horas, viewModel.HorasTrabalhadas.minutos, 0));
+                new TimeSpan(viewModel.HorasTrabalhadas.Horas, viewModel.HorasTrabalhadas.Minutos, 0));
 
             RepositorioDominio.RemuneracaoDiaria.Incluir(novo);
 

@@ -5,8 +5,8 @@ namespace TechBeauty.API.ViewModels.Criacao
     public class CriarTimeSpan
     {
         [Required]
-        public int horas { get; }
+        public int Horas { get; }
         [Required]
-        public int minutos { get; }
+        public int Minutos { get; }
     }
 }

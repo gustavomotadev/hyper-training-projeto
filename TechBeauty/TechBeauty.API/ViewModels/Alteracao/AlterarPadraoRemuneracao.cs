@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dominio.Financeiro;
 
 namespace TechBeauty.API.ViewModels.Alteracao
 {
     public class AlterarPadraoRemuneracao
     {
-        public TimeSpan? JornadaEsperada { get; set; }
+        public CriarTimeSpan JornadaEsperada { get; set; }
         public decimal? SalarioHora { get; set; }
         public decimal? PercentualComissao { get; set; }
         public decimal? AdicionalHoraExtra { get; set; }
@@ -16,7 +17,8 @@ namespace TechBeauty.API.ViewModels.Alteracao
         public bool ValidarJornadaEsperada()
         {
             return (JornadaEsperada is not null &&
-                JornadaEsperada <= PadraoRemuneracao.JornadaMaxima);
+                new TimeSpan(JornadaEsperada.Horas, JornadaEsperada.Minutos, 0) 
+                <= PadraoRemuneracao.JornadaMaxima);
         }
 
         public bool ValidarSalarioHora()

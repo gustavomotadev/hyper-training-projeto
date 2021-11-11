@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TechBeauty.Dados.Interfaces
 {
@@ -11,5 +12,7 @@ namespace TechBeauty.Dados.Interfaces
         void Excluir(T objeto);
         void Excluir(params object[] chave);
         void SalvarAlteracoes();
+        public List<T> SelecionarPorCondicao(Func<T, bool> condicao); //receber delegate
+        public T SelecionarUmPorCondicao(Func<T, bool> condicao); //receber delegate
     }
 }

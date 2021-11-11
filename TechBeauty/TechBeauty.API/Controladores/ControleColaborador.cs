@@ -201,6 +201,135 @@ namespace TechBeauty.API.Controladores
             return Ok();
         }
 
+        [HttpPut(template: "Colaborador/{id}")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarColaborador viewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(id);
+            if (colaborador is null) return BadRequest();
+
+            bool modificado = false;
+            if (viewModel.ValidarNome())
+            {
+                colaborador.AlterarNome(viewModel.Nome);
+                modificado = true;
+            }
+            if (viewModel.ValidarNomeSocial())
+            {
+                colaborador.AlterarNomeSocial(viewModel.NomeSocial);
+                modificado = true;
+            }
+            
+            if (modificado)
+            {
+                RepositorioDominio.Colaborador.Alterar(colaborador);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut(template: "Colaborador/{colaboradorId}/Contrato/{contratoId}")]
+        public IActionResult Post([FromRoute] int colaboradorId, [FromRoute] int contratoId, 
+            [FromBody] AlterarContrato viewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(colaboradorId);
+            if (colaborador is null) return BadRequest();
+
+            var contrato = RepositorioDominio.ContratoTrabalho.SelecionarPorChave(contratoId);
+            if (contrato is null) return BadRequest();
+
+            bool modificado = false;
+            if (viewModel.ValidarDataDesligamento())
+            {
+                contrato.AlterarDataDesligamento(viewModel.DataDesligamento);
+                modificado = true;
+            }
+            if (viewModel.ValidarVigente())
+            {
+                contrato.alterarVigencia((bool) viewModel.Vigente);
+                modificado = true;
+            }
+
+            if (modificado)
+            {
+                RepositorioDominio.ContratoTrabalho.Alterar(contrato);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut(template: "Colaborador/{id}/Endereco")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarEndereco viewModel)
+        {
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(id);
+            if (colaborador is null) return BadRequest();
+
+            var endereco = RepositorioDominio.Endereco.SelecionarPorChave(colaborador.EnderecoId);
+            if (endereco is null) return BadRequest();
+
+            endereco.MudarDeEndereco(viewModel.Logradouro, viewModel.Numero, viewModel.Bairro,
+                viewModel.Cidade, (UnidadeFederativa) viewModel.UF, viewModel.CEP, viewModel.Complemento);
+
+            RepositorioDominio.Endereco.Alterar(endereco);
+            return Ok();
+        }
+
+        [HttpPut(template: "Colaborador/{id}/PadraoRemuneracao")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarPadraoRemuneracao viewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(id);
+            if (colaborador is null) return BadRequest();
+
+            var padraoRemuneracao = RepositorioDominio.PadraoRemuneracao.SelecionarUmPorCondicao(p => p.ColaboradorId == id);
+            if (padraoRemuneracao is null) return BadRequest();
+
+            bool modificado = false;
+            if (viewModel.ValidarJornadaEsperada())
+            {
+                padraoRemuneracao.AlterarJornadaEsperada(
+                    new TimeSpan(viewModel.JornadaEsperada.Horas, viewModel.JornadaEsperada.Minutos, 0));
+                modificado = true;
+            }
+            if (viewModel.ValidarSalarioHora())
+            {
+                padraoRemuneracao.AlterarSalarioHora((decimal) viewModel.SalarioHora);
+                modificado = true;
+            }
+            if (viewModel.ValidarPercentualComissao())
+            {
+                padraoRemuneracao.AlterarPercentualComissao((decimal) viewModel.PercentualComissao);
+                modificado = true;
+            }
+            if (viewModel.ValidarAdicionalHoraExtra())
+            {
+                padraoRemuneracao.AlterarAdicionalHoraExtra((decimal)viewModel.AdicionalHoraExtra);
+                modificado = true;
+            }
+
+            if (modificado)
+            {
+                RepositorioDominio.PadraoRemuneracao.Alterar(padraoRemuneracao);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpDelete(template: "Colaborador/{id}")]
         public IActionResult Delete([FromRoute] int id)
         {

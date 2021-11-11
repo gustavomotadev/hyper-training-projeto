@@ -21,7 +21,7 @@ namespace TechBeauty.API.ViewModels.Criacao
 
         public bool Validar()
         {
-            return (new TimeSpan(HorasTrabalhadas.horas, HorasTrabalhadas.minutos, 0) 
+            return (new TimeSpan(HorasTrabalhadas.Horas, HorasTrabalhadas.Minutos, 0) 
                 <= PadraoRemuneracao.JornadaMaxima);
         }
     }

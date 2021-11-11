@@ -72,5 +72,17 @@ namespace TechBeauty.Dados.Repositorios
         {
             return _contexto.Set<T>().ToList();
         }
+
+        //essa funcao consulta o banco toda vez, nao tem cache
+        public List<T> SelecionarPorCondicao(Func<T, bool> condicao) //receber delegate
+        {
+            return _contexto.Set<T>().Where(condicao).ToList();
+        }
+
+        //essa funcao consulta o banco toda vez, nao tem cache
+        public T SelecionarUmPorCondicao(Func<T, bool> condicao) //receber delegate
+        {
+            return _contexto.Set<T>().Where(condicao).FirstOrDefault();
+        }
     }
 }
