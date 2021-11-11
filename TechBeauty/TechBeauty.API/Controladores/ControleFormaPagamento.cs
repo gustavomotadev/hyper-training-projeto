@@ -34,7 +34,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "FormaPagamento")]
         public IActionResult Post([FromBody] CriarFormaPagamento viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = FormaPagamento.NovaFormaPagamento(viewModel.Valor);
 

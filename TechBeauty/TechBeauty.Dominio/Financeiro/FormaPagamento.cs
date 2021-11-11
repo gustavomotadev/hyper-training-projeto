@@ -18,15 +18,8 @@ namespace TechBeauty.Dominio.Financeiro
 
         public static FormaPagamento NovaFormaPagamento(string valor)
         {
-            if (! String.IsNullOrWhiteSpace(valor))
-            {
                 var formaPagamento = new FormaPagamento(valor);
                 return formaPagamento;
-            }
-            else
-            {
-                return null;
-            }
         }
 
     }
