@@ -25,14 +25,12 @@ namespace TechBeauty.API.ViewModels.Alteracao
 
         public bool ValidarDescricao()
         {
-            return (!String.IsNullOrWhiteSpace(Descricao);
+            return (!String.IsNullOrWhiteSpace(Descricao));
         }
 
         public bool ValidarDuracaoEmMin()
         {
             return (DuracaoEmMin > 0);
         }
-
-
     }
 }
