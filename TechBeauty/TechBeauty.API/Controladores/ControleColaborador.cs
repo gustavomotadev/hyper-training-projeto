@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TechBeauty.API.ViewModels.Alteracao;
 using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Financeiro;
@@ -160,6 +161,44 @@ namespace TechBeauty.API.Controladores
             RepositorioDominio.ContratoTrabalho.Incluir(contrato);
 
             return Created(uri: $"TechBeautyV1/Colaborador/{id}", contrato);
+        }
+
+        [HttpPut(template: "Colaborador/{id}/Servico")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AdicionarServico viewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(id);
+            if (colaborador is null) return BadRequest();
+
+            var servico = RepositorioDominio.Servico.SelecionarPorChave(viewModel.ServicoId);
+            if (servico is null) return BadRequest();
+
+            colaborador.AdicionarServico(servico);
+            RepositorioDominio.Colaborador.Alterar(colaborador);
+
+            return Ok();
+        }
+
+        [HttpPut(template: "Colaborador/{colaboradorId}/Contrato/{contratoId}/Cargo")]
+        public IActionResult Post([FromRoute] int colaboradorId, [FromRoute] int contratoId,
+            [FromBody] AdicionarCargo viewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(colaboradorId);
+            if (colaborador is null) return BadRequest();
+
+            var contrato = RepositorioDominio.ContratoTrabalho.SelecionarPorChave(contratoId);
+            if (colaborador is null) return BadRequest();
+
+            var cargo = RepositorioDominio.Cargo.SelecionarPorChave(viewModel.CargoId);
+            if (cargo is null) return BadRequest();
+
+            contrato.AdicionarCargo(cargo);
+            RepositorioDominio.ContratoTrabalho.Alterar(contrato);
+
+            return Ok();
         }
 
         [HttpDelete(template: "Colaborador/{id}")]
