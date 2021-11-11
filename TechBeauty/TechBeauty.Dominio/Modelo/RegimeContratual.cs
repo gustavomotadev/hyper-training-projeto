@@ -20,5 +20,7 @@ namespace TechBeauty.Dominio.Modelo
         {
             return new RegimeContratual(valor);
         }
+
+        //TO DO - AlterarRegimeContratual();
     }
 }
