@@ -9,7 +9,7 @@ namespace TechBeauty.Dominio.Modelo
         public int Id { get; set; }
         public DateTime DataHoraAbertura { get; init; }
         public DateTime DataHoraFechamento { get; init; }
-        public List<Turno> Turnos { get; private set; }
+        public List<Turno> Turnos { get; private set; } = new List<Turno>();
         public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>();
 
         private Expediente() { }
