@@ -79,7 +79,7 @@ namespace TechBeauty.Dominio.Financeiro
                 return false;
             }
         }
-
+        //TO DO - AlterarCaixaDiario();
         private void CalcularTudo()
         {
             CalcularTotalSalario();
