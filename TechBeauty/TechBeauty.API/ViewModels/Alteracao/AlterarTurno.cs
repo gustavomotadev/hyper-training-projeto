@@ -8,14 +8,16 @@ namespace TechBeauty.API.ViewModels.Alteracao
 {
     public class AlterarTurno : IValidavel
     {
-        public DateTime DataHoraEntrada { get; set; }
+        public DateTime? RegistroEntrada { get; set; }
         
-        public DateTime DataHoraSaida { get; set; }
+        public DateTime? RegistroSaida { get; set; }
 
         public bool Validar()
         {
-            return (DataHoraEntrada.Date == DataHoraSaida.Date &&
-                DataHoraEntrada < DataHoraSaida);
+            return (RegistroEntrada is not null &&
+                RegistroSaida is not null &&
+                RegistroEntrada.Value.Date == RegistroSaida.Value.Date &&
+                RegistroEntrada < RegistroSaida);
         }
     }
 }

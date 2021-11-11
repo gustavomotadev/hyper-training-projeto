@@ -6,14 +6,19 @@ using TechBeauty.API.Interfaces;
 
 namespace TechBeauty.API.ViewModels.Alteracao
 {
-    public class AlterarCargo : IValidavel
+    public class AlterarCargo
     {
         public string Nome { get; set; }   
         public string Descricao { get; set; }
 
-        public bool Validar()
+        public bool ValidarNome()
         {
-            return (!String.IsNullOrWhiteSpace(Nome) && !String.IsNullOrWhiteSpace(Descricao));
+            return (!String.IsNullOrWhiteSpace(Nome));
+        }
+
+        public bool ValidarDescricao()
+        {
+            return (!String.IsNullOrWhiteSpace(Descricao));
         }
     }
 }
