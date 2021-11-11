@@ -22,6 +22,10 @@ namespace TechBeauty.Dados.Map
                 .HasColumnType("int")
                 .IsRequired();
 
+            builder.Property(x => x.Data)
+                .HasColumnType("date")
+                .IsRequired();
+
             builder.HasMany<Agendamento>
                 (os => os.Agendamentos)
                 .WithOne(a => a.OrdemServico)

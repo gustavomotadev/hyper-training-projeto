@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo.Enumeracoes;
@@ -8,6 +9,7 @@ namespace TechBeauty.Dominio.Modelo
     public class OrdemServico
     {
         public int Id { get; init; }
+        public DateTime Data { get; init; }
         public int ClienteId { get; private set; } //ef
         public Cliente Cliente { get; init; }
         public StatusOS StatusOS { get; private set; } = StatusOS.Pendente;
