@@ -32,32 +32,22 @@ namespace TechBeauty.Dominio.Modelo
             List<Contato> contatos, List<Servico> servicos, int enderecoId,
             int generoId, string nomeSocial = null)
         {
-            if (!String.IsNullOrWhiteSpace(nome) &&
-                !String.IsNullOrWhiteSpace(cpf) &&
-                Pessoa.ObterIdade(dataNascimento) >= 18 &&
-                Pessoa.ObterIdade(dataNascimento) <= 100)
+            var colaborador = new Colaborador(cpf, dataNascimento);
+            colaborador.Nome = nome;
+            colaborador.Contatos = contatos;
+            colaborador.Servicos = servicos;
+            colaborador.EnderecoId = enderecoId;
+            colaborador.GeneroId = generoId;
+            if (String.IsNullOrEmpty(nomeSocial))
             {
-                var colaborador = new Colaborador(cpf, dataNascimento);
-                colaborador.Nome = nome;
-                colaborador.Contatos = contatos;
-                colaborador.Servicos = servicos;
-                colaborador.EnderecoId = enderecoId;
-                colaborador.GeneroId = generoId;
-                if (String.IsNullOrEmpty(nomeSocial))
-                {
-                    colaborador.NomeSocial = String.Empty;
-                }
-                else
-                {
-                    colaborador.NomeSocial = nomeSocial;
-                }
-                //colaborador.Contratos.Add(contrato);
-                return colaborador;
+                colaborador.NomeSocial = String.Empty;
             }
             else
             {
-                return null;
+                colaborador.NomeSocial = nomeSocial;
             }
+            //colaborador.Contratos.Add(contrato);
+            return colaborador;
         }
 
         public bool AdicionarServico(Servico servico)

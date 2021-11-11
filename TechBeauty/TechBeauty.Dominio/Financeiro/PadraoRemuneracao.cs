@@ -6,10 +6,9 @@ namespace TechBeauty.Dominio.Financeiro
 {
     public class PadraoRemuneracao
     {
-        private static readonly TimeSpan jornadaMaxima = new TimeSpan(8,0,0);
-        private static readonly decimal adicionalHoraExtraMinimo = 0.5M;
-        public static TimeSpan JornadaMaxima => jornadaMaxima;
-        public static decimal SalarioMinimoHora { get; private set; } = 5.00M;
+        public static TimeSpan JornadaMaxima => new TimeSpan(8, 0, 0);
+        public static decimal AdicionalHoraExtraMinimo => 0.5M;
+        //public static decimal SalarioMinimoHora { get; private set; } = 5.00M;
         public int Id { get; set; }
         public int ColaboradorId { get; set; } //ef
         public Colaborador Colaborador { get; init; }
@@ -20,44 +19,35 @@ namespace TechBeauty.Dominio.Financeiro
 
         private PadraoRemuneracao() { }
 
+        /*
         private PadraoRemuneracao(Colaborador colaborador)
         {
             Colaborador = colaborador;
         }
+        */
 
+        /*
         public static void AtualizarSalarioMin(decimal salarioMinHora)
         {
             SalarioMinimoHora = salarioMinHora;
         }
+        */
 
-        public static PadraoRemuneracao NovoPadraoRemuneracao(Colaborador colaborador, TimeSpan jornadaEsperada,
+        public static PadraoRemuneracao NovoPadraoRemuneracao(int colaboradorId, TimeSpan jornadaEsperada,
             decimal salarioHora, decimal percentualComissao, decimal adicionalHoraExtra)
         {
-            if (colaborador != null &&
-                jornadaEsperada <= jornadaMaxima &&
-                (salarioHora >= SalarioMinimoHora || colaborador.Contratos.FirstOrDefault(c => c.Vigente).RegimeContratual.Valor == "pj") && //TODO: garantir que colaborador sempre tenha um contrato ativo
-                percentualComissao < 1 &&
-                percentualComissao >= 0 &&
-                adicionalHoraExtra < 1 &&
-                adicionalHoraExtra >= adicionalHoraExtraMinimo)
-            { 
-                var novaFormaRemunerar = new PadraoRemuneracao(colaborador);
-                novaFormaRemunerar.JornadaEsperada = jornadaEsperada;
-                novaFormaRemunerar.SalarioHora = salarioHora;
-                novaFormaRemunerar.PercentualComissao = percentualComissao;
-                novaFormaRemunerar.AdicionalHoraExtra = adicionalHoraExtra;
-                return novaFormaRemunerar;
-            }
-            else
-            {
-                return null;
-            }
-            
+            var novaFormaRemunerar = new PadraoRemuneracao();
+            novaFormaRemunerar.ColaboradorId = colaboradorId;
+            novaFormaRemunerar.JornadaEsperada = jornadaEsperada;
+            novaFormaRemunerar.SalarioHora = salarioHora;
+            novaFormaRemunerar.PercentualComissao = percentualComissao;
+            novaFormaRemunerar.AdicionalHoraExtra = adicionalHoraExtra;
+            return novaFormaRemunerar;
         }
 
         public bool AlterarJornadaEsperada(TimeSpan jornadaEsperada)
         {
-            if (jornadaEsperada <= jornadaMaxima)
+            if (jornadaEsperada <= JornadaMaxima)
             {
                 JornadaEsperada = jornadaEsperada;
                 return true;
@@ -70,6 +60,7 @@ namespace TechBeauty.Dominio.Financeiro
 
         public bool AlterarSalarioHora(decimal salarioHora)
         {
+            /*
             if (salarioHora >= SalarioMinimoHora)
             {
                 SalarioHora = salarioHora;
@@ -79,6 +70,9 @@ namespace TechBeauty.Dominio.Financeiro
             {
                 return false;
             }
+            */
+            SalarioHora = salarioHora;
+            return true;
         }
 
         public bool AlterarPercentualComissao(decimal percentualComissao)
@@ -97,7 +91,7 @@ namespace TechBeauty.Dominio.Financeiro
 
         public bool AlterarAdicionalHoraExtra(decimal adicionalHoraExtra)
         {
-            if (adicionalHoraExtra >= adicionalHoraExtraMinimo &&
+            if (adicionalHoraExtra >= AdicionalHoraExtraMinimo &&
                 adicionalHoraExtra < 1)
             {
                 AdicionalHoraExtra = adicionalHoraExtra;

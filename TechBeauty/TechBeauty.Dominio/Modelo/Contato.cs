@@ -20,17 +20,10 @@ namespace TechBeauty.Dominio.Modelo
 
         public static Contato NovoContato(int tipoContatoId, string valor, int pessoaId)
         {
-            if (!String.IsNullOrWhiteSpace(valor))
-            {
-                var contato = new Contato(tipoContatoId);
-                contato.Valor = valor;
-                contato.PessoaId = pessoaId;
-                return contato;
-            }
-            else
-            {
-                return null;
-            }
+            var contato = new Contato(tipoContatoId);
+            contato.Valor = valor;
+            contato.PessoaId = pessoaId;
+            return contato;
         }
 
         public bool AlterarContato(string novoValor)

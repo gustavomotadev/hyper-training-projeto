@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TechBeauty.API.ViewModels;
 using TechBeauty.Dados.Repositorios;
+using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo;
 using TechBeauty.Dominio.Modelo.Enumeracoes;
 
@@ -33,9 +34,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Colaborador")]
         public IActionResult Post([FromBody] CriarColaborador viewModel)
         {
-            if (!ModelState.IsValid ||
-                !viewModel.validarEndereco()) 
-                return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             Endereco endereco = null;
             if (viewModel.EnderecoId is not null)
@@ -118,6 +117,11 @@ namespace TechBeauty.API.Controladores
             }
             contrato.Cargos = cargos;
             RepositorioDominio.ContratoTrabalho.Alterar(contrato);
+
+            var padraoRemuneracao = PadraoRemuneracao.NovoPadraoRemuneracao(novo.Id,
+                viewModel.JornadaEsperada, viewModel.SalarioHora, viewModel.PercentualComissao,
+                viewModel.AdicionalHoraExtra);
+            RepositorioDominio.PadraoRemuneracao.Incluir(padraoRemuneracao);
 
             return Created(uri: $"TechBeautyV1/Colaborador/{novo.Id}", novo);
         }

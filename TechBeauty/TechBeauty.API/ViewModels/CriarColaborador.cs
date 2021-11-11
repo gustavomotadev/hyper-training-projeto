@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+using TechBeauty.API.Interfaces;
+using TechBeauty.Dominio.Financeiro;
+using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.API.ViewModels
 {
-    public class CriarColaborador
+    public class CriarColaborador : IValidavel
     {
         //Dados de Pessoa
         [Required]
@@ -65,27 +69,67 @@ namespace TechBeauty.API.ViewModels
         public string Complemento { get; set; } = "";
         public string CEP { get; set; }
 
-        public bool validarEndereco()
+        public bool Validar()
+        {
+            return (!String.IsNullOrWhiteSpace(Nome) &&
+                !String.IsNullOrWhiteSpace(CPF) &&
+                Pessoa.ObterIdade(DataNascimento) >= 18 &&
+                Pessoa.ObterIdade(DataNascimento) <= 100 &&
+                ValidarContatos() &&
+                ValidarEndereco() &&
+                ValidarPadraoRemuneracao() &&
+                ValidarContrato());
+        }
+
+        public bool ValidarContatos()
+        {
+            return (!String.IsNullOrWhiteSpace(Contato1) &&
+                ((TipoContato2Id is null && Contato2 is null) || (TipoContato2Id is not null && !String.IsNullOrWhiteSpace(Contato2))) &&
+                ((TipoContato3Id is null && Contato3 is null) || (TipoContato3Id is not null && !String.IsNullOrWhiteSpace(Contato3))));
+        }
+
+        public bool ValidarEndereco()
         {
             if (EnderecoId is null)
             {
-                if (Logradouro is null ||
-                    Bairro is null ||
-                    Cidade is null ||
-                    UF is null ||
-                    CEP is null)
+                if (!String.IsNullOrWhiteSpace(Logradouro) &&
+                    !String.IsNullOrWhiteSpace(Bairro) &&
+                    !String.IsNullOrWhiteSpace(Cidade) &&
+                    !String.IsNullOrWhiteSpace(CEP) &&
+                    ValidarCEP() &&
+                    UF is not null)
                 {
-                    return false;
+                    return true;
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
             }
             else
             {
                 return true;
             }
+        }
+
+        public bool ValidarCEP()
+        {
+            return Regex.IsMatch(CEP, @"^\d{8}$");
+        }
+
+        public bool ValidarPadraoRemuneracao()
+        {
+            return (JornadaEsperada <= PadraoRemuneracao.JornadaMaxima &&
+                PercentualComissao < 1 &&
+                PercentualComissao >= 0 &&
+                AdicionalHoraExtra < 1 &&
+                AdicionalHoraExtra >= PadraoRemuneracao.AdicionalHoraExtraMinimo);
+        }
+        
+        public bool ValidarContrato()
+        {
+            return (!String.IsNullOrWhiteSpace(CNPJ_CTPS) &&
+                ((DataDesligamento != null && DataDesligamento > DataEntrada) || DataDesligamento == null));
         }
     }
 }
