@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.Interfaces;
+using TechBeauty.Dominio.Financeiro;
 
 namespace TechBeauty.API.ViewModels
 {
-    public class CriarRemuneracaoDiaria
+    public class CriarRemuneracaoDiaria : IValidavel
     {
         [Required]
         public int ColaboradorId { get; set; }
@@ -17,5 +19,10 @@ namespace TechBeauty.API.ViewModels
         [Required]
         public List<int> ServicosRealizadosId { get; set; }
 
+        public bool Validar()
+        {
+            return (new TimeSpan(HorasTrabalhadas.horas, HorasTrabalhadas.minutos, 0) 
+                <= PadraoRemuneracao.JornadaMaxima);
+        }
     }
 }

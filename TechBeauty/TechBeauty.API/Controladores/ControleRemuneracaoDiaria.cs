@@ -44,21 +44,23 @@ namespace TechBeauty.API.Controladores
 
             if (caixaDiario is null) return BadRequest();
 
-            List<Servico> servicosRealizados = new List<Servico>();
+            var novo = RemuneracaoDiaria.NovaRemuneracaoDiaria(viewModel.CaixaDiarioId, viewModel.ColaboradorId, 
+                new TimeSpan(viewModel.HorasTrabalhadas.horas, viewModel.HorasTrabalhadas.minutos, 0));
 
+            RepositorioDominio.RemuneracaoDiaria.Incluir(novo);
+
+            //List<Servico> servicosRealizados = new List<Servico>();
             foreach (var servicoId in viewModel.ServicosRealizadosId)
             {
                 var servico = RepositorioDominio.Servico.SelecionarPorChave(servicoId);
                 if (servico is null) return BadRequest();
 
-                servicosRealizados.Add(servico);
+                //servicosRealizados.Add(servico);
+                novo.Servicos.Add(servico);
             }
+            novo.CalcularTudo();
 
-            var novo = RemuneracaoDiaria.NovaRemuneracaoDiaria(viewModel.CaixaDiarioId, viewModel.ColaboradorId, 
-                new TimeSpan(viewModel.HorasTrabalhadas.horas, viewModel.HorasTrabalhadas.minutos, 0), 
-                servicosRealizados);
-
-            RepositorioDominio.RemuneracaoDiaria.Incluir(novo);
+            RepositorioDominio.RemuneracaoDiaria.Alterar(novo);
 
             return Created(uri: $"TechBeautyV1/RemuneracaoDiaria/{novo.Id}", novo);
         }

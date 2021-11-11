@@ -10,13 +10,13 @@ namespace TechBeauty.Dominio.Financeiro
         public int Id { get; set; }
         public int ColaboradorId { get; private set; } //ef
         public Colaborador Colaborador { get; init; }
-        public List<Servico> Servicos { get; private set; } //ef
+        public List<Servico> Servicos { get; private set; } = new List<Servico>(); //ef
         public int CaixaDiarioId { get; private set; } //ef
         public CaixaDiario CaixaDiario { get; private set; } //ef
         public TimeSpan HorasTrabalhadas { get; init; }
-        public decimal ValorSalario { get; init; }
-        public decimal ValorComissao { get; init; }
-        public decimal ValorHoraExtra { get; init; }
+        public decimal ValorSalario { get; private set; }
+        public decimal ValorComissao { get; private set; }
+        public decimal ValorHoraExtra { get; private set; }
         public decimal ValorTotal => ValorSalario + ValorComissao + ValorHoraExtra;
 
         private RemuneracaoDiaria() { }
@@ -27,19 +27,12 @@ namespace TechBeauty.Dominio.Financeiro
             CaixaDiarioId = caixaDiarioId;
             ColaboradorId = colaboradorId;
             HorasTrabalhadas = horasTrabalhadas;
-
-            ValorSalario = CalcularSalario();
-            ValorComissao = CalcularComissao();
-            ValorHoraExtra = CalcularHoraExtra();
         }
 
         public static RemuneracaoDiaria NovaRemuneracaoDiaria(int caixaDiarioId, int colaboradorId,
-            TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
+            TimeSpan horasTrabalhadas)
         {
-            if (horasTrabalhadas <= PadraoRemuneracao.JornadaMaxima &&
-                servicosRealizados != null &&
-                servicosRealizados.Count > 0 &&
-                !servicosRealizados.Any(x => x == null))
+            if (horasTrabalhadas <= PadraoRemuneracao.JornadaMaxima)
             {
                 return new RemuneracaoDiaria(caixaDiarioId, colaboradorId, horasTrabalhadas);
             }
@@ -49,27 +42,34 @@ namespace TechBeauty.Dominio.Financeiro
             }
         }
 
-        private decimal CalcularSalario()
+        public void CalcularTudo()
         {
-            return (HorasTrabalhadas.Minutes * Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
+            CalcularSalario();
+            CalcularComissao();
+            CalcularHoraExtra();
         }
 
-        private decimal CalcularComissao()
+        private void CalcularSalario()
+        {
+            ValorSalario = (HorasTrabalhadas.Minutes * Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
+        }
+
+        private void CalcularComissao()
         {
             decimal total = Servicos.Sum(x => x.Preco);
-            return total * Colaborador.PadraoRemuneracao.PercentualComissao; 
+            ValorComissao = total * Colaborador.PadraoRemuneracao.PercentualComissao; 
         }
 
-        private decimal CalcularHoraExtra()
+        private void CalcularHoraExtra()
         {
             if (HorasTrabalhadas > Colaborador.PadraoRemuneracao.JornadaEsperada)
             {
-                return ((HorasTrabalhadas- Colaborador.PadraoRemuneracao.JornadaEsperada).Minutes *
+                ValorHoraExtra = ((HorasTrabalhadas- Colaborador.PadraoRemuneracao.JornadaEsperada).Minutes *
                     Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
             }
             else 
             {
-                return 0.00M;
+                ValorHoraExtra = 0.00M;
             }
         }
     }
