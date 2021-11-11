@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using TechBeauty.API.Interfaces;
 using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo;
+using TechBeauty.Dominio.Modelo.Enumeracoes;
 
 namespace TechBeauty.API.ViewModels
 {
@@ -69,6 +70,7 @@ namespace TechBeauty.API.ViewModels
         public string Complemento { get; set; } = "";
         public string CEP { get; set; }
 
+        //TODO VALIDAR CPF
         public bool Validar()
         {
             return (!String.IsNullOrWhiteSpace(Nome) &&
@@ -97,7 +99,8 @@ namespace TechBeauty.API.ViewModels
                     !String.IsNullOrWhiteSpace(Cidade) &&
                     !String.IsNullOrWhiteSpace(CEP) &&
                     ValidarCEP() &&
-                    UF is not null)
+                    UF is not null &&
+                    Enum.IsDefined(typeof(UnidadeFederativa), UF))
                 {
                     return true;
                 }
@@ -120,12 +123,14 @@ namespace TechBeauty.API.ViewModels
         public bool ValidarPadraoRemuneracao()
         {
             return (JornadaEsperada <= PadraoRemuneracao.JornadaMaxima &&
+                SalarioHora > 0 &&
                 PercentualComissao < 1 &&
                 PercentualComissao >= 0 &&
                 AdicionalHoraExtra < 1 &&
                 AdicionalHoraExtra >= PadraoRemuneracao.AdicionalHoraExtraMinimo);
         }
         
+        //TODO VALIDAR CNPJCTPS
         public bool ValidarContrato()
         {
             return (!String.IsNullOrWhiteSpace(CNPJ_CTPS) &&
