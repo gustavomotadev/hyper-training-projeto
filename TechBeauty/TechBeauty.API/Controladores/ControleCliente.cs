@@ -33,7 +33,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Cliente")]
         public IActionResult Post([FromBody] CriarCliente viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = Cliente.NovoCliente(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento, null);
 

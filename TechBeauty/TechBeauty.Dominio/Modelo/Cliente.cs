@@ -18,21 +18,10 @@ namespace TechBeauty.Dominio.Modelo
         public static Cliente NovoCliente(string nome, string cpf, DateTime dataNascimento, 
             List<Contato> contatos)
         {
-            if (!String.IsNullOrWhiteSpace(nome) &&
-                !String.IsNullOrWhiteSpace(cpf) &&
-                Pessoa.ObterIdade(dataNascimento) >= 18 &&
-                Pessoa.ObterIdade(dataNascimento) <= 100)
-            {
-                var cliente = new Cliente(cpf, dataNascimento);
-                cliente.Nome = nome;
-                cliente.Contatos = contatos;
-                return cliente;
-
-            } else
-            {
-                return null;
-            }
-            
+            var cliente = new Cliente(cpf, dataNascimento);
+            cliente.Nome = nome;
+            cliente.Contatos = contatos;
+            return cliente;
         }
     }
 }
