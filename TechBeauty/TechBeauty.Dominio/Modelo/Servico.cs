@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using TechBeauty.Dominio.Financeiro;
 
 namespace TechBeauty.Dominio.Modelo
@@ -11,8 +12,11 @@ namespace TechBeauty.Dominio.Modelo
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
+        [JsonIgnore]
         public List<Agendamento> Agendamentos { get; set; } = new List<Agendamento>(); //ef
+        [JsonIgnore]
         public List<Colaborador> Colaboradores { get; set; } = new List<Colaborador>(); //ef
+        [JsonIgnore]
         public List<RemuneracaoDiaria> Remuneracoes { get; set; } = new List<RemuneracaoDiaria>(); //ef
 
         private Servico() { }

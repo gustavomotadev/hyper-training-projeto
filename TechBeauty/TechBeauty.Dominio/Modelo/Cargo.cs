@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -8,6 +9,7 @@ namespace TechBeauty.Dominio.Modelo
         public int Id { get; init; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
+        [JsonIgnore]
         public List<ContratoTrabalho> Contratos { get; set; } = new List<ContratoTrabalho>(); //ef
 
         private Cargo() { }
