@@ -9,9 +9,9 @@ namespace TechBeauty.API.ViewModels.Alteracao
     public class AlterarServico 
     {
         public string Nome { get; set; }
-        public decimal Preco { get; set; }  
+        public decimal? Preco { get; set; }  
         public string Descricao { get; set; }
-        public int DuracaoEmMin { get; set; }
+        public int? DuracaoEmMin { get; set; }
 
         public bool ValidarNome()
         {
@@ -20,7 +20,8 @@ namespace TechBeauty.API.ViewModels.Alteracao
 
         public bool ValidarPreco()
         {
-            return (Preco > 0M);
+            return (Preco is not null &&
+                Preco > 0M);
         }
 
         public bool ValidarDescricao()
@@ -30,7 +31,8 @@ namespace TechBeauty.API.ViewModels.Alteracao
 
         public bool ValidarDuracaoEmMin()
         {
-            return (DuracaoEmMin > 0);
+            return (DuracaoEmMin is not null &&
+                DuracaoEmMin > 0);
         }
     }
 }
