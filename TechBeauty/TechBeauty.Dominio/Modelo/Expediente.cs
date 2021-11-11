@@ -29,6 +29,8 @@ namespace TechBeauty.Dominio.Modelo
         public Turno ObterTurnoPorId(int id) =>
             Turnos.FirstOrDefault(x => x.Id == id);
 
+        //TO DO - AlterarExpediente();
+
         public bool AdicionarTurno(Turno turno)
         {
             if (turno != null &&
