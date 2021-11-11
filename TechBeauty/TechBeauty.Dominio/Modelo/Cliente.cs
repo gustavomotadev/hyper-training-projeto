@@ -19,7 +19,6 @@ namespace TechBeauty.Dominio.Modelo
         {
             var cliente = new Cliente(cpf, dataNascimento);
             cliente.Nome = nome;
-            cliente.Contatos = contatos;
             return cliente;
         }
     }

@@ -41,7 +41,7 @@ namespace TechBeauty.Dominio.Financeiro
                 servicosRealizados.Count > 0 &&
                 !servicosRealizados.Any(x => x == null))
             {
-                return new RemuneracaoDiaria(caixaDiarioId, colaboradorId, horasTrabalhadas, servicosRealizados);
+                return new RemuneracaoDiaria(caixaDiarioId, colaboradorId, horasTrabalhadas);
             }
             else
             {
