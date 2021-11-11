@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TechBeauty.API.ViewModels.Alteracao;
 using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Modelo;
+using TechBeauty.Dominio.Modelo.Enumeracoes;
 
 namespace TechBeauty.API.Controladores
 {
@@ -40,6 +42,20 @@ namespace TechBeauty.API.Controladores
             RepositorioDominio.OrdemServico.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/OrdemServico/{novo.Id}", novo);
+        }
+
+        [HttpPut(template: "OrdemServico/{id}")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarOrdemServico viewModel)
+        {
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+
+            var os = RepositorioDominio.OrdemServico.SelecionarPorChave(id);
+            if (os is null) return BadRequest();
+
+            os.AlterarStatusDaOS((StatusOS) viewModel.StatusOS);
+
+            RepositorioDominio.OrdemServico.Alterar(os);
+            return Ok();
         }
 
         [HttpDelete(template: "OrdemServico/{id}")]
