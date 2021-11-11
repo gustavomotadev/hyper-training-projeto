@@ -32,7 +32,7 @@ namespace TechBeauty.API.ViewModels
         [HttpPost(template: "Turno")]
         public IActionResult Post([FromBody] CriarTurno viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
             var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(viewModel.ColaboradorId);
             if (colaborador is null) return BadRequest();
             var novo = Turno.NovoTurno(viewModel.DataHoraEntrada, viewModel.DataHoraSaida, viewModel.ColaboradorId);

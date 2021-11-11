@@ -33,7 +33,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Genero")]
         public IActionResult Post([FromBody] CriarGenero viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = Genero.AdicionarGenero(viewModel.Valor);
 

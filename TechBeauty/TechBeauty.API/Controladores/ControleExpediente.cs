@@ -33,7 +33,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Expediente")]
         public IActionResult Post([FromBody] CriarExpediente viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
 
             var novo = Expediente.NovoExpediente(viewModel.DataHoraAbertura, viewModel.DataHoraFechamento);
 

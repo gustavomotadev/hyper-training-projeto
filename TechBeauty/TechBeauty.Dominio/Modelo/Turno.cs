@@ -27,16 +27,8 @@ namespace TechBeauty.Dominio.Modelo
         public static Turno NovoTurno(DateTime dataHoraEntrada, 
             DateTime dataHoraSaida, int colaboradorId)
         {
-            if (dataHoraEntrada.Date == dataHoraSaida.Date &&
-                dataHoraEntrada < dataHoraSaida)
-            {
                 var turno = new Turno(dataHoraEntrada, dataHoraSaida, colaboradorId);
                 return turno;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public void RegistrarPontoEntrada(DateTime dataHora) => 

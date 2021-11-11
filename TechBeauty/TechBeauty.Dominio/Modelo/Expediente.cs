@@ -22,16 +22,8 @@ namespace TechBeauty.Dominio.Modelo
 
         public static Expediente NovoExpediente(DateTime dataHoraAbertura, DateTime dataHoraFechamento)
         {
-            if (dataHoraAbertura.Date == dataHoraFechamento.Date &&
-                dataHoraAbertura < dataHoraFechamento)
-            {
                 var expediente = new Expediente(dataHoraAbertura, dataHoraFechamento);
                 return expediente;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public Turno ObterTurnoPorId(int id) =>

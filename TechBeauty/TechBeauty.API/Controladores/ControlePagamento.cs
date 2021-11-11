@@ -33,7 +33,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Pagamento")]
         public IActionResult Post([FromBody] CriarPagamento viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var os = RepositorioDominio.OrdemServico.SelecionarPorChave(viewModel.OrdemServicoId);
 
@@ -47,7 +47,8 @@ namespace TechBeauty.API.Controladores
 
             if (caixaDiario is null) return BadRequest();
 
-            var novo = Pagamento.NovoPagamento(caixaDiario, os, formaPgto, viewModel.DataPagamento);
+            var novo = Pagamento.NovoPagamento(viewModel.CaixaDiarioId, viewModel.OrdemServicoId, 
+                viewModel.FormaPagamentoId, viewModel.DataPagamento);
 
             RepositorioDominio.Pagamento.Incluir(novo);
 

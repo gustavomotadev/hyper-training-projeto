@@ -22,22 +22,12 @@ namespace TechBeauty.Dominio.Modelo
         private Servico() { }
         public static Servico NovoServico(string nome, decimal preco, string descricao, int duracaoEmMin)
         {
-            if (!String.IsNullOrWhiteSpace(nome) &&
-                preco > 0M &&
-                !String.IsNullOrWhiteSpace(descricao) &&
-                duracaoEmMin > 0)
-            {
                 var servico = new Servico();
                 servico.Nome = nome;
                 servico.Preco = preco;
                 servico.Descricao = descricao;
                 servico.DuracaoEmMin = duracaoEmMin;
                 return servico;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public bool AlterarNome(string novoNome)
