@@ -33,7 +33,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Agendamento")]
         public IActionResult Post([FromBody] CriarAgendamento viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var servico = RepositorioDominio.Servico.SelecionarPorChave(viewModel.ServicoId);
 

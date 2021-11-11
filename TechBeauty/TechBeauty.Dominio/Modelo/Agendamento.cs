@@ -39,18 +39,11 @@ namespace TechBeauty.Dominio.Modelo
         public static Agendamento NovoAgendamento(int servicoId, int colaboradorId, int ordemServicoId, 
             int expedienteId, string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
-            if (!String.IsNullOrWhiteSpace(pessoaAtendida))
-            {
-                var agendamento = new Agendamento(servicoId, colaboradorId, pessoaAtendida,
-                    dataHoraCriacao, dataHoraExecucao);
-                agendamento.OrdemServicoId = ordemServicoId;
-                agendamento.ExpedienteId = expedienteId;
-                return agendamento;
-            }
-            else
-            {
-                return null;
-            }
+            var agendamento = new Agendamento(servicoId, colaboradorId, pessoaAtendida,
+                dataHoraCriacao, dataHoraExecucao);
+            agendamento.OrdemServicoId = ordemServicoId;
+            agendamento.ExpedienteId = expedienteId;
+            return agendamento;
         }    
 
         public void AlterarStatusAgendamento(StatusAgendamento statusDoAgendamento) =>
