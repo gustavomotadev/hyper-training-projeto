@@ -34,7 +34,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "RegimeContratual")]
         public IActionResult Post([FromBody] CriarRegimeContratual viewModel)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = RegimeContratual.NovoRegimeContratual(viewModel.Valor);
 
