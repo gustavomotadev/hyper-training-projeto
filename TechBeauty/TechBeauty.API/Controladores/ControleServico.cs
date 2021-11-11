@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.ViewModels.Alteracao;
 using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Modelo;
@@ -41,6 +42,47 @@ namespace TechBeauty.API.Controladores
             RepositorioDominio.Servico.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Servico/{novo.Id}", novo);
+        }
+
+        [HttpPut(template: "Servico/{id}")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarServico viewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var servico = RepositorioDominio.Servico.SelecionarPorChave(id);
+            if (servico is null) return BadRequest();
+
+            bool modificado = false;
+            if (viewModel.ValidarNome())
+            {
+                servico.AlterarNome(viewModel.Nome);
+                modificado = true;
+            }
+            if (viewModel.ValidarPreco())
+            {
+                servico.AlterarPreco((decimal) viewModel.Preco);
+                modificado = true;
+            }
+            if (viewModel.ValidarDescricao())
+            {
+                servico.AlterarDescricao(viewModel.Descricao);
+                modificado = true;
+            }
+            if (viewModel.ValidarDuracaoEmMin())
+            {
+                servico.AlterarDuracao((int) viewModel.DuracaoEmMin);
+                modificado = true;
+            }
+
+            if (modificado)
+            {
+                RepositorioDominio.Servico.Alterar(servico);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete(template: "Servico/{id}")]
