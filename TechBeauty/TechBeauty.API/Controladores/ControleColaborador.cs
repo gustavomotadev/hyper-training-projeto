@@ -132,10 +132,37 @@ namespace TechBeauty.API.Controladores
         public IActionResult Post([FromRoute] int id, [FromBody] AdicionarContato viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
-            return Ok(); //todo
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(id);
+            if (colaborador is null) return BadRequest();
+
+            var tipoContato = RepositorioDominio.TipoContato.SelecionarPorChave(viewModel.TipoContatoId);
+            if (tipoContato is null) return BadRequest();
+
+            var contato = Contato.NovoContato(viewModel.TipoContatoId, viewModel.Contato, id);
+
+            RepositorioDominio.Contato.Incluir(contato);
+
+            return Created(uri: $"TechBeautyV1/Colaborador/{id}", contato);
         }
 
-            [HttpDelete(template: "Colaborador/{id}")]
+        [HttpPost(template: "Colaborador/{id}/Contrato")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AdicionarContrato viewModel)
+        {
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(id);
+            if (colaborador is null) return BadRequest();
+
+            var contrato = ContratoTrabalho.NovoContratoTrabalho(viewModel.RegimeContratualId, viewModel.DataEntrada,
+                viewModel.DataDesligamento, viewModel.CNPJ_CTPS, colaborador.Id);
+
+            RepositorioDominio.ContratoTrabalho.Incluir(contrato);
+
+            return Created(uri: $"TechBeautyV1/Colaborador/{id}", contrato);
+        }
+
+        [HttpDelete(template: "Colaborador/{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Colaborador.SelecionarPorChave(id);
