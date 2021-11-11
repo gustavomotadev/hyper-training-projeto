@@ -35,8 +35,14 @@ namespace TechBeauty.API.ViewModels
                 !String.IsNullOrWhiteSpace(CPF) &&
                 Pessoa.ObterIdade(DataNascimento) >= 18 &&
                 Pessoa.ObterIdade(DataNascimento) <= 100 &&
-                ((TipoContato2Id is null && Contato2 is null) || (TipoContato2Id is not null && Contato2 is not null)) &&
-                ((TipoContato3Id is null && Contato3 is null) || (TipoContato3Id is not null && Contato3 is not null)));
+                ValidarContatos());
+        }
+
+        public bool ValidarContatos()
+        {
+            return (!String.IsNullOrWhiteSpace(Contato1) &&
+                ((TipoContato2Id is null && Contato2 is null) || (TipoContato2Id is not null && !String.IsNullOrWhiteSpace(Contato2))) &&
+                ((TipoContato3Id is null && Contato3 is null) || (TipoContato3Id is not null && !String.IsNullOrWhiteSpace(Contato3))));
         }
     }
 }
