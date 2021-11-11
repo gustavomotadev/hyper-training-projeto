@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TechBeauty.API.ViewModels
+namespace TechBeauty.API.ViewModels.Criacao
 {
     public class CriarTimeSpan
     {

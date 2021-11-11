@@ -7,7 +7,7 @@ using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo;
 using TechBeauty.Dominio.Modelo.Enumeracoes;
 
-namespace TechBeauty.API.ViewModels
+namespace TechBeauty.API.ViewModels.Criacao
 {
     public class CriarColaborador : IValidavel
     {

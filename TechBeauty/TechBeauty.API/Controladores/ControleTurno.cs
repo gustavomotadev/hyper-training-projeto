@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Modelo;
 
-namespace TechBeauty.API.ViewModels
+namespace TechBeauty.API.Controladores
 {
     [ApiController]
     [Route(template: "TechBeautyV1")]

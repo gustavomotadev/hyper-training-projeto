@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TechBeauty.API.Interfaces;
 
-namespace TechBeauty.API.ViewModels
+namespace TechBeauty.API.ViewModels.Criacao
 {
     public class CriarExpediente :IValidavel
     {

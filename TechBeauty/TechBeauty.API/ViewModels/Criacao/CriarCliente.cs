@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using TechBeauty.API.Interfaces;
 using TechBeauty.Dominio.Modelo;
 
-namespace TechBeauty.API.ViewModels
+namespace TechBeauty.API.ViewModels.Criacao
 {
     public class CriarCliente : IValidavel
     {

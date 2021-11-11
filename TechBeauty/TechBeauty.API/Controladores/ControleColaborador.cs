@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using TechBeauty.API.ViewModels;
+using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Financeiro;
 using TechBeauty.Dominio.Modelo;
@@ -128,7 +128,14 @@ namespace TechBeauty.API.Controladores
             return Created(uri: $"TechBeautyV1/Colaborador/{novo.Id}", novo);
         }
 
-        [HttpDelete(template: "Colaborador/{id}")]
+        [HttpPost(template: "Colaborador/{id}/Contato")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AdicionarContato viewModel)
+        {
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+            return Ok(); //todo
+        }
+
+            [HttpDelete(template: "Colaborador/{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Colaborador.SelecionarPorChave(id);

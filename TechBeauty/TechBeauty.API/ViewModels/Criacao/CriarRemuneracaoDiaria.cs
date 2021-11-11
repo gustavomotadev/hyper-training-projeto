@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TechBeauty.API.Interfaces;
 using TechBeauty.Dominio.Financeiro;
 
-namespace TechBeauty.API.ViewModels
+namespace TechBeauty.API.ViewModels.Criacao
 {
     public class CriarRemuneracaoDiaria : IValidavel
     {
