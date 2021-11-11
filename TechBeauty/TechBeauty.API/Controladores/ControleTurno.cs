@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.ViewModels.Alteracao;
 using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Modelo;
@@ -41,6 +42,21 @@ namespace TechBeauty.API.Controladores
             RepositorioDominio.Turno.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Turno/{novo.Id}", novo);
+        }
+
+        [HttpPut(template: "Turno/{id}")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarTurno viewModel)
+        {
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+
+            var turno = RepositorioDominio.Turno.SelecionarPorChave(id);
+            if (turno is null) return BadRequest();
+
+            turno.RegistrarPontoEntrada(viewModel.RegistroEntrada);
+            turno.RegistrarPontoSaida(viewModel.RegistroSaida);
+
+            RepositorioDominio.Turno.Alterar(turno);
+            return Ok();
         }
 
         [HttpDelete(template: "Turno/{id}")]
