@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Json.Serialization;
 using TechBeauty.Dominio.Modelo.Enumeracoes;
 
 namespace TechBeauty.Dominio.Modelo
@@ -19,13 +20,14 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime DataHoraCriacao { get; init; }
         public DateTime DataHoraExecucao { get; init; }
         public StatusAgendamento StatusAgendamento { get; set; } = StatusAgendamento.Agendado;
-        public int DuracaoEmMin => Servico.DuracaoEmMin; //fora do banco
+        [JsonIgnore] //TODO AJUSTAR ISSO
+        public int DuracaoEmMin => (Servico == null) ? 0 : Servico.DuracaoEmMin; //fora do banco //TODO GAMBIARRA
         public DateTime DataHoraFinal => DataHoraExecucao.AddMinutes(DuracaoEmMin); //fora do banco
 
         private Agendamento() { }
 
-        private Agendamento(int servicoId, int colaboradorId, string pessoaAtendida,
-          DateTime dataHoraCriacao, DateTime dataHoraExecucao)
+        private Agendamento(int servicoId, int colaboradorId,
+            string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
             ServicoId = servicoId;
             ColaboradorId = colaboradorId;
@@ -34,13 +36,16 @@ namespace TechBeauty.Dominio.Modelo
             DataHoraExecucao = dataHoraExecucao;
         }
 
-        public static Agendamento NovoAgendamento(int servicoId, int colaboradorId, 
-            string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
+        public static Agendamento NovoAgendamento(int servicoId, int colaboradorId, int ordemServicoId, 
+            int expedienteId, string pessoaAtendida, DateTime dataHoraCriacao, DateTime dataHoraExecucao)
         {
             if (!String.IsNullOrWhiteSpace(pessoaAtendida))
             {
-                return new Agendamento(servicoId, colaboradorId, pessoaAtendida,
+                var agendamento = new Agendamento(servicoId, colaboradorId, pessoaAtendida,
                     dataHoraCriacao, dataHoraExecucao);
+                agendamento.OrdemServicoId = ordemServicoId;
+                agendamento.ExpedienteId = expedienteId;
+                return agendamento;
             }
             else
             {

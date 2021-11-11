@@ -21,9 +21,9 @@ namespace TechBeauty.API.ViewModels
         public string Contato1 { get; set; }
 
         //Contatos opcionais
-        public int TipoContato2Id { get; set; }
+        public int? TipoContato2Id { get; set; }
         public string Contato2 { get; set; }
-        public int TipoContato3Id { get; set; }
+        public int? TipoContato3Id { get; set; }
         public string Contato3 { get; set; }
     }
 }

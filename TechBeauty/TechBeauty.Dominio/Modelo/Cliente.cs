@@ -10,24 +10,20 @@ namespace TechBeauty.Dominio.Modelo
 
         private Cliente() { }
 
-        private Cliente(int id, string cpf, DateTime dataNascimento)
+        private Cliente(string cpf, DateTime dataNascimento)
         {
-            Id = id;
             CPF = cpf;
             DataNascimento = dataNascimento;
         }
-        public static Cliente NovoCliente(int idCliente, string nome, string cpf, DateTime dataNascimento, 
+        public static Cliente NovoCliente(string nome, string cpf, DateTime dataNascimento, 
             List<Contato> contatos)
         {
             if (!String.IsNullOrWhiteSpace(nome) &&
                 !String.IsNullOrWhiteSpace(cpf) &&
                 Pessoa.ObterIdade(dataNascimento) >= 18 &&
-                Pessoa.ObterIdade(dataNascimento) <= 100 &&
-                contatos != null && 
-                contatos.Count > 0 && 
-                !contatos.Any(x => x == null))
+                Pessoa.ObterIdade(dataNascimento) <= 100)
             {
-                var cliente = new Cliente(idCliente, cpf, dataNascimento);
+                var cliente = new Cliente(cpf, dataNascimento);
                 cliente.Nome = nome;
                 cliente.Contatos = contatos;
                 return cliente;

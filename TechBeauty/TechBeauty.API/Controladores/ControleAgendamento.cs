@@ -30,8 +30,7 @@ namespace TechBeauty.API.Controladores
             else return NotFound();
         }
         
-        // TO DO - Cosntrutor de Agendamento.
-        /*[HttpPost(template: "Agendamento")]
+        [HttpPost(template: "Agendamento")]
         public IActionResult Post([FromBody] CriarAgendamento viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -40,7 +39,7 @@ namespace TechBeauty.API.Controladores
 
             if (servico is null) return BadRequest();
 
-            var colaborador = RepositorioDominio.Servico.SelecionarPorChave(viewModel.ColaboradorId);
+            var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(viewModel.ColaboradorId);
 
             if (colaborador is null) return BadRequest();
 
@@ -52,13 +51,14 @@ namespace TechBeauty.API.Controladores
 
             if (expediente is null) return BadRequest();
 
-            var novo = Agendamento.NovoAgendamento(servico, colaborador, viewModel.PessoaAtendida, 
-                viewModel.DataHoraExecucao);
+            var novo = Agendamento.NovoAgendamento(viewModel.ServicoId, viewModel.ColaboradorId,
+                viewModel.OrdemServicoId, viewModel.ExpedienteId, viewModel.PessoaAtendida, 
+                DateTime.Now, viewModel.DataHoraExecucao);
 
             RepositorioDominio.Agendamento.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Agendamento/{novo.Id}", novo);
-        }*/
+        }
 
         [HttpDelete(template: "Agendamento/{id}")]
         public IActionResult Delete([FromRoute] int id)
