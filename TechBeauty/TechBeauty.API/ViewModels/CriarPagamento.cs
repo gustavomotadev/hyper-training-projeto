@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.Interfaces;
 
 namespace TechBeauty.API.ViewModels
 {
-    public class CriarPagamento
+    public class CriarPagamento : IValidavel
     {
         [Required]
         public DateTime DataPagamento { get; set; }
@@ -16,6 +17,10 @@ namespace TechBeauty.API.ViewModels
         public int FormaPagamentoId { get; set; }
         [Required]
         public int CaixaDiarioId { get; set; }
-        
+
+        public bool Validar()
+        {
+            return true;
+        }
     }
 }
