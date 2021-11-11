@@ -22,12 +22,11 @@ namespace TechBeauty.Dominio.Financeiro
         private RemuneracaoDiaria() { }
 
         private RemuneracaoDiaria(int caixaDiarioId, int colaboradorId,
-            TimeSpan horasTrabalhadas, List<Servico> servicosRealizados)
+            TimeSpan horasTrabalhadas)
         {
             CaixaDiarioId = caixaDiarioId;
             ColaboradorId = colaboradorId;
             HorasTrabalhadas = horasTrabalhadas;
-            Servicos = servicosRealizados;
 
             ValorSalario = CalcularSalario();
             ValorComissao = CalcularComissao();
