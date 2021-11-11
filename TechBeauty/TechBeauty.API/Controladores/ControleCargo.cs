@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.ViewModels.Alteracao;
 using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Modelo;
@@ -47,6 +48,37 @@ namespace TechBeauty.API.Controladores
             _cargo.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Cargo/{novo.Id}", novo);
+        }
+
+        [HttpPut(template: "Cargo/{id}")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarCargo viewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var cargo = RepositorioDominio.Cargo.SelecionarPorChave(id);
+            if (cargo is null) return BadRequest();
+
+            bool modificado = false;
+            if (viewModel.ValidarNome())
+            {
+                cargo.AlterarNome(viewModel.Nome);
+                modificado = true;
+            }
+            if (viewModel.ValidarDescricao())
+            {
+                cargo.AlterarDescricao(viewModel.Descricao);
+                modificado = true;
+            }
+
+            if (modificado)
+            {
+                RepositorioDominio.Cargo.Alterar(cargo);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpDelete(template: "Cargo/{id}")]
