@@ -54,7 +54,7 @@ namespace TechBeauty.API.Controladores
                 servicosRealizados.Add(servico);
             }
 
-            var novo = RemuneracaoDiaria.NovaRemuneracaoDiaria(caixaDiario, colaborador, 
+            var novo = RemuneracaoDiaria.NovaRemuneracaoDiaria(viewModel.CaixaDiarioId, viewModel.ColaboradorId, 
                 new TimeSpan(viewModel.HorasTrabalhadas.horas, viewModel.HorasTrabalhadas.minutos, 0), 
                 servicosRealizados);
 
