@@ -19,14 +19,8 @@ namespace TechBeauty.Dominio.Modelo
 
         public static Genero AdicionarGenero(string valorGenero)
         {
-            if (!String.IsNullOrWhiteSpace(valorGenero))
-            {
+           
                 return new Genero(valorGenero);
-            }
-            else
-            {
-                return null;
-            }
         }
     }
 }
