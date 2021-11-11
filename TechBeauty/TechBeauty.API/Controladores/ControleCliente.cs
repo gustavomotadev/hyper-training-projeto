@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.ViewModels.Alteracao;
 using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Modelo;
@@ -70,6 +71,20 @@ namespace TechBeauty.API.Controladores
             }
 
             return Created(uri: $"TechBeautyV1/Cliente/{novo.Id}", novo);
+        }
+
+        [HttpPut(template: "Cliente/{id}")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarCliente viewModel)
+        {
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+
+            var cliente = RepositorioDominio.Cliente.SelecionarPorChave(id);
+            if (cliente is null) return BadRequest();
+
+            cliente.AlterarNome(viewModel.Nome);
+
+            RepositorioDominio.Cliente.Alterar(cliente);
+            return Ok();
         }
 
         [HttpDelete(template: "Cliente/{id}")]
