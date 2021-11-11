@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TechBeauty.API.ViewModels.Alteracao;
 using TechBeauty.API.ViewModels.Criacao;
 using TechBeauty.Dados.Repositorios;
 using TechBeauty.Dominio.Modelo;
+using TechBeauty.Dominio.Modelo.Enumeracoes;
 
 namespace TechBeauty.API.Controladores
 {
@@ -58,6 +60,20 @@ namespace TechBeauty.API.Controladores
             RepositorioDominio.Agendamento.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Agendamento/{novo.Id}", novo);
+        }
+
+        [HttpPut(template: "Agendamento/{id}")]
+        public IActionResult Post([FromRoute] int id, [FromBody] AlterarAgendamento viewModel)
+        {
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+
+            var agendamento = RepositorioDominio.Agendamento.SelecionarPorChave(id);
+            if (agendamento is null) return BadRequest();
+
+            agendamento.AlterarStatusAgendamento((StatusAgendamento) viewModel.StatusAgendamento);
+
+            RepositorioDominio.Agendamento.Alterar(agendamento);
+            return Ok();
         }
 
         [HttpDelete(template: "Agendamento/{id}")]
