@@ -6,12 +6,12 @@ namespace TechBeauty.Dominio.Financeiro
     public class Pagamento
     {
         public int Id { get; init; }
-        public int OrdemServicoId { get; set; } //ef
+        public int OrdemServicoId { get; private set; } //ef
         public OrdemServico OrdemServico { get; init; }
-        public int FormaPagamentoId { get; set; } //ef
+        public int FormaPagamentoId { get; private set; } //ef
         public FormaPagamento FormaPagamento { get; init; }
-        public int CaixaDiarioId { get; set; } //ef
-        public CaixaDiario CaixaDiario { get; set; } //ef
+        public int CaixaDiarioId { get; private set; } //ef
+        public CaixaDiario CaixaDiario { get; private set; } //ef
         public DateTime DataPagamento { get; init; }
 
         private Pagamento() { }

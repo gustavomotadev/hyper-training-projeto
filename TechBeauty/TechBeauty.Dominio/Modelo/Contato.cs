@@ -5,11 +5,11 @@ namespace TechBeauty.Dominio.Modelo
     public class Contato
     {
         public int Id { get; init; }
-        public int TipoContatoId { get; set; } //ef
+        public int TipoContatoId { get; private set; } //ef
         public TipoContato TipoContato { get; init; }
         public string Valor { get; private set; }
-        public int PessoaId { get; set; } //ef
-        public Pessoa Pessoa { get; set; } //ef
+        public int PessoaId { get; private set; } //ef
+        public Pessoa Pessoa { get; private set; } //ef
 
         private Contato() { }
 

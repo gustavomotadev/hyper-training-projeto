@@ -7,7 +7,7 @@ namespace TechBeauty.Dominio.Financeiro
     {
         public int Id { get; init; }
         public string Valor { get; init; }
-        public List<Pagamento> Pagamentos { get; set; } //ef
+        public List<Pagamento> Pagamentos { get; private set; } //ef
 
         private FormaPagamento() { }
 

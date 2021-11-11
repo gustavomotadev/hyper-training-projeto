@@ -9,13 +9,13 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; init; }
         public string Logradouro { get; private set; }
-        public string Bairro { get; set; }
+        public string Bairro { get; private set; }
         public string Cidade { get; private set; }
         public UnidadeFederativa UF { get; private set; }
         public string Numero { get; private set; } = "s/n";
         public string Complemento { get; private set; }
-        public string CEP { get; set; }
-        public List<Colaborador> Colaboradores { get; set; } = new List<Colaborador>(); //ef
+        public string CEP { get; private set; }
+        public List<Colaborador> Colaboradores { get; private set; } = new List<Colaborador>(); //ef
 
         private Endereco() { }
 

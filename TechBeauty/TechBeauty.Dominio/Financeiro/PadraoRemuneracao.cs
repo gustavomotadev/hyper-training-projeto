@@ -10,7 +10,7 @@ namespace TechBeauty.Dominio.Financeiro
         public static decimal AdicionalHoraExtraMinimo => 0.5M;
         //public static decimal SalarioMinimoHora { get; private set; } = 5.00M;
         public int Id { get; set; }
-        public int ColaboradorId { get; set; } //ef
+        public int ColaboradorId { get; private set; } //ef
         public Colaborador Colaborador { get; init; }
         public TimeSpan JornadaEsperada { get; private set; }
         public decimal SalarioHora { get; private set; }

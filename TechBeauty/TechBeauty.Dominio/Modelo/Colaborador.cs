@@ -8,17 +8,17 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Colaborador : Pessoa
     {
-        public List<Servico> Servicos { get; set; } //ef
-        public int EnderecoId { get; set; } //ef
+        public List<Servico> Servicos { get; private set; } //ef
+        public int EnderecoId { get; private set; } //ef
         public Endereco Endereco { get; private set; }
-        public int GeneroId { get; set; } //ef
+        public int GeneroId { get; private set; } //ef
         public Genero Genero { get; private set; }
         public string NomeSocial { get; private set; } = String.Empty;
         public List<ContratoTrabalho> Contratos { get; private set; } = new List<ContratoTrabalho>(); //ef
-        public List<Turno> Turnos { get; set; } = new List<Turno>();  //ef
-        public List<Agendamento> Agendamentos { get; set; } = new List<Agendamento>(); //ef
-        public PadraoRemuneracao PadraoRemuneracao { get; set; } //ef
-        public List<RemuneracaoDiaria> Remuneracoes { get; set; } = new List<RemuneracaoDiaria>(); //ef
+        public List<Turno> Turnos { get; private set; } = new List<Turno>();  //ef
+        public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>(); //ef
+        public PadraoRemuneracao PadraoRemuneracao { get; private set; } //ef
+        public List<RemuneracaoDiaria> Remuneracoes { get; private set; } = new List<RemuneracaoDiaria>(); //ef
 
         private Colaborador() { }
 

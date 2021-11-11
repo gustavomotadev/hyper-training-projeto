@@ -7,7 +7,7 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; init; }
         public string Valor { get; init; }
-        public List<Contato> Contatos { get; set; } = new List<Contato>(); //ef
+        public List<Contato> Contatos { get; private set; } = new List<Contato>(); //ef
 
         private TipoContato() { }
 

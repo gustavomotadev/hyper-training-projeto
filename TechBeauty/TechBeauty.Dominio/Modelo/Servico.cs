@@ -13,11 +13,11 @@ namespace TechBeauty.Dominio.Modelo
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
         [JsonIgnore]
-        public List<Agendamento> Agendamentos { get; set; } = new List<Agendamento>(); //ef
+        public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>(); //ef
         [JsonIgnore]
-        public List<Colaborador> Colaboradores { get; set; } = new List<Colaborador>(); //ef
+        public List<Colaborador> Colaboradores { get; private set; } = new List<Colaborador>(); //ef
         [JsonIgnore]
-        public List<RemuneracaoDiaria> Remuneracoes { get; set; } = new List<RemuneracaoDiaria>(); //ef
+        public List<RemuneracaoDiaria> Remuneracoes { get; private set; } = new List<RemuneracaoDiaria>(); //ef
 
         private Servico() { }
         public static Servico NovoServico(string nome, decimal preco, string descricao, int duracaoEmMin)
