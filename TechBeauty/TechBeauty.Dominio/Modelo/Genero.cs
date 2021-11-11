@@ -22,5 +22,7 @@ namespace TechBeauty.Dominio.Modelo
            
                 return new Genero(valorGenero);
         }
+
+        //TO DO - AlterarGenero();
     }
 }
