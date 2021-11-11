@@ -14,24 +14,18 @@ namespace TechBeauty.Dominio.Modelo
 
         private Expediente() { }
 
-        private Expediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento)
+        private Expediente(DateTime dataHoraAbertura, DateTime dataHoraFechamento)
         {
-            Id = id;
             DataHoraAbertura = dataHoraAbertura;
             DataHoraFechamento = dataHoraFechamento;
         }
 
-        public static Expediente NovoExpediente(int id, DateTime dataHoraAbertura, DateTime dataHoraFechamento,
-            List<Turno> turnos)
+        public static Expediente NovoExpediente(DateTime dataHoraAbertura, DateTime dataHoraFechamento)
         {
             if (dataHoraAbertura.Date == dataHoraFechamento.Date &&
-                dataHoraAbertura < dataHoraFechamento &&
-                turnos != null &&
-                turnos.Count > 0 &&
-                !turnos.Any(x => x == null))
+                dataHoraAbertura < dataHoraFechamento)
             {
-                var expediente = new Expediente(id, dataHoraAbertura, dataHoraFechamento);
-                expediente.Turnos = turnos;
+                var expediente = new Expediente(dataHoraAbertura, dataHoraFechamento);
                 return expediente;
             }
             else

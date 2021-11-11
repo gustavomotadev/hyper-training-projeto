@@ -35,17 +35,12 @@ namespace TechBeauty.API.Controladores
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            // TODO 
-
-            /*var novo = Expediente.NovoExpediente(caixaDiario, colaborador,
-                new TimeSpan(viewModel.HorasTrabalhadas.horas, viewModel.HorasTrabalhadas.minutos, 0),
-                servicosRealizados);
+            var novo = Expediente.NovoExpediente(viewModel.DataHoraAbertura, viewModel.DataHoraFechamento);
 
             RepositorioDominio.Expediente.Incluir(novo);
 
-            return Created(uri: $"TechBeautyV1/Expediente/{novo.Id}", novo);*/
+            return Created(uri: $"TechBeautyV1/Expediente/{novo.Id}", novo);
 
-            return Ok(); //todo
         }
 
         [HttpDelete(template: "Expediente/{id}")]
