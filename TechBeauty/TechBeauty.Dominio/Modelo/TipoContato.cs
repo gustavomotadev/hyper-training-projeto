@@ -18,14 +18,7 @@ namespace TechBeauty.Dominio.Modelo
 
         public static TipoContato NovoTipoContato(string valor)
         {
-            if (!String.IsNullOrWhiteSpace(valor))
-            {
                 return new TipoContato(valor);
-            }
-            else
-            {
-                return null;
-            }
         }
     }
 }
