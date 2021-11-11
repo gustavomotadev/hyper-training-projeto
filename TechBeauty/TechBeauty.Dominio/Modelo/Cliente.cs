@@ -15,8 +15,7 @@ namespace TechBeauty.Dominio.Modelo
             CPF = cpf;
             DataNascimento = dataNascimento;
         }
-        public static Cliente NovoCliente(string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos)
+        public static Cliente NovoCliente(string nome, string cpf, DateTime dataNascimento)
         {
             var cliente = new Cliente(cpf, dataNascimento);
             cliente.Nome = nome;

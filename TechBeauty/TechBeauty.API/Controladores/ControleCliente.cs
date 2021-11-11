@@ -35,7 +35,7 @@ namespace TechBeauty.API.Controladores
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
-            var novo = Cliente.NovoCliente(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento, null);
+            var novo = Cliente.NovoCliente(viewModel.Nome, viewModel.CPF, viewModel.DataNascimento);
 
             RepositorioDominio.Cliente.Incluir(novo);
 
