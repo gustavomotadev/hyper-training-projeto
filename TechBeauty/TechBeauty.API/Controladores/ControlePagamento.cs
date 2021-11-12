@@ -35,6 +35,11 @@ namespace TechBeauty.API.Controladores
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
+            //checar se já está pago
+            var jaEstaPago = RepositorioDominio.Pagamento.SelecionarUmPorCondicao(
+                p => p.OrdemServicoId == viewModel.OrdemServicoId);
+            if (jaEstaPago is not null) return BadRequest();
+
             var os = RepositorioDominio.OrdemServico.SelecionarPorChave(viewModel.OrdemServicoId);
 
             if (os is null) return BadRequest();
