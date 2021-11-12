@@ -7,26 +7,22 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; init; }
         public string Valor { get; init; }
-        public List<Colaborador> Colaboradores { get; set; } //ef
+        public List<Colaborador> Colaboradores { get; private set; } = new List<Colaborador>(); //ef
 
         private Genero() { }
 
-        private Genero(int id, string valor)
+        private Genero(string valor)
         {
-            Id = id;
+            
             Valor = valor;
         }
 
-        public static Genero AdicionarGenero(int idGenero, string valorGenero)
+        public static Genero AdicionarGenero(string valorGenero)
         {
-            if (!String.IsNullOrWhiteSpace(valorGenero))
-            {
-                return new Genero(idGenero, valorGenero);
-            }
-            else
-            {
-                return null;
-            }
+           
+                return new Genero(valorGenero);
         }
+
+        //TO DO - AlterarGenero();
     }
 }

@@ -9,63 +9,43 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; init; }
         public string Logradouro { get; private set; }
-        public string Bairro { get; set; }
+        public string Bairro { get; private set; }
         public string Cidade { get; private set; }
         public UnidadeFederativa UF { get; private set; }
         public string Numero { get; private set; } = "s/n";
         public string Complemento { get; private set; }
-        public string CEP { get; set; }
-        public List<Colaborador> Colaboradores { get; set; } //ef
+        public string CEP { get; private set; }
+        public List<Colaborador> Colaboradores { get; private set; } = new List<Colaborador>(); //ef
 
         private Endereco() { }
 
-        private Endereco(int id)
-        {
-            Id = id;
-        }
-
-        public static bool ValidarCEP(string cep)
-        {
-            return Regex.IsMatch(cep, @"^\d{8}$");
-        }
-
-        public static Endereco NovoEndereco(int idEndereco, string logradouro, string bairro,
+        public static Endereco NovoEndereco(string logradouro, string bairro,
             string cidade, UnidadeFederativa uf, string cep, string numero = "s/n", string complemento = null)
         {
-            if (!String.IsNullOrWhiteSpace(logradouro) &&
-                !String.IsNullOrWhiteSpace(bairro) &&
-                !String.IsNullOrWhiteSpace(cidade) &&
-                !String.IsNullOrWhiteSpace(cep) &&
-                ValidarCEP(cep))
+
+            var endereco = new Endereco();
+            endereco.Logradouro = logradouro;
+            if (String.IsNullOrWhiteSpace(numero))
             {
-                var endereco = new Endereco(idEndereco);
-                endereco.Logradouro = logradouro;
-                if (String.IsNullOrWhiteSpace(numero))
-                {
-                    endereco.Numero = "s/n";
-                }
-                else
-                {
-                    endereco.Numero = numero;
-                }
-                endereco.Bairro = bairro;
-                endereco.Cidade = cidade;
-                endereco.UF = uf;
-                endereco.CEP = cep;
-                if (String.IsNullOrWhiteSpace(complemento))
-                {
-                    endereco.Complemento = string.Empty;
-                }
-                else
-                {
-                    endereco.Complemento = complemento;
-                }
-                return endereco;
+                endereco.Numero = "s/n";
             }
             else
             {
-                return null;
-            } 
+                endereco.Numero = numero;
+            }
+            endereco.Bairro = bairro;
+            endereco.Cidade = cidade;
+            endereco.UF = uf;
+            endereco.CEP = cep;
+            if (String.IsNullOrWhiteSpace(complemento))
+            {
+                endereco.Complemento = string.Empty;
+            }
+            else
+            {
+                endereco.Complemento = complemento;
+            }
+            return endereco;
         }
 
         public bool MudarDeEndereco(string novoLogradouro, string novoNumero, string novoBairro,
@@ -80,8 +60,7 @@ namespace TechBeauty.Dominio.Modelo
                 novaCidade != null &&
                 !String.IsNullOrWhiteSpace(novaCidade) &&
                 novoCep != null &&
-                !String.IsNullOrWhiteSpace(novoCep) &&
-                ValidarCEP(novoCep))
+                !String.IsNullOrWhiteSpace(novoCep))
             {
                 Logradouro = novoLogradouro;
                 Numero = novoNumero;
@@ -117,8 +96,7 @@ namespace TechBeauty.Dominio.Modelo
                 novaCidade != null &&
                 !String.IsNullOrWhiteSpace(novaCidade) &&
                 novoCep != null &&
-                !String.IsNullOrWhiteSpace(novoCep) &&
-                ValidarCEP(novoCep))
+                !String.IsNullOrWhiteSpace(novoCep))
             {
                 Logradouro = novoLogradouro;
                 Numero = novoNumero;
@@ -149,8 +127,7 @@ namespace TechBeauty.Dominio.Modelo
                 novoBairro != null &&
                 !String.IsNullOrWhiteSpace(novoBairro) &&
                 novoCep != null &&
-                !String.IsNullOrWhiteSpace(novoCep) &&
-                ValidarCEP(novoCep))
+                !String.IsNullOrWhiteSpace(novoCep))
             {
                 Logradouro = novoLogradouro;
                 Numero = novoNumero;

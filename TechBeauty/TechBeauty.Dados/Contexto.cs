@@ -11,10 +11,9 @@ namespace TechBeauty.Dados
         public DbSet<Agendamento> Agendamento { get; set; }
         public DbSet<CaixaDiario> CaixaDiario { get; set; }
         public DbSet<Cargo> Cargo { get; set; }
-        public DbSet<CargoContratoTrabalho> CargoContratoTrabalho { get; set; }
+        
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Colaborador> Colaborador { get; set; }
-        public DbSet<ColaboradorServico> ColaboradorServico { get; set; }
         public DbSet<Contato> Contato { get; set; }
         public DbSet<ContratoTrabalho> ContratoTrabalho { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
@@ -27,7 +26,6 @@ namespace TechBeauty.Dados
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<RegimeContratual> RegimeContratual { get; set; }
         public DbSet<RemuneracaoDiaria> RemuneracaoDiaria { get; set; }
-        public DbSet<RemuneracaoDiariaServico> RemuneracaoDiariaServico { get; set; }
         public DbSet<Servico> Servico { get; set; }
         public DbSet<TipoContato> TipoContato { get; set; }
         public DbSet<Turno> Turno { get; set; }
@@ -36,7 +34,7 @@ namespace TechBeauty.Dados
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // User ID=carson; Password=123, caso seja autenticação usuário e senha do DB.
-            optionsBuilder.UseSqlServer("Password=admin;Persist Security Info=True;User ID=tech-beauty-admin;Initial Catalog=TechBeauty;Data Source=DESKTOP-MOTA"); //Trusted é para autenticação com usuário do Windows.
+            optionsBuilder.UseSqlServer("Server=localhost;Database=TechBeauty;Trusted_Connection=True;"); //Trusted é para autenticação com usuário do Windows.
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -44,11 +42,9 @@ namespace TechBeauty.Dados
         {
             modelBuilder.ApplyConfiguration(new AgendamentoMap());
             modelBuilder.ApplyConfiguration(new CaixaDiarioMap());
-            modelBuilder.ApplyConfiguration(new CargoContratoTrabalhoMap());
             modelBuilder.ApplyConfiguration(new CargoMap());
             modelBuilder.ApplyConfiguration(new ClienteMap());
             modelBuilder.ApplyConfiguration(new ColaboradorMap());
-            modelBuilder.ApplyConfiguration(new ColaboradorServicoMap());
             modelBuilder.ApplyConfiguration(new ContatoMap());
             modelBuilder.ApplyConfiguration(new ContratoTrabalhoMap());
             modelBuilder.ApplyConfiguration(new EnderecoMap());
@@ -61,7 +57,6 @@ namespace TechBeauty.Dados
             modelBuilder.ApplyConfiguration(new PessoaMap());
             modelBuilder.ApplyConfiguration(new RegimeContratualMap());
             modelBuilder.ApplyConfiguration(new RemuneracaoDiariaMap());
-            modelBuilder.ApplyConfiguration(new RemuneracaoDiariaServicoMap());
             modelBuilder.ApplyConfiguration(new ServicoMap());
             modelBuilder.ApplyConfiguration(new TipoContatoMap());
             modelBuilder.ApplyConfiguration(new TurnoMap());

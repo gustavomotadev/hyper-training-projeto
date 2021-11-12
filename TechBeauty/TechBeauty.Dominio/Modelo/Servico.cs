@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using TechBeauty.Dominio.Financeiro;
 
 namespace TechBeauty.Dominio.Modelo
@@ -11,32 +12,22 @@ namespace TechBeauty.Dominio.Modelo
         public decimal Preco { get; private set; }
         public string Descricao { get; private set; }
         public int DuracaoEmMin { get; private set; }
-        public List<Agendamento> Agendamentos { get; set; } //ef
-        public List<ColaboradorServico> ColaboradoresServicos { get; set; } //ef
-        public List<RemuneracaoDiariaServico> RemuneracoesServicos { get; set; } //ef
+        [JsonIgnore]
+        public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>(); //ef
+        [JsonIgnore]
+        public List<Colaborador> Colaboradores { get; private set; } = new List<Colaborador>(); //ef
+        [JsonIgnore]
+        public List<RemuneracaoDiaria> Remuneracoes { get; private set; } = new List<RemuneracaoDiaria>(); //ef
 
         private Servico() { }
-
-        private Servico(int id) => Id = id;
-
-        public static Servico NovoServico(int idServico, string nome, decimal preco, string descricao, int duracaoEmMin)
+        public static Servico NovoServico(string nome, decimal preco, string descricao, int duracaoEmMin)
         {
-            if (!String.IsNullOrWhiteSpace(nome) &&
-                preco > 0M &&
-                !String.IsNullOrWhiteSpace(descricao) &&
-                duracaoEmMin > 0)
-            {
-                var servico = new Servico(idServico);
+                var servico = new Servico();
                 servico.Nome = nome;
                 servico.Preco = preco;
                 servico.Descricao = descricao;
                 servico.DuracaoEmMin = duracaoEmMin;
                 return servico;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public bool AlterarNome(string novoNome)

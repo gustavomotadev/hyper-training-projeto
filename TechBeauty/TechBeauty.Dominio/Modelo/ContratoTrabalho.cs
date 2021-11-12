@@ -7,45 +7,32 @@ namespace TechBeauty.Dominio.Modelo
     public class ContratoTrabalho
     {
         public int Id { get; init; }
-        public int RegimeContratualId { get; set; } //ef
+        public int RegimeContratualId { get; private set; } //ef
         public RegimeContratual RegimeContratual { get; init; }
-        public int ColaboradorId { get; set; } //ef
+        public int ColaboradorId { get; private set; } //ef
         public Colaborador Colaborador { get; init; }
         public DateTime DataEntrada { get; init; }
         public DateTime? DataDesligamento { get; private set; }
-        public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
+        public List<Cargo> Cargos { get; private set; } = new List<Cargo>(); //ef
         public string CNPJ_CTPS { get; init; }
-        public bool Vigente { get; set; }
+        public bool Vigente { get; private set; } = true;
 
         private ContratoTrabalho() { }
 
-        private ContratoTrabalho(int id, RegimeContratual regimeContratual, DateTime dataEntrada, string cnpjCTPS)
+        private ContratoTrabalho(int regimeContratualId, DateTime dataEntrada, string cnpjCTPS)
         {
-            Id = id;
-            RegimeContratual = regimeContratual;
+            RegimeContratualId = regimeContratualId;
             DataEntrada = dataEntrada;
             CNPJ_CTPS = cnpjCTPS;
         }
 
-        public static ContratoTrabalho NovoContratoTrabalho(int idContratoTrabalho, RegimeContratual regimeContratual, DateTime dataEntrada,
-            DateTime? dataDesligamento, List<CargoContratoTrabalho> cargos, string cnpjCTPS)
+        public static ContratoTrabalho NovoContratoTrabalho(int regimeContratualId, DateTime dataEntrada,
+            DateTime? dataDesligamento, string cnpjCTPS, int colaboradorId)
         {
-            if (regimeContratual != null &&
-                cargos != null &&
-                cargos.Count > 0 &&
-                !cargos.Any(x => x == null) &&
-                !String.IsNullOrWhiteSpace(cnpjCTPS) &&
-                ((dataDesligamento != null && dataDesligamento > dataEntrada) || dataDesligamento == null))
-            {
-                var contratoTrabalho = new ContratoTrabalho(idContratoTrabalho, regimeContratual, dataEntrada, cnpjCTPS);
-                contratoTrabalho.DataDesligamento = dataDesligamento;
-                contratoTrabalho.CargosContratosTrabalho = cargos;
-                return contratoTrabalho;
-            }
-            else
-            {
-                return null;
-            }
+            var contratoTrabalho = new ContratoTrabalho(regimeContratualId, dataEntrada, cnpjCTPS);
+            contratoTrabalho.DataDesligamento = dataDesligamento;
+            contratoTrabalho.ColaboradorId = colaboradorId;
+            return contratoTrabalho;
         }
 
         public bool AlterarDataDesligamento(DateTime? dataDesligamento)
@@ -61,11 +48,11 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public bool AdicionarCargo(CargoContratoTrabalho cargo)
+        public bool AdicionarCargo(Cargo cargo)
         {
             if (cargo != null)
             {
-                CargosContratosTrabalho.Add(cargo);
+                Cargos.Add(cargo);
                 return true;
             }
             else
@@ -74,7 +61,7 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public Cargo ObterCargoPorId(int id) => CargosContratosTrabalho.FirstOrDefault(x => x.CargoId == id).Cargo;
+        public Cargo ObterCargoPorId(int id) => Cargos.FirstOrDefault(x => x.Id == id);
 
         /*
         public bool RemoverCargo(int id)
@@ -90,12 +77,12 @@ namespace TechBeauty.Dominio.Modelo
         }
         */
 
-        public bool RemoverServico(Cargo cargo)
+        public bool RemoverCargo(Cargo cargo)
         {
-            if (CargosContratosTrabalho.Count > 1 &&
+            if (Cargos.Count > 1 &&
                 cargo != null)
             {
-                return CargosContratosTrabalho.Remove(CargosContratosTrabalho.FirstOrDefault(cs => cs.CargoId == cargo.Id));
+                return Cargos.Remove(cargo);
             }
             else
             {

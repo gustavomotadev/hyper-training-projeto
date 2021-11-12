@@ -19,6 +19,51 @@ namespace TechBeauty.Dados.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CargoContratoTrabalho", b =>
+                {
+                    b.Property<int>("CargosId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContratosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CargosId", "ContratosId");
+
+                    b.HasIndex("ContratosId");
+
+                    b.ToTable("CargoContratoTrabalho");
+                });
+
+            modelBuilder.Entity("ColaboradorServico", b =>
+                {
+                    b.Property<int>("ColaboradoresId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ColaboradoresId", "ServicosId");
+
+                    b.HasIndex("ServicosId");
+
+                    b.ToTable("ColaboradorServico");
+                });
+
+            modelBuilder.Entity("RemuneracaoDiariaServico", b =>
+                {
+                    b.Property<int>("RemuneracoesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServicosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RemuneracoesId", "ServicosId");
+
+                    b.HasIndex("ServicosId");
+
+                    b.ToTable("RemuneracaoDiariaServico");
+                });
+
             modelBuilder.Entity("TechBeauty.Dominio.Financeiro.CaixaDiario", b =>
                 {
                     b.Property<int>("Id")
@@ -169,28 +214,6 @@ namespace TechBeauty.Dados.Migrations
                     b.ToTable("RemuneracaoDiaria");
                 });
 
-            modelBuilder.Entity("TechBeauty.Dominio.Financeiro.RemuneracaoDiariaServico", b =>
-                {
-                    b.Property<int>("RemuneracaoDiariaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServicoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("RemuneracaoDiariaId", "ServicoId");
-
-                    b.HasIndex("ServicoId");
-
-                    b.ToTable("RemuneracaoDiaria_Servico");
-                });
-
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Agendamento", b =>
                 {
                     b.Property<int>("Id")
@@ -254,50 +277,6 @@ namespace TechBeauty.Dados.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cargo");
-                });
-
-            modelBuilder.Entity("TechBeauty.Dominio.Modelo.CargoContratoTrabalho", b =>
-                {
-                    b.Property<int>("CargoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ContratoTrabalhoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("CargoId", "ContratoTrabalhoId");
-
-                    b.HasIndex("ContratoTrabalhoId");
-
-                    b.ToTable("Cargo_ContratoTrabalho");
-                });
-
-            modelBuilder.Entity("TechBeauty.Dominio.Modelo.ColaboradorServico", b =>
-                {
-                    b.Property<int>("ColaboradorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServicoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("ColaboradorId", "ServicoId");
-
-                    b.HasIndex("ServicoId");
-
-                    b.ToTable("Colaborador_Servico");
                 });
 
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Contato", b =>
@@ -443,6 +422,9 @@ namespace TechBeauty.Dados.Migrations
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("date");
 
                     b.Property<int>("StatusOS")
                         .HasColumnType("int");
@@ -596,6 +578,51 @@ namespace TechBeauty.Dados.Migrations
                     b.ToTable("Colaborador");
                 });
 
+            modelBuilder.Entity("CargoContratoTrabalho", b =>
+                {
+                    b.HasOne("TechBeauty.Dominio.Modelo.Cargo", null)
+                        .WithMany()
+                        .HasForeignKey("CargosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechBeauty.Dominio.Modelo.ContratoTrabalho", null)
+                        .WithMany()
+                        .HasForeignKey("ContratosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ColaboradorServico", b =>
+                {
+                    b.HasOne("TechBeauty.Dominio.Modelo.Colaborador", null)
+                        .WithMany()
+                        .HasForeignKey("ColaboradoresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechBeauty.Dominio.Modelo.Servico", null)
+                        .WithMany()
+                        .HasForeignKey("ServicosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RemuneracaoDiariaServico", b =>
+                {
+                    b.HasOne("TechBeauty.Dominio.Financeiro.RemuneracaoDiaria", null)
+                        .WithMany()
+                        .HasForeignKey("RemuneracoesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TechBeauty.Dominio.Modelo.Servico", null)
+                        .WithMany()
+                        .HasForeignKey("ServicosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TechBeauty.Dominio.Financeiro.PadraoRemuneracao", b =>
                 {
                     b.HasOne("TechBeauty.Dominio.Modelo.Colaborador", "Colaborador")
@@ -653,25 +680,6 @@ namespace TechBeauty.Dados.Migrations
                     b.Navigation("Colaborador");
                 });
 
-            modelBuilder.Entity("TechBeauty.Dominio.Financeiro.RemuneracaoDiariaServico", b =>
-                {
-                    b.HasOne("TechBeauty.Dominio.Financeiro.RemuneracaoDiaria", "RemuneracaoDiaria")
-                        .WithMany("RemuneracoesServicos")
-                        .HasForeignKey("RemuneracaoDiariaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TechBeauty.Dominio.Modelo.Servico", "Servico")
-                        .WithMany("RemuneracoesServicos")
-                        .HasForeignKey("ServicoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RemuneracaoDiaria");
-
-                    b.Navigation("Servico");
-                });
-
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Agendamento", b =>
                 {
                     b.HasOne("TechBeauty.Dominio.Modelo.Colaborador", "Colaborador")
@@ -703,44 +711,6 @@ namespace TechBeauty.Dados.Migrations
                     b.Navigation("Expediente");
 
                     b.Navigation("OrdemServico");
-
-                    b.Navigation("Servico");
-                });
-
-            modelBuilder.Entity("TechBeauty.Dominio.Modelo.CargoContratoTrabalho", b =>
-                {
-                    b.HasOne("TechBeauty.Dominio.Modelo.Cargo", "Cargo")
-                        .WithMany("CargosContratosTrabalho")
-                        .HasForeignKey("CargoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TechBeauty.Dominio.Modelo.ContratoTrabalho", "ContratoTrabalho")
-                        .WithMany("CargosContratosTrabalho")
-                        .HasForeignKey("ContratoTrabalhoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cargo");
-
-                    b.Navigation("ContratoTrabalho");
-                });
-
-            modelBuilder.Entity("TechBeauty.Dominio.Modelo.ColaboradorServico", b =>
-                {
-                    b.HasOne("TechBeauty.Dominio.Modelo.Colaborador", "Colaborador")
-                        .WithMany("ColaboradoresServicos")
-                        .HasForeignKey("ColaboradorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TechBeauty.Dominio.Modelo.Servico", "Servico")
-                        .WithMany("ColaboradoresServicos")
-                        .HasForeignKey("ServicoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Colaborador");
 
                     b.Navigation("Servico");
                 });
@@ -859,21 +829,6 @@ namespace TechBeauty.Dados.Migrations
                     b.Navigation("Pagamentos");
                 });
 
-            modelBuilder.Entity("TechBeauty.Dominio.Financeiro.RemuneracaoDiaria", b =>
-                {
-                    b.Navigation("RemuneracoesServicos");
-                });
-
-            modelBuilder.Entity("TechBeauty.Dominio.Modelo.Cargo", b =>
-                {
-                    b.Navigation("CargosContratosTrabalho");
-                });
-
-            modelBuilder.Entity("TechBeauty.Dominio.Modelo.ContratoTrabalho", b =>
-                {
-                    b.Navigation("CargosContratosTrabalho");
-                });
-
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Endereco", b =>
                 {
                     b.Navigation("Colaboradores");
@@ -911,10 +866,6 @@ namespace TechBeauty.Dados.Migrations
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Servico", b =>
                 {
                     b.Navigation("Agendamentos");
-
-                    b.Navigation("ColaboradoresServicos");
-
-                    b.Navigation("RemuneracoesServicos");
                 });
 
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.TipoContato", b =>
@@ -930,8 +881,6 @@ namespace TechBeauty.Dados.Migrations
             modelBuilder.Entity("TechBeauty.Dominio.Modelo.Colaborador", b =>
                 {
                     b.Navigation("Agendamentos");
-
-                    b.Navigation("ColaboradoresServicos");
 
                     b.Navigation("Contratos");
 

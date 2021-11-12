@@ -7,26 +7,20 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; init; }
         public string Valor { get; init; }
-        public List<ContratoTrabalho> ContratosDeTrabalho { get; set; } //ef
+        public List<ContratoTrabalho> ContratosDeTrabalho { get; private set; } = new List<ContratoTrabalho>(); //ef
 
         private RegimeContratual() { }
 
-        private RegimeContratual(int id, string valor)
+        private RegimeContratual(string valor)
         {
-            Id = id;
             Valor = valor.ToLower();
         }
 
-        public static RegimeContratual NovoRegimeContratual(int idRegimeContratual, string valor)
+        public static RegimeContratual NovoRegimeContratual(string valor)
         {
-            if (!String.IsNullOrWhiteSpace(valor))
-            {
-                return new RegimeContratual(idRegimeContratual, valor);
-            }
-            else
-            {
-                return null;
-            }
+            return new RegimeContratual(valor);
         }
+
+        //TO DO - AlterarRegimeContratual();
     }
 }

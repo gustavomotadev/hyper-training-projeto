@@ -8,76 +8,50 @@ namespace TechBeauty.Dominio.Modelo
 {
     public class Colaborador : Pessoa
     {
-        public List<ColaboradorServico> ColaboradoresServicos { get; set; } //ef
-        public int EnderecoId { get; set; } //ef
+        public List<Servico> Servicos { get; private set; } = new List<Servico>(); //ef
+        public int EnderecoId { get; private set; } //ef
         public Endereco Endereco { get; private set; }
-        public int GeneroId { get; set; } //ef
+        public int GeneroId { get; private set; } //ef
         public Genero Genero { get; private set; }
         public string NomeSocial { get; private set; } = String.Empty;
-        public List<ContratoTrabalho> Contratos { get; private set; } //ef
-        public List<Turno> Turnos { get; set; } //ef
-        public List<Agendamento> Agendamentos { get; set; } //ef
-        public PadraoRemuneracao PadraoRemuneracao { get; set; } //ef
-        public List<RemuneracaoDiaria> Remuneracoes { get; set; } //ef
+        public List<ContratoTrabalho> Contratos { get; private set; } = new List<ContratoTrabalho>(); //ef
+        public List<Turno> Turnos { get; private set; } = new List<Turno>();  //ef
+        public List<Agendamento> Agendamentos { get; private set; } = new List<Agendamento>(); //ef
+        public PadraoRemuneracao PadraoRemuneracao { get; private set; } //ef
+        public List<RemuneracaoDiaria> Remuneracoes { get; private set; } = new List<RemuneracaoDiaria>(); //ef
 
         private Colaborador() { }
 
-        private Colaborador(int id, string cpf, DateTime dataNascimento)
+        private Colaborador(string cpf, DateTime dataNascimento)
         {
-            Id = id;
             CPF = cpf;
             DataNascimento = dataNascimento;
-            
         }
 
-        public static Colaborador NovoColaborador(int idColaborador, string nome, string cpf, DateTime dataNascimento, 
-            List<Contato> contatos, string carteiraDeTrabalho, List<ColaboradorServico> servicos, Endereco endereco, 
-            Genero genero, ContratoTrabalho contrato, string nomeSocial = null)
+        public static Colaborador NovoColaborador(string nome, string cpf, DateTime dataNascimento, 
+            int enderecoId, int generoId, string nomeSocial = null)
         {
-            if (!String.IsNullOrWhiteSpace(nome) &&
-                !String.IsNullOrWhiteSpace(cpf) &&
-                Pessoa.ObterIdade(dataNascimento) >= 18 &&
-                Pessoa.ObterIdade(dataNascimento) <= 100 &&
-                contatos != null &&
-                contatos.Count > 0 &&
-                !contatos.Any(x => x == null) &&
-                !String.IsNullOrWhiteSpace(carteiraDeTrabalho) &&
-                servicos != null &&
-                servicos.Count > 0 &&
-                !servicos.Any(x => x == null) &&
-                endereco != null &&
-                genero != null &&
-                contrato != null &&
-                contrato.Vigente)
+            var colaborador = new Colaborador(cpf, dataNascimento);
+            colaborador.Nome = nome;
+            colaborador.EnderecoId = enderecoId;
+            colaborador.GeneroId = generoId;
+            if (String.IsNullOrEmpty(nomeSocial))
             {
-                var colaborador = new Colaborador(idColaborador, cpf, dataNascimento);
-                colaborador.Nome = nome;
-                colaborador.Contatos = contatos;
-                colaborador.ColaboradoresServicos = servicos;
-                colaborador.Endereco = endereco;
-                colaborador.Genero = genero;
-                if (String.IsNullOrEmpty(nomeSocial))
-                {
-                    colaborador.NomeSocial = String.Empty;
-                }
-                else
-                {
-                    colaborador.NomeSocial = nomeSocial;
-                }
-                colaborador.Contratos.Add(contrato);
-                return colaborador;
+                colaborador.NomeSocial = String.Empty;
             }
             else
             {
-                return null;
+                colaborador.NomeSocial = nomeSocial;
             }
+            //colaborador.Contratos.Add(contrato);
+            return colaborador;
         }
 
-        public bool AdicionarServico(ColaboradorServico servico)
+        public bool AdicionarServico(Servico servico)
         {
             if (servico != null)
             {
-                ColaboradoresServicos.Add(servico);
+                Servicos.Add(servico);
                 return true;
             }
             else
@@ -86,7 +60,7 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        public Servico ObterServicoPorId(int id) => ColaboradoresServicos.FirstOrDefault(x => x.ServicoId == id).Servico;
+        public Servico ObterServicoPorId(int id) => Servicos.FirstOrDefault(x => x.Id == id);
 
         /*
         public bool RemoverServico(int id)
@@ -104,10 +78,10 @@ namespace TechBeauty.Dominio.Modelo
 
         public bool RemoverServico(Servico servico)
         {
-            if (ColaboradoresServicos.Count > 1 &&
+            if (Servicos.Count > 1 &&
                 servico != null)
             {
-                return ColaboradoresServicos.Remove(ColaboradoresServicos.FirstOrDefault(cs => cs.ServicoId == servico.Id));
+                return Servicos.Remove(servico);
             }
             else
             {

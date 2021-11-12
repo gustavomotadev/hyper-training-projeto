@@ -7,107 +7,123 @@ namespace TechBeauty.Dominio.Financeiro
     public class CaixaDiario
     {
         public static decimal CustoFixoPadrao { get; private set; } = 90.00M;
-        public static decimal PercentualEncargos { get; private set; } = 55.06M;
+        public static decimal PercentualEncargos { get; private set; } = 0.5506M;
         public static decimal PercentualSimplesNacional { get; private set; } = 0.06M;
         public int Id { get; init; }
-        public List<Pagamento> Pagamentos { get; init; }
-        public List<RemuneracaoDiaria> Remuneracoes { get; init; }
+        public List<Pagamento> Pagamentos { get; private set; } = new List<Pagamento>();
+        public List<RemuneracaoDiaria> Remuneracoes { get; private set; } = new List<RemuneracaoDiaria>();
         public DateTime Data { get; init; }
-        public decimal TotalSalario { get; init; }
-        public decimal TotalComissao { get; init; }
-        public decimal TotalHoraExtra { get; init; }
-        public decimal CustoFixo { get; init; }
-        public decimal EncargosTrabalhistas { get; init; }
-        public decimal SimplesNacional { get; init; }
-        public decimal ReceitaBruta { get; init; }
-        public decimal ReceitaLiquida { get; init; }
+        public decimal TotalSalario { get; private set; } = 0;
+        public decimal TotalComissao { get; private set; } = 0;
+        public decimal TotalHoraExtra { get; private set; } = 0;
+        public decimal CustoFixo { get; private set; }
+        public decimal EncargosTrabalhistas { get; private set; } = 0;
+        public decimal SimplesNacional { get; private set; } = 0;
+        public decimal ReceitaBruta { get; private set; } = 0;
+        public decimal ReceitaLiquida { get; private set; } = 0;
 
         private CaixaDiario() { }
 
-        private CaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes, decimal custoFixo)
+        private CaixaDiario(DateTime data, decimal? custoFixo)
         {
             Data = data;
-            Pagamentos = pagamentos;
-            Remuneracoes = remuneracoes;
-            CustoFixo = custoFixo;
-
-            TotalSalario = CalcularTotalSalario();
-            TotalComissao = CalcularTotalComissao();
-            TotalHoraExtra = CalcularTotalHoraExtra();
-            EncargosTrabalhistas = CalcularEncargosTrabalhistas();
-            SimplesNacional = CalcularSimplesNacional();
-            ReceitaBruta = CalcularReceitaBruta();
-            ReceitaLiquida = CalcularReceitaLiquida();
-        }
-
-        public CaixaDiario NovoCaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes, decimal custoFixo)
-        {
-            if (pagamentos != null &&
-                pagamentos.Count > 0 &&
-                !pagamentos.Any(x => x == null) &&
-                remuneracoes != null &&
-                remuneracoes.Count > 0 &&
-                !remuneracoes.Any(x => x == null) &&
-                custoFixo >= 0)
+            if (custoFixo is not null)
             {
-                return new CaixaDiario(data, pagamentos, remuneracoes, custoFixo);
+                CustoFixo = (decimal) custoFixo;
             }
             else
             {
-                return null;
+                CustoFixo = CustoFixoPadrao;
             }
+
+            ReceitaLiquida -= CustoFixo;
         }
 
-        public CaixaDiario NovoCaixaDiario(DateTime data, List<Pagamento> pagamentos, List<RemuneracaoDiaria> remuneracoes)
+        public static CaixaDiario NovoCaixaDiario(DateTime data, decimal? custoFixo)
         {
-            if (pagamentos != null &&
-                pagamentos.Count > 0 &&
-                !pagamentos.Any(x => x == null) &&
-                remuneracoes != null &&
-                remuneracoes.Count > 0 &&
-                !remuneracoes.Any(x => x == null))
+                return new CaixaDiario(data, custoFixo);
+        }
+
+        public bool AdicionarPagamento(Pagamento pagamento)
+        {
+            if (pagamento is not null)
             {
-                return new CaixaDiario(data, pagamentos, remuneracoes, CustoFixoPadrao);
+                Pagamentos.Add(pagamento);
+                decimal simples = PercentualSimplesNacional * pagamento.OrdemServico.PrecoTotal;
+                ReceitaBruta += pagamento.OrdemServico.PrecoTotal;
+                SimplesNacional += simples;
+                ReceitaLiquida += pagamento.OrdemServico.PrecoTotal - simples;
+                return true;
             }
             else
             {
-                return null;
+                return false;
             }
         }
 
-        private decimal CalcularTotalSalario()
+        public bool AdicionarRemuneracao(RemuneracaoDiaria remuneracao)
         {
-            return Remuneracoes.Sum(x => x.ValorSalario);
+            if (remuneracao is not null)
+            {
+                Remuneracoes.Add(remuneracao);
+                var encargos = PercentualEncargos * remuneracao.ValorSalario;
+                TotalSalario += remuneracao.ValorSalario;
+                TotalComissao += remuneracao.ValorComissao;
+                TotalHoraExtra += remuneracao.ValorHoraExtra;
+                EncargosTrabalhistas += encargos;
+                ReceitaLiquida += -remuneracao.ValorSalario - remuneracao.ValorComissao - remuneracao.ValorHoraExtra - encargos;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        //TO DO - AlterarCaixaDiario();
+        public void CalcularTudo()
+        {
+            CalcularTotalSalario();
+            CalcularTotalComissao();
+            CalcularTotalHoraExtra();
+            CalcularEncargosTrabalhistas();
+            CalcularSimplesNacional();
+            CalcularReceitaBruta();
+            CalcularReceitaLiquida();
         }
 
-        private decimal CalcularTotalComissao()
+        private void CalcularTotalSalario()
         {
-            return Remuneracoes.Sum(x => x.ValorComissao);
+            TotalSalario = Remuneracoes.Sum(x => x.ValorSalario);
         }
 
-        private decimal CalcularTotalHoraExtra()
+        private void CalcularTotalComissao()
         {
-            return Remuneracoes.Sum(x => x.ValorHoraExtra);
+            TotalComissao = Remuneracoes.Sum(x => x.ValorComissao);
         }
 
-        private decimal CalcularEncargosTrabalhistas()
+        private void CalcularTotalHoraExtra()
         {
-            return PercentualEncargos * TotalSalario;
+            TotalHoraExtra = Remuneracoes.Sum(x => x.ValorHoraExtra);
         }
 
-        private decimal CalcularSimplesNacional()
+        private void CalcularEncargosTrabalhistas()
         {
-            return PercentualSimplesNacional * ReceitaBruta;
+            EncargosTrabalhistas = PercentualEncargos * TotalSalario;
         }
 
-        private decimal CalcularReceitaBruta()
+        private void CalcularSimplesNacional()
         {
-            return Pagamentos.Sum(x => x.OrdemServico.PrecoTotal);
+            SimplesNacional = PercentualSimplesNacional * ReceitaBruta;
         }
 
-        private decimal CalcularReceitaLiquida()
+        private void CalcularReceitaBruta()
         {
-            return ReceitaBruta - TotalSalario - TotalComissao - TotalHoraExtra - CustoFixo - EncargosTrabalhistas - SimplesNacional;
+            ReceitaBruta = Pagamentos.Sum(x => x.OrdemServico.PrecoTotal);
+        }
+
+        private void CalcularReceitaLiquida()
+        {
+            ReceitaLiquida = ReceitaBruta - TotalSalario - TotalComissao - TotalHoraExtra - CustoFixo - EncargosTrabalhistas - SimplesNacional;
         }
     }
 }

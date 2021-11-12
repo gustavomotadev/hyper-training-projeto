@@ -7,26 +7,18 @@ namespace TechBeauty.Dominio.Modelo
     {
         public int Id { get; init; }
         public string Valor { get; init; }
-        public List<Contato> Contatos { get; set; } //ef
+        public List<Contato> Contatos { get; private set; } = new List<Contato>(); //ef
 
         private TipoContato() { }
 
-        private TipoContato(int id, string valor)
+        private TipoContato(string valor)
         {
-            Id = id;
             Valor = valor;
         }
 
-        public static TipoContato NovoTipoContato(int idTipoContato, string valor)
+        public static TipoContato NovoTipoContato(string valor)
         {
-            if (!String.IsNullOrWhiteSpace(valor))
-            {
-                return new TipoContato(idTipoContato, valor);
-            }
-            else
-            {
-                return null;
-            }
+                return new TipoContato(valor);
         }
     }
 }

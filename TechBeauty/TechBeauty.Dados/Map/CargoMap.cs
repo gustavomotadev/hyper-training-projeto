@@ -19,6 +19,10 @@ namespace TechBeauty.Dados.Map
             builder.Property(x => x.Descricao)
                 .HasColumnType("varchar(150)")
                 .IsRequired();
+
+            builder.HasMany<ContratoTrabalho>
+                (c => c.Contratos)
+                .WithMany(ct => ct.Cargos);
         }
     }
 }

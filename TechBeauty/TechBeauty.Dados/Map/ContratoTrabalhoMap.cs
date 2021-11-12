@@ -22,6 +22,11 @@ namespace TechBeauty.Dados.Map
             builder.Property(x => x.CNPJ_CTPS)
                 .HasColumnType("varchar(14)")
                 .IsRequired();
+
+            builder.HasMany<Cargo>
+                (ct => ct.Cargos)
+                .WithMany(c => c.Contratos);
+
         }
     }
 }

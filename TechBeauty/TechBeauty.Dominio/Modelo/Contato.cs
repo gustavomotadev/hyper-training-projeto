@@ -5,33 +5,25 @@ namespace TechBeauty.Dominio.Modelo
     public class Contato
     {
         public int Id { get; init; }
-        public int TipoContatoId { get; set; } //ef
+        public int TipoContatoId { get; private set; } //ef
         public TipoContato TipoContato { get; init; }
         public string Valor { get; private set; }
-        public int PessoaId { get; set; } //ef
-        public Pessoa Pessoa { get; set; } //ef
+        public int PessoaId { get; private set; } //ef
+        public Pessoa Pessoa { get; private set; } //ef
 
         private Contato() { }
 
-        private Contato(int id, TipoContato tipo)
+        private Contato(int tipoContatoId)
         {
-            Id = id;
-            TipoContato = tipo;
+            TipoContatoId = tipoContatoId;
         }
 
-        public static Contato NovoContato(int idContato, TipoContato tipo, string valor)
+        public static Contato NovoContato(int tipoContatoId, string valor, int pessoaId)
         {
-            if (tipo != null &&
-                !String.IsNullOrWhiteSpace(valor))
-            {
-                var contato = new Contato(idContato, tipo);
-                contato.Valor = valor;
-                return contato;
-            }
-            else
-            {
-                return null;
-            }
+            var contato = new Contato(tipoContatoId);
+            contato.Valor = valor;
+            contato.PessoaId = pessoaId;
+            return contato;
         }
 
         public bool AlterarContato(string novoValor)

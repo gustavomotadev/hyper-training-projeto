@@ -1,36 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TechBeauty.Dominio.Modelo
 {
-    public class Cargo
+    public class Cargo 
     {
         public int Id { get; init; }
         public string Nome { get; private set; }
         public string Descricao { get; private set; }
-        public List<CargoContratoTrabalho> CargosContratosTrabalho { get; set; } //ef
+        [JsonIgnore]
+        public List<ContratoTrabalho> Contratos { get; private set; } = new List<ContratoTrabalho>(); //ef
 
         private Cargo() { }
 
-        private Cargo(int id)
+        public static Cargo NovoCargo(string nome, string descricao)
         {
-            Id = id;
-        }
-
-        public static Cargo NovoCargo(int idCargo, string nome, string descricao)
-        {
-            if (!String.IsNullOrWhiteSpace(nome) &&
-                !String.IsNullOrWhiteSpace(descricao))
-            {
-                var cargo = new Cargo(idCargo);
-                cargo.Nome = nome;
-                cargo.Descricao = descricao;
-                return cargo;
-            }
-            else
-            {
-                return null;
-            }
+            var cargo = new Cargo();
+            cargo.Nome = nome;
+            cargo.Descricao = descricao;
+            return cargo;
         }
 
         public bool AlterarNome(string nome)

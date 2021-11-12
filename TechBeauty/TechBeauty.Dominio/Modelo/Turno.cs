@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -7,38 +8,30 @@ namespace TechBeauty.Dominio.Modelo
         public int Id { get; init; }
         public DateTime DataHoraEntrada { get; init; }
         public DateTime DataHoraSaida { get; init; }
-        public int ColaboradorId { get; set; } //ef
+        public int ColaboradorId { get; private set; } //ef
         public Colaborador Colaborador { get; init; }
-        public DateTime? RegistroEntrada { get; set; } = null;
-        public DateTime? RegistroSaida { get; set; } = null;
-        public int ExpedienteId { get; set; } //ef
-        public Expediente Expediente { get; set; } //ef
+        public DateTime? RegistroEntrada { get; private set; } = null;
+        public DateTime? RegistroSaida { get; private set; } = null;
+        public int ExpedienteId { get; private set; } //ef
+        [JsonIgnore]
+        public Expediente Expediente { get; private set; } //ef
 
         private Turno() { }
 
-        private Turno(int id, DateTime dataHoraEntrada, DateTime dataHoraSaida,
-            Colaborador colaborador)
+        private Turno(DateTime dataHoraEntrada, DateTime dataHoraSaida,
+            int colaboradorId, int expedienteId)
         {
-            Id = id;
             DataHoraEntrada = dataHoraEntrada;
-            DataHoraEntrada = dataHoraSaida;
-            Colaborador = colaborador;
+            DataHoraSaida = dataHoraSaida;
+            ColaboradorId = colaboradorId;
+            ExpedienteId = expedienteId;
         }
 
-        public static Turno NovoTurno(int idTurno, DateTime dataHoraEntrada, 
-            DateTime dataHoraSaida, Colaborador colaborador)
+        public static Turno NovoTurno(DateTime dataHoraEntrada, 
+            DateTime dataHoraSaida, int colaboradorId, int expedienteId)
         {
-            if (colaborador != null &&
-                dataHoraEntrada.Date == dataHoraSaida.Date &&
-                dataHoraEntrada < dataHoraSaida)
-            {
-                var turno = new Turno(idTurno, dataHoraEntrada, dataHoraSaida, colaborador);
+                var turno = new Turno(dataHoraEntrada, dataHoraSaida, colaboradorId, expedienteId);
                 return turno;
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public void RegistrarPontoEntrada(DateTime dataHora) => 
