@@ -36,6 +36,12 @@ namespace TechBeauty.API.Controladores
         {
             if (!ModelState.IsValid) return BadRequest();
 
+            //não permitir colaborador ser pago duas vezes
+            var jaFoiPago = RepositorioDominio.RemuneracaoDiaria.SelecionarUmPorCondicao(
+                r => r.ColaboradorId == viewModel.ColaboradorId &&
+                r.CaixaDiarioId == viewModel.CaixaDiarioId);
+            if (jaFoiPago is not null) return BadRequest();
+
             var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(viewModel.ColaboradorId);
 
             if (colaborador is null) return BadRequest();
