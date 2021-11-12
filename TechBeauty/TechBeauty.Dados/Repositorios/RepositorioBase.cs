@@ -42,7 +42,7 @@ namespace TechBeauty.Dados.Repositorios
             }
         }
 
-        public void Excluir(params object[] chave)
+        public void ExcluirPorChave(params object[] chave)
         {
             var objeto = SelecionarPorChave(chave);
             Excluir(objeto);
@@ -83,6 +83,11 @@ namespace TechBeauty.Dados.Repositorios
         public T SelecionarUmPorCondicao(Func<T, bool> condicao) //receber delegate
         {
             return _contexto.Set<T>().Where(condicao).FirstOrDefault();
+        }
+
+        public virtual T SelecionarCompletoPorChave(params object[] chave)
+        {
+            return _contexto.Set<T>().Find(chave);
         }
     }
 }
