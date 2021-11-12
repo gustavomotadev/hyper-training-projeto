@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Financeiro
@@ -9,9 +10,11 @@ namespace TechBeauty.Dominio.Financeiro
     {
         public int Id { get; set; }
         public int ColaboradorId { get; private set; } //ef
+        [JsonIgnore]
         public Colaborador Colaborador { get; init; }
         public List<Servico> Servicos { get; private set; } = new List<Servico>(); //ef
         public int CaixaDiarioId { get; private set; } //ef
+        [JsonIgnore]
         public CaixaDiario CaixaDiario { get; private set; } //ef
         public TimeSpan HorasTrabalhadas { get; init; }
         public decimal ValorSalario { get; private set; }
@@ -42,6 +45,19 @@ namespace TechBeauty.Dominio.Financeiro
             }
         }
 
+        public bool AdicionarServico(Servico servico)
+        {
+            if (servico is not null)
+            {
+                Servicos.Add(servico);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void CalcularTudo()
         {
             CalcularSalario();
@@ -51,7 +67,7 @@ namespace TechBeauty.Dominio.Financeiro
 
         private void CalcularSalario()
         {
-            ValorSalario = (HorasTrabalhadas.Minutes * Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
+            ValorSalario = ((HorasTrabalhadas.Hours*60 + HorasTrabalhadas.Minutes) * Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
         }
 
         private void CalcularComissao()
@@ -64,8 +80,10 @@ namespace TechBeauty.Dominio.Financeiro
         {
             if (HorasTrabalhadas > Colaborador.PadraoRemuneracao.JornadaEsperada)
             {
-                ValorHoraExtra = ((HorasTrabalhadas- Colaborador.PadraoRemuneracao.JornadaEsperada).Minutes *
-                    Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M;
+                var horasExtras = HorasTrabalhadas - Colaborador.PadraoRemuneracao.JornadaEsperada;
+                ValorHoraExtra = (((horasExtras.Hours*60 + horasExtras.Minutes) *
+                    Colaborador.PadraoRemuneracao.SalarioHora) / 60.00M) * 
+                    (1+Colaborador.PadraoRemuneracao.AdicionalHoraExtra);
             }
             else 
             {

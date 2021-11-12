@@ -15,5 +15,6 @@ namespace TechBeauty.Dados.Interfaces
         public List<T> SelecionarPorCondicao(Func<T, bool> condicao); //receber delegate
         public T SelecionarUmPorCondicao(Func<T, bool> condicao); //receber delegate
         public T SelecionarCompletoPorChave(params object[] chave);
+        public void ExcluirVariosPorCondicao(Func<T, bool> condicao); //receber delegate
     }
 }

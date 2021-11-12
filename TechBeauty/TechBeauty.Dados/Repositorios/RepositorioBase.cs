@@ -89,5 +89,16 @@ namespace TechBeauty.Dados.Repositorios
         {
             return _contexto.Set<T>().Find(chave);
         }
+
+        public void ExcluirVariosPorCondicao(Func<T, bool> condicao)
+        {
+            var deletados = _contexto.Set<T>().Where(condicao);
+            _contexto.Set<T>().RemoveRange(deletados);
+
+            if (_salvarAlteracoes)
+            {
+                _contexto.SaveChanges();
+            }
+        }
     }
 }

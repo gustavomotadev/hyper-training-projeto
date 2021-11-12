@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using TechBeauty.Dominio.Modelo;
 
 namespace TechBeauty.Dominio.Financeiro
@@ -11,6 +12,7 @@ namespace TechBeauty.Dominio.Financeiro
         public int FormaPagamentoId { get; private set; } //ef
         public FormaPagamento FormaPagamento { get; init; }
         public int CaixaDiarioId { get; private set; } //ef
+        [JsonIgnore]
         public CaixaDiario CaixaDiario { get; private set; } //ef
         public DateTime DataPagamento { get; init; }
 

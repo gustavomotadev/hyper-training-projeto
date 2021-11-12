@@ -6,7 +6,8 @@ namespace TechBeauty.Dados.Repositorios
     public static class RepositorioDominio
     {
         public static RepositorioBase<Agendamento> Agendamento { get; } = new RepositorioBase<Agendamento>();
-        public static RepositorioBase<CaixaDiario> CaixaDiario { get; } = new RepositorioBase<CaixaDiario>();
+        //public static RepositorioBase<CaixaDiario> CaixaDiario { get; } = new RepositorioBase<CaixaDiario>();
+        public static RepositorioCaixaDiario CaixaDiario { get; } = new RepositorioCaixaDiario();
         public static RepositorioBase<Cargo> Cargo { get; } = new RepositorioBase<Cargo>();
         public static RepositorioBase<Cliente> Cliente { get; } = new RepositorioBase<Cliente>();
         public static RepositorioBase<Colaborador> Colaborador { get; } = new RepositorioBase<Colaborador>();
