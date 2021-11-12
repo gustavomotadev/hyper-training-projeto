@@ -29,7 +29,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "TipoContato")]
         public IActionResult PostTipoContato([FromBody] CriarTipoContato viewModel)
         {
-            if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = TipoContato.NovoTipoContato(viewModel.Valor);
 

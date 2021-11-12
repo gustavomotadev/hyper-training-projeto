@@ -52,8 +52,8 @@ namespace TechBeauty.Dominio.Modelo
         public bool TurnoCabe(Turno turno)
         {
             if (turno != null &&
-                turno.DataHoraEntrada.Date >= DataHoraAbertura.Date &&
-                turno.DataHoraSaida.Date <= DataHoraFechamento.Date &&
+                turno.DataHoraEntrada >= DataHoraAbertura &&
+                turno.DataHoraSaida <= DataHoraFechamento &&
                 !Turnos.Any(x => x.ColaboradorId == turno.ColaboradorId))
             {
                 return true;

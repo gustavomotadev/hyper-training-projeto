@@ -14,6 +14,8 @@ namespace TechBeauty.Dados.Repositorios
         {
             var expediente = SelecionarPorChave(chave);
 
+            if (expediente is null) return null;
+
             _contexto.Entry(expediente).Collection(e => e.Turnos).Load();
             _contexto.Entry(expediente).Collection(e => e.Agendamentos).Load();
 

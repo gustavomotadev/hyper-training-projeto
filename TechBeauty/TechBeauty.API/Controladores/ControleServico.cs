@@ -34,7 +34,7 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Servico")]
         public IActionResult PostServico([FromBody] CriarServico viewModel)
         {
-            if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = Servico.NovoServico(viewModel.Nome, viewModel.Preco, viewModel.Descricao, 
                 viewModel.DuracaoEmMin);
