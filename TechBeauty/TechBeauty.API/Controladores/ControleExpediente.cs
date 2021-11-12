@@ -15,7 +15,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "Expediente")]
-        public IActionResult Get()
+        public IActionResult GetExpediente()
         {
             var todos = RepositorioDominio.Expediente.SelecionarTodos();
             return Ok(todos);
@@ -23,7 +23,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "Expediente/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetExpedientePorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.Expediente.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -31,7 +31,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Expediente")]
-        public IActionResult Post([FromBody] CriarExpediente viewModel)
+        public IActionResult PostExpediente([FromBody] CriarExpediente viewModel)
         {
             if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
 
@@ -44,7 +44,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Expediente/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteExpediente([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Expediente.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

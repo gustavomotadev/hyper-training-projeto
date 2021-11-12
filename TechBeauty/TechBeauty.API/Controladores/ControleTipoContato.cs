@@ -11,7 +11,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "TipoContato")]
-        public IActionResult Get()
+        public IActionResult GetTipoContato()
         {
             var todos = RepositorioDominio.TipoContato.SelecionarTodos();
             return Ok(todos);
@@ -19,7 +19,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "TipoContato/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetTipoContatoPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.TipoContato.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -27,7 +27,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "TipoContato")]
-        public IActionResult Post([FromBody] CriarTipoContato viewModel)
+        public IActionResult PostTipoContato([FromBody] CriarTipoContato viewModel)
         {
             if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
 
@@ -39,7 +39,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "TipoContato/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteTipoContato([FromRoute] int id)
         {
             var excluido = RepositorioDominio.TipoContato.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

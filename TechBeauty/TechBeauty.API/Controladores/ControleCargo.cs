@@ -14,44 +14,37 @@ namespace TechBeauty.API.Controladores
     [Route(template: "TechBeautyV1")]
     public class ControleCargo : ControllerBase
     {
-        private readonly RepositorioBase<Cargo> _cargo;
-
-        public ControleCargo()
-        {
-            _cargo = new RepositorioBase<Cargo>();
-        }
-
         [HttpGet]
         [Route(template: "Cargo")]
-        public IActionResult Get()
+        public IActionResult GetCargo()
         {
-            var todos = _cargo.SelecionarTodos();
+            var todos = RepositorioDominio.Cargo.SelecionarTodos();
             return Ok(todos);
         }
 
         [HttpGet]
         [Route(template: "Cargo/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetCargoPorId([FromRoute] int id)
         {
-            var escolhido = _cargo.SelecionarPorChave(id);
+            var escolhido = RepositorioDominio.Cargo.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
             else return NotFound();
         }
 
         [HttpPost(template: "Cargo")]
-        public IActionResult Post([FromBody] CriarCargo viewModel)
+        public IActionResult PostCargo([FromBody] CriarCargo viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
             var novo = Cargo.NovoCargo(viewModel.Nome, viewModel.Descricao);
 
-            _cargo.Incluir(novo);
+            RepositorioDominio.Cargo.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Cargo/{novo.Id}", novo);
         }
 
         [HttpPut(template: "Cargo/{id}")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarCargo viewModel)
+        public IActionResult PutCargo([FromRoute] int id, [FromBody] AlterarCargo viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -82,12 +75,12 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Cargo/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteCargo([FromRoute] int id)
         {
-            var excluido = _cargo.SelecionarPorChave(id);
+            var excluido = RepositorioDominio.Cargo.SelecionarPorChave(id);
             if (excluido == null) return NotFound();
 
-            _cargo.Excluir(excluido);
+            RepositorioDominio.Cargo.Excluir(excluido);
             return Ok(excluido);
         }
     }

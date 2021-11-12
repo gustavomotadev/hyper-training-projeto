@@ -16,7 +16,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "Cliente")]
-        public IActionResult Get()
+        public IActionResult GetCliente()
         {
             var todos = RepositorioDominio.Cliente.SelecionarTodos();
             return Ok(todos);
@@ -24,7 +24,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "Cliente/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetClientePorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.Cliente.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -32,7 +32,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Cliente")]
-        public IActionResult Post([FromBody] CriarCliente viewModel)
+        public IActionResult PostCliente([FromBody] CriarCliente viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -74,7 +74,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Cliente/{id}")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarCliente viewModel)
+        public IActionResult PutCliente([FromRoute] int id, [FromBody] AlterarCliente viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -88,7 +88,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Cliente/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteCliente([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Cliente.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

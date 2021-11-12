@@ -17,7 +17,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "Colaborador")]
-        public IActionResult Get()
+        public IActionResult GetColaborador()
         {
             var todos = RepositorioDominio.Colaborador.SelecionarTodos();
             return Ok(todos);
@@ -25,7 +25,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "Colaborador/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetColaboradorPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.Colaborador.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -33,7 +33,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Colaborador")]
-        public IActionResult Post([FromBody] CriarColaborador viewModel)
+        public IActionResult PostColaborador([FromBody] CriarColaborador viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -130,7 +130,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Colaborador/{id}/Contato")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AdicionarContato viewModel)
+        public IActionResult PostColaboradorContato([FromRoute] int id, [FromBody] AdicionarContato viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -148,7 +148,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Colaborador/{id}/Contrato")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AdicionarContrato viewModel)
+        public IActionResult PostColaboradorContrato([FromRoute] int id, [FromBody] AdicionarContrato viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -164,7 +164,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Colaborador/{id}/Servico")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AdicionarServico viewModel)
+        public IActionResult PutColaboradorServico([FromRoute] int id, [FromBody] AdicionarServico viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -181,7 +181,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Colaborador/{colaboradorId}/Contrato/{contratoId}/Cargo")]
-        public IActionResult Post([FromRoute] int colaboradorId, [FromRoute] int contratoId,
+        public IActionResult PutColaboradorContratoCargo([FromRoute] int colaboradorId, [FromRoute] int contratoId,
             [FromBody] AdicionarCargo viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -202,7 +202,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Colaborador/{id}")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarColaborador viewModel)
+        public IActionResult PutColaborador([FromRoute] int id, [FromBody] AlterarColaborador viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -233,7 +233,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Colaborador/{colaboradorId}/Contrato/{contratoId}")]
-        public IActionResult Post([FromRoute] int colaboradorId, [FromRoute] int contratoId, 
+        public IActionResult PutColaboradorContrato([FromRoute] int colaboradorId, [FromRoute] int contratoId, 
             [FromBody] AlterarContrato viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -268,7 +268,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Colaborador/{id}/Endereco")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarEndereco viewModel)
+        public IActionResult PutColaboradorEndereco([FromRoute] int id, [FromBody] AlterarEndereco viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -286,7 +286,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Colaborador/{id}/PadraoRemuneracao")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarPadraoRemuneracao viewModel)
+        public IActionResult PutColaboradorPadraoRemuneracao([FromRoute] int id, [FromBody] AlterarPadraoRemuneracao viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -331,7 +331,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Colaborador/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteColaborador([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Colaborador.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

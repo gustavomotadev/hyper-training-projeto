@@ -16,7 +16,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "RegimeContratual")] 
-        public IActionResult Get()
+        public IActionResult GetRegimeContratual()
         {
             var todos = RepositorioDominio.RegimeContratual.SelecionarTodos();
             return Ok(todos);
@@ -24,7 +24,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "RegimeContratual/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetRegimeContratualPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.RegimeContratual.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -32,7 +32,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "RegimeContratual")]
-        public IActionResult Post([FromBody] CriarRegimeContratual viewModel)
+        public IActionResult PostRegimeContratual([FromBody] CriarRegimeContratual viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -44,7 +44,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "RegimeContratual/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteRegimeContratual([FromRoute] int id)
         {
             var excluido = RepositorioDominio.RegimeContratual.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

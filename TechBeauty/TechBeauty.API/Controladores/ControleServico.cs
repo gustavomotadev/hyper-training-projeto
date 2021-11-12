@@ -16,7 +16,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "Servico")]
-        public IActionResult Get()
+        public IActionResult GetServico()
         {
             var todos = RepositorioDominio.Servico.SelecionarTodos();
             return Ok(todos);
@@ -24,7 +24,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "Servico/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetServicoPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.Servico.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -32,7 +32,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Servico")]
-        public IActionResult Post([FromBody] CriarServico viewModel)
+        public IActionResult PostServico([FromBody] CriarServico viewModel)
         {
             if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
 
@@ -45,7 +45,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Servico/{id}")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarServico viewModel)
+        public IActionResult PutServico([FromRoute] int id, [FromBody] AlterarServico viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -86,7 +86,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Servico/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteServico([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Servico.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

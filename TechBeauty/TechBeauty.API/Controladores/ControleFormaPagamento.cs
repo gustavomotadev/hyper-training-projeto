@@ -16,7 +16,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "FormaPagamento")]
-        public IActionResult Get()
+        public IActionResult GetFormaPagamento()
         {
             var todos = RepositorioDominio.FormaPagamento.SelecionarTodos();
             return Ok(todos);
@@ -24,7 +24,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "FormaPagamento/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetFormaPagamentoPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.FormaPagamento.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -32,7 +32,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "FormaPagamento")]
-        public IActionResult Post([FromBody] CriarFormaPagamento viewModel)
+        public IActionResult PostFormaPagamento([FromBody] CriarFormaPagamento viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -44,7 +44,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "FormaPagamento/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteFormaPagamento([FromRoute] int id)
         {
             var excluido = RepositorioDominio.FormaPagamento.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

@@ -24,7 +24,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "RemuneracaoDiaria/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetRemuneracaoDiariaPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.RemuneracaoDiaria.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -32,7 +32,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "RemuneracaoDiaria")]
-        public IActionResult Post([FromBody] CriarRemuneracaoDiaria viewModel)
+        public IActionResult PostRemuneracaoDiaria([FromBody] CriarRemuneracaoDiaria viewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -66,7 +66,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "RemuneracaoDiaria/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteRemuneracaoDiaria([FromRoute] int id)
         {
             var excluido = RepositorioDominio.RemuneracaoDiaria.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

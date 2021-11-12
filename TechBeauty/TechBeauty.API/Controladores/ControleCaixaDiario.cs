@@ -11,7 +11,7 @@ namespace TechBeauty.API.Controladores //TO DO
     {
         [HttpGet]
         [Route(template: "CaixaDiario")]
-        public IActionResult Get()
+        public IActionResult GetCaixaDiario()
         {
             var todos = RepositorioDominio.CaixaDiario.SelecionarTodos();
             return Ok(todos);
@@ -19,7 +19,7 @@ namespace TechBeauty.API.Controladores //TO DO
 
         [HttpGet]
         [Route(template: "CaixaDiario/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetCaixaDiarioPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.CaixaDiario.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -27,7 +27,7 @@ namespace TechBeauty.API.Controladores //TO DO
         }
 
         [HttpPost(template: "CaixaDiario")] //TO DO
-        public IActionResult Post([FromBody] CriarCaixaDiario viewModel)
+        public IActionResult PostCaixaDiario([FromBody] CriarCaixaDiario viewModel)
         {
             if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
             
@@ -39,7 +39,7 @@ namespace TechBeauty.API.Controladores //TO DO
         }
 
         [HttpDelete(template: "CaixaDiario/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteCaixaDiario([FromRoute] int id)
         {
             var excluido = RepositorioDominio.CaixaDiario.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

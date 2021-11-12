@@ -15,7 +15,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "Genero")]
-        public IActionResult Get()
+        public IActionResult GetGenero()
         {
             var todos = RepositorioDominio.Genero.SelecionarTodos();
             return Ok(todos);
@@ -23,7 +23,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "Genero/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetGeneroPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.Genero.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -31,7 +31,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Genero")]
-        public IActionResult Post([FromBody] CriarGenero viewModel)
+        public IActionResult PostGenero([FromBody] CriarGenero viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -43,7 +43,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Genero/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteGenero([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Genero.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

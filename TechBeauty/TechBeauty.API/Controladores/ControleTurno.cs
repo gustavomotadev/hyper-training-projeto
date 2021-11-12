@@ -24,7 +24,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "Turno/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetTurnoPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.Turno.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -32,7 +32,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPost(template: "Turno")]
-        public IActionResult Post([FromBody] CriarTurno viewModel)
+        public IActionResult PostTurno([FromBody] CriarTurno viewModel)
         {
             if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
             var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(viewModel.ColaboradorId);
@@ -45,7 +45,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Turno/{id}")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarTurno viewModel)
+        public IActionResult PutTurno([FromRoute] int id, [FromBody] AlterarTurno viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -60,7 +60,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Turno/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteTurno([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Turno.SelecionarPorChave(id);
             if (excluido == null) return NotFound();

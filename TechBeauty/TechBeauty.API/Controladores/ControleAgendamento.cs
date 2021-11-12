@@ -17,7 +17,7 @@ namespace TechBeauty.API.Controladores
     {
         [HttpGet]
         [Route(template: "Agendamento")]
-        public IActionResult Get()
+        public IActionResult GetAgendamento()
         {
             var todos = RepositorioDominio.Agendamento.SelecionarTodos();
             return Ok(todos);
@@ -25,7 +25,7 @@ namespace TechBeauty.API.Controladores
 
         [HttpGet]
         [Route(template: "Agendamento/{id}")]
-        public IActionResult GetPorId([FromRoute] int id)
+        public IActionResult GetAgendamentoPorId([FromRoute] int id)
         {
             var escolhido = RepositorioDominio.Agendamento.SelecionarPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
@@ -33,7 +33,7 @@ namespace TechBeauty.API.Controladores
         }
         
         [HttpPost(template: "Agendamento")]
-        public IActionResult Post([FromBody] CriarAgendamento viewModel)
+        public IActionResult PostAgendamento([FromBody] CriarAgendamento viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -63,7 +63,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpPut(template: "Agendamento/{id}")]
-        public IActionResult Post([FromRoute] int id, [FromBody] AlterarAgendamento viewModel)
+        public IActionResult PutAgendamento([FromRoute] int id, [FromBody] AlterarAgendamento viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
@@ -77,7 +77,7 @@ namespace TechBeauty.API.Controladores
         }
 
         [HttpDelete(template: "Agendamento/{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult DeleteAgendamento([FromRoute] int id)
         {
             var excluido = RepositorioDominio.Agendamento.SelecionarPorChave(id);
             if (excluido == null) return NotFound();
