@@ -50,6 +50,9 @@ namespace TechBeauty.API.Controladores
             var novo = Pagamento.NovoPagamento(viewModel.CaixaDiarioId, viewModel.OrdemServicoId, 
                 viewModel.FormaPagamentoId, viewModel.DataPagamento);
 
+            //pagamento deve ter mesma data da os
+            if (os.Data.Date != novo.DataPagamento.Date) return BadRequest();
+
             RepositorioDominio.Pagamento.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Pagamento/{novo.Id}", novo);

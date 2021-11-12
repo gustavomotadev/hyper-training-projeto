@@ -60,6 +60,9 @@ namespace TechBeauty.API.Controladores
             //checar se tem espaço para o agendamento
             if (!expediente.AgendamentoCabe(novo)) return BadRequest();
 
+            //agendamento deve ter mesma data da os
+            if (os.Data.Date != novo.DataHoraExecucao.Date) return BadRequest();
+
             RepositorioDominio.Agendamento.Incluir(novo);
 
             return Created(uri: $"TechBeautyV1/Agendamento/{novo.Id}", novo);
