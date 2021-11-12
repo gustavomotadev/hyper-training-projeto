@@ -30,7 +30,11 @@ namespace TechBeauty.API.Controladores //TO DO
         public IActionResult PostCaixaDiario([FromBody] CriarCaixaDiario viewModel)
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
-            
+
+            var jaExiste = RepositorioDominio.CaixaDiario.SelecionarUmPorCondicao(
+                e => e.Data.Date == viewModel.Data.Date);
+            if (jaExiste is not null) return BadRequest();
+
             var novo = CaixaDiario.NovoCaixaDiario(viewModel.Data.Date, viewModel.CustoFixo);
 
             RepositorioDominio.CaixaDiario.Incluir(novo);

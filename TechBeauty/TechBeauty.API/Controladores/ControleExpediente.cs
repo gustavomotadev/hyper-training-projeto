@@ -36,6 +36,10 @@ namespace TechBeauty.API.Controladores
         {
             if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
 
+            var jaExiste = RepositorioDominio.Expediente.SelecionarUmPorCondicao(
+                e => e.DataHoraAbertura.Date == viewModel.DataHoraAbertura.Date);
+            if (jaExiste is not null) return BadRequest();
+
             var novo = Expediente.NovoExpediente(viewModel.DataHoraAbertura, viewModel.DataHoraFechamento);
 
             RepositorioDominio.Expediente.Incluir(novo);
