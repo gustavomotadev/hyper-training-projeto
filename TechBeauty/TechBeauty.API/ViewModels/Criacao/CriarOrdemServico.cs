@@ -10,6 +10,7 @@ namespace TechBeauty.API.ViewModels.Criacao
     {
         [Required]
         public int ClienteId { get; set; }
-        
+        [Required]
+        public DateTime Data { get; set; }
     }
 }

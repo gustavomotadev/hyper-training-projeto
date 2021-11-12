@@ -20,15 +20,16 @@ namespace TechBeauty.Dominio.Modelo
 
         private OrdemServico() { }
 
-        private OrdemServico(int clienteId)
+        private OrdemServico(int clienteId, DateTime data)
         {
             ClienteId = clienteId;
+            Data = data;
         }
 
-        public static OrdemServico NovaOS(int clienteIdDaOS)
+        public static OrdemServico NovaOS(int clienteIdDaOS, DateTime data)
         {
             
-                var os = new OrdemServico(clienteIdDaOS);
+                var os = new OrdemServico(clienteIdDaOS, data);
                 return os;
             
         }
