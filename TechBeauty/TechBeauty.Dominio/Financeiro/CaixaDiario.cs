@@ -80,7 +80,7 @@ namespace TechBeauty.Dominio.Financeiro
             }
         }
         //TO DO - AlterarCaixaDiario();
-        private void CalcularTudo()
+        public void CalcularTudo()
         {
             CalcularTotalSalario();
             CalcularTotalComissao();
