@@ -49,13 +49,16 @@ namespace TechBeauty.API.Controladores
 
             if (os is null) return BadRequest();
 
-            var expediente = RepositorioDominio.Expediente.SelecionarPorChave(viewModel.ExpedienteId);
+            var expediente = RepositorioDominio.Expediente.SelecionarCompletoPorChave(viewModel.ExpedienteId);
 
             if (expediente is null) return BadRequest();
 
             var novo = Agendamento.NovoAgendamento(viewModel.ServicoId, viewModel.ColaboradorId,
                 viewModel.OrdemServicoId, viewModel.ExpedienteId, viewModel.PessoaAtendida, 
                 DateTime.Now, viewModel.DataHoraExecucao);
+
+            //checar se tem espaço para o agendamento
+            if (!expediente.AgendamentoCabe(novo)) return BadRequest();
 
             RepositorioDominio.Agendamento.Incluir(novo);
 

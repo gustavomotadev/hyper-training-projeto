@@ -31,14 +31,31 @@ namespace TechBeauty.Dominio.Modelo
 
         //TO DO - AlterarExpediente();
 
+        /*
         public bool AdicionarTurno(Turno turno)
         {
             if (turno != null &&
                 turno.DataHoraEntrada.Date >= DataHoraAbertura.Date &&
                 turno.DataHoraSaida.Date <= DataHoraFechamento.Date &&
-                !Turnos.Any(x => x.Colaborador.Id == turno.Colaborador.Id))
+                !Turnos.Any(x => x.ColaboradorId == turno.ColaboradorId))
             {
                 Turnos.Add(turno);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        */
+
+        public bool TurnoCabe(Turno turno)
+        {
+            if (turno != null &&
+                turno.DataHoraEntrada.Date >= DataHoraAbertura.Date &&
+                turno.DataHoraSaida.Date <= DataHoraFechamento.Date &&
+                !Turnos.Any(x => x.ColaboradorId == turno.ColaboradorId))
+            {
                 return true;
             }
             else
@@ -54,7 +71,7 @@ namespace TechBeauty.Dominio.Modelo
         {
             if (turno != null)
             {
-                return Agendamentos.Where(x => x.Colaborador.Id == turno.Colaborador.Id).ToList();
+                return Agendamentos.Where(x => x.ColaboradorId == turno.ColaboradorId).ToList();
             }
             else
             {
@@ -62,7 +79,7 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
-        private bool AgendamentoCabeNoTurno(Turno turno, Agendamento agendamento)
+        public bool AgendamentoCabeNoTurno(Turno turno, Agendamento agendamento)
         {
             if (turno != null &&
                 agendamento != null)
@@ -111,6 +128,28 @@ namespace TechBeauty.Dominio.Modelo
             }
         }
 
+        public bool AgendamentoCabe(Agendamento agendamento)
+        {
+            if (agendamento != null)
+            {
+                var turno =
+                Turnos.FirstOrDefault(x => x.ColaboradorId == agendamento.ColaboradorId);
+                if (turno != null && AgendamentoCabeNoTurno(turno, agendamento))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /*
         public bool AdicionarAgendamento(Agendamento agendamento)
         {
             if (agendamento != null)
@@ -132,7 +171,11 @@ namespace TechBeauty.Dominio.Modelo
                 return false;
             }
         }
+        */
 
+        /*
+        //TODO ?
+        //essa funcao é mais complicada de implementar com ORM
         public List<Turno> ObterPrestadoresDeServico(List<Servico> servicos)
         {
             if (servicos != null &&
@@ -154,5 +197,6 @@ namespace TechBeauty.Dominio.Modelo
                 return null;
             }
         }
+        */
     }
 }

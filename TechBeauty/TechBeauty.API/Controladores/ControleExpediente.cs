@@ -25,7 +25,8 @@ namespace TechBeauty.API.Controladores
         [Route(template: "Expediente/{id}")]
         public IActionResult GetExpedientePorId([FromRoute] int id)
         {
-            var escolhido = RepositorioDominio.Expediente.SelecionarPorChave(id);
+            //var escolhido = RepositorioDominio.Expediente.SelecionarPorChave(id);
+            var escolhido = RepositorioDominio.Expediente.SelecionarCompletoPorChave(id);
             if (escolhido is not null) return Ok(escolhido);
             else return NotFound();
         }

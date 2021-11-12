@@ -8,8 +8,8 @@ namespace TechBeauty.Dados.Repositorios
 {
     public class RepositorioBase<T> : IRepositorioModelo<T>, IDisposable where T : class
     {
-        protected readonly Contexto _contexto; //coloquei readonly depois
-        public bool _salvarAlteracoes = true;
+        protected readonly Contexto _contexto; //coloquei readonly depois //TODO (talvez static?)
+        protected bool _salvarAlteracoes = true;
 
         public RepositorioBase(bool salvarAlteracoes = true)
         {

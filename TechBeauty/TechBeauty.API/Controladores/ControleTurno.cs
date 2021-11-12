@@ -34,10 +34,19 @@ namespace TechBeauty.API.Controladores
         [HttpPost(template: "Turno")]
         public IActionResult PostTurno([FromBody] CriarTurno viewModel)
         {
-            if (!ModelState.IsValid || viewModel.Validar()) return BadRequest();
+            if (!ModelState.IsValid || !viewModel.Validar()) return BadRequest();
+
             var colaborador = RepositorioDominio.Colaborador.SelecionarPorChave(viewModel.ColaboradorId);
             if (colaborador is null) return BadRequest();
-            var novo = Turno.NovoTurno(viewModel.DataHoraEntrada, viewModel.DataHoraSaida, viewModel.ColaboradorId);
+
+            var expediente = RepositorioDominio.Expediente.SelecionarCompletoPorChave(viewModel.ExpedienteId);
+            if (expediente is null) return BadRequest();
+
+            var novo = Turno.NovoTurno(viewModel.DataHoraEntrada, viewModel.DataHoraSaida, 
+                viewModel.ColaboradorId, viewModel.ExpedienteId);
+
+            //só permitir criação de turno dentro do horário do expediente e somente um turno por colaborador por expediente
+            if (!expediente.TurnoCabe(novo)) return BadRequest();
 
             RepositorioDominio.Turno.Incluir(novo);
 

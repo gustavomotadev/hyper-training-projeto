@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace TechBeauty.Dominio.Modelo
 {
@@ -12,22 +13,24 @@ namespace TechBeauty.Dominio.Modelo
         public DateTime? RegistroEntrada { get; private set; } = null;
         public DateTime? RegistroSaida { get; private set; } = null;
         public int ExpedienteId { get; private set; } //ef
+        [JsonIgnore]
         public Expediente Expediente { get; private set; } //ef
 
         private Turno() { }
 
         private Turno(DateTime dataHoraEntrada, DateTime dataHoraSaida,
-            int colaboradorId)
+            int colaboradorId, int expedienteId)
         {
             DataHoraEntrada = dataHoraEntrada;
-            DataHoraEntrada = dataHoraSaida;
+            DataHoraSaida = dataHoraSaida;
             ColaboradorId = colaboradorId;
+            ExpedienteId = expedienteId;
         }
 
         public static Turno NovoTurno(DateTime dataHoraEntrada, 
-            DateTime dataHoraSaida, int colaboradorId)
+            DateTime dataHoraSaida, int colaboradorId, int expedienteId)
         {
-                var turno = new Turno(dataHoraEntrada, dataHoraSaida, colaboradorId);
+                var turno = new Turno(dataHoraEntrada, dataHoraSaida, colaboradorId, expedienteId);
                 return turno;
         }
 

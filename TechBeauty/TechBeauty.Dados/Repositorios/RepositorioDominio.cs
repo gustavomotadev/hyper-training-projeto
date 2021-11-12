@@ -13,7 +13,8 @@ namespace TechBeauty.Dados.Repositorios
         public static RepositorioBase<Contato> Contato { get; } = new RepositorioBase<Contato>();
         public static RepositorioBase<ContratoTrabalho> ContratoTrabalho { get; } = new RepositorioBase<ContratoTrabalho>();
         public static RepositorioBase<Endereco> Endereco { get; } = new RepositorioBase<Endereco>();
-        public static RepositorioBase<Expediente> Expediente { get; } = new RepositorioBase<Expediente>();
+        //public static RepositorioBase<Expediente> Expediente { get; } = new RepositorioBase<Expediente>();
+        public static RepositorioExpediente Expediente { get; } = new RepositorioExpediente();
         public static RepositorioBase<FormaPagamento> FormaPagamento { get; } = new RepositorioBase<FormaPagamento>();
         public static RepositorioBase<Genero> Genero { get; } = new RepositorioBase<Genero>();
         public static RepositorioBase<OrdemServico> OrdemServico { get; } = new RepositorioBase<OrdemServico>();

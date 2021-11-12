@@ -15,6 +15,7 @@ namespace TechBeauty.Dominio.Modelo
         public int OrdemServicoId { get; private set; } //ef
         public OrdemServico OrdemServico { get; private set; } //ef
         public int ExpedienteId { get; private set; } //ef
+        [JsonIgnore]
         public Expediente Expediente { get; private set; } //ef
         public string PessoaAtendida { get; init; }
         public DateTime DataHoraCriacao { get; init; }
